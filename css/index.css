@@ -1,0 +1,22 @@
+body{background-color:#f5f5f5}
+header .jumbotron{padding-top:11rem;padding-bottom:11rem;padding-right:1rem}
+.header-title{font-size:4vw;font-family:Manrope,sans-serif;color:#fff;letter-spacing:1px}
+.header-image{max-width:25vw;padding:1vw}
+.header-button-container{display:flexbox;align-items:flex-start}
+.header-btn{font-family:Manrope,sans-serif;font-size:.8rem;letter-spacing:1px;color:#fff;margin-left:6px;margin-right:6px;border-radius:1000px;font-weight:700}
+.lead{color:#fff;font-size:1.4rem}
+.transitive{transition:.4s}
+b{font-family:Manrope,sans-serif;font-size:1.5rem;letter-spacing:1px}
+.carousel-wrapper{display:flex;flex-direction:row;justify-content:space-between;margin-left:13vw;margin-right:13vw;margin-bottom:192px}
+.carousel-wrapper .carousel{width:50%;margin:auto 14% auto 0;-webkit-box-shadow:0 0 50px 0 rgba(0,0,0,.3);-moz-box-shadow:0 0 50px 0 rgba(0,0,0,.3);box-shadow:0 0 50px 0 rgba(0,0,0,.3);border-radius: 10px;}
+.carousel-indicators li{border:0;border-radius:100px;height:4px}
+.carousel-wrapper .carousel-inner{border-radius:10px}
+.carousel-item img{object-fit:cover;height:40rem}
+.carousel-item h5{font-family:Manrope,sans-serif}
+.description-wrapper{width:36%;display:flex;flex-direction:column;box-sizing:border-box;align-items:flex-start;font-family:Manrope,sans-serif;margin:auto}
+.headline p{color:#95a5a6;font-size:small;margin:0;letter-spacing:2px}
+.headline{display:flex;flex-direction:row;align-items:center;justify-content:center}
+.description h1{font-family:Manrope,sans-serif;color:#222;line-height:1.5;margin-bottom:24px}
+.description p{font-family:Roboto,sans-serif;color:#95a5a6;margin-top:24px;margin-bottom:24px;letter-spacing:1px;line-height:1.5}
+.desc-btn{font-family:Manrope,sans-serif;font-size:.8rem;letter-spacing:1px;margin-top:12px;color:#fff;border-radius:1000px;font-weight:700}
+.jumbotron{padding-left:10vw;padding-right:10vw}

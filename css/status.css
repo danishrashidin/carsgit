@@ -1,0 +1,121 @@
+body {
+	background-color: #1d0e61;
+	text-decoration-color:  #3F2860;
+	font-family : "Manrope", sans-serif;
+	line-height: 1.5;
+
+}
+
+
+.container {
+  margin: auto;
+  	width: 800;
+  	text-align: center;
+  background-size: 150px;
+ 
+}
+
+
+main {
+	background-color: #1d0e61;
+	display: block;
+	line-height: 50px;
+}
+
+.form-control{
+	width: 75%;
+}
+
+label {
+  line-height: 5;
+}
+
+.row {
+  height: 100%;
+  width: 100%;
+  
+}
+
+.col-9 {
+  padding-top: 25px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    color: rgba(0, 0, 0, 0);
+    opacity: 1;
+    display: block;
+    background: url(https://mywildalberta.ca/images/GFX-MWA-Parks-Reservations.png) no-repeat;
+    width: 10px;
+    height: 20px;
+    border-width: thin;
+}
+
+
+
+#numdays2{
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+#totalcost{
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+#Name{
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+#IC{
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+#Faculty{
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+#Department{
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+#Phonenumber{
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+#Startdate{
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+#EndDate{
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+#Reason{
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+#Status{
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+

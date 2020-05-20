@@ -1,0 +1,247 @@
+head,
+body {
+  font-family: "Manrope", sans-serif;
+}
+
+header {
+  margin: 20px;
+}
+
+nav {
+  background-image: linear-gradient(
+    -225deg,
+    #ff057c 0,
+    #8d0b93 50%,
+    #321575 100%
+  ) !important;
+
+  -webkit-box-shadow: 0px 5px 50px -10px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0px 5px 50px -10px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 5px 50px -10px rgba(0, 0, 0, 0.4);
+}
+
+.main-container {
+  background: url(https://images.pexels.com/photos/1565982/pexels-photo-1565982.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+  background-color: rgb(68, 67, 67);
+  /* Used if the image is unavailable */
+  opacity: 0.85;
+  border-radius: 2em;
+  filter: grayscale(20%);
+  background-size: cover;
+  background-position: center;
+  padding: 6em;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: white;
+}
+
+.main-container h1 {
+  font-weight: bold;
+}
+
+/* Style the search box */
+
+.search-container {
+  text-decoration: none;
+  background: white;
+  padding: 10px 15px;
+  opacity: 0.6;
+  border-radius: 8em;
+  width: 55%;
+  margin-top: 10px;
+}
+
+.search-container input[type="text"] {
+  color: black;
+  letter-spacing: 1px;
+  font-size: 14px;
+  border: none;
+  width: 80%;
+  outline: none;
+}
+
+/* so that do not float when window is minimized @ use inline block*/
+
+.search-container::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.search-container button {
+  float: right;
+  color: black;
+  font-size: 14px;
+  background: white;
+  border: none;
+  cursor: pointer;
+}
+
+.search-container button:hover {
+  opacity: 0.6;
+}
+
+/* serach box end */
+
+/* main nav */
+
+.main-nav {
+  text-transform: uppercase;
+  margin: 20px;
+}
+
+.main-nav ul {
+  display: grid;
+  /* A non-negative dimension with the unit fr specifying the track’s flex factor. Each <flex>-sized track takes a share of the remaining space in proportion to its flex factor. */
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 2em;
+  padding: 0;
+  list-style: none;
+}
+
+.main-nav a {
+  display: block;
+  text-decoration: none;
+  padding: 1em;
+  text-align: center;
+  color: rgb(68, 67, 67);
+  border: 1px solid black;
+  border-radius: 20px;
+}
+
+/* Change the color of links on hover */
+
+.main-nav a:hover {
+  background: rgb(233, 233, 233);
+  color: black;
+}
+
+/* Style the "active" element to highlight the current page */
+
+.main-nav a.active {
+  background: rgb(233, 233, 233);
+  border: 1px solid white;
+}
+
+/* main nav end */
+
+/*hori bar start*/
+
+.horizontal-bar-row {
+  display: grid;
+  grid-template-columns: auto auto;
+  background: rgb(233, 233, 233);
+  padding: 12px 25px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  width: 100%;
+}
+
+.horizontal-bar-row h2 {
+  display: block;
+}
+
+.select-container {
+  display: block;
+  float: right;
+  text-align: right;
+  padding-right: 20px;
+}
+
+#college-select {
+  padding: 8px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+}
+
+/* hori bar end! */
+
+/* card-card start here*/
+
+.card-group {
+  margin: 20px;
+  justify-content: center;
+}
+
+.restaurant-card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 20px;
+  margin: 20px 30px 20px 30px;
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
+
+.card-container {
+  padding: 12px 16px;
+}
+
+.card-container h4 {
+  font: bold;
+}
+
+.card-container ul {
+  margin-top: 10px;
+}
+
+.restaurant-card img {
+  display: block;
+  width: 100%;
+  height: 300px;
+  /* Add rounded corners to the top left and the top right corner of the image */
+  border-radius: 20px 20px 0px 0px;
+  opacity: 0.9;
+  filter: grayscale(30%);
+  filter: saturate(120%);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: 0.3s ease;
+  background-color: black;
+  border-radius: 20px;
+  /* h-offset v-offset blur spread color */
+  box-shadow: 6px 10px 10px 2px;
+}
+
+.restaurant-card:hover .overlay {
+  opacity: 0.6;
+}
+
+.view_menu {
+  padding: 1em;
+  /* 1em = 16px */
+  text-transform: uppercase;
+  font-size: large;
+  font-weight: bold;
+  border-radius: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* centered position button */
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background: none;
+  color: white;
+  border: 2px solid white;
+}
+
+.view_menu:hover {
+  background: white;
+  color: #363636;
+  cursor: pointer;
+  outline: none;
+}
+
+/* cardcard end!!!*/
+
+/* my pre-order */
