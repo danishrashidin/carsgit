@@ -1,5 +1,5 @@
-head, body {
-  font-family: 'Manrope', sans-serif;
+#menu-head, #menu-body {
+  font-family: "Manrope", sans-serif;
 }
 
 .food-card {

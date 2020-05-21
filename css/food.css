@@ -1,9 +1,8 @@
-head,
-body {
+#food-head, #food-body {
   font-family: "Manrope", sans-serif;
 }
 
-header {
+.description {
   margin: 20px;
 }
 
