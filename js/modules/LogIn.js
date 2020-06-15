@@ -10,11 +10,19 @@ export default class LogIn {
       this.navLogInButton = document.querySelector("#button-log-in");
       this.modalLogIn = document.querySelector(".shadowBox.log-in");
       this.logInForm = document.querySelector(".log-in-form");
+      this.emailInputBox = document.querySelector(".log-in-input-email");
       this.passwordInputBox = document.querySelector(".log-in-input-password");
       this.passwordVisibility = document.querySelector(".log-in-password-check-icon");
       this.signUpButton = document.querySelector(".side-sign-up");
+      this.logInButton = document.querySelector(".log-in-button");
       this.forgotPassword = document.querySelector(".side-forgot-password");
+      this.tooltipEmail = document.querySelector("#logInEmail-check-template");
+      this.notificationTitle = document.querySelector(".notification-title");
+      this.notificationMessage = document.querySelector(".notification-message");
+      this.modalVerify = document.querySelector(".shadowBox.verify");
       this.typed;
+      this.emailTippy;
+      this.declareTooltips();
       this.events();
     });
   }
@@ -28,21 +36,109 @@ export default class LogIn {
     this.logInForm.addEventListener("focusin", (e) => this.focusIn(e));
     this.logInForm.addEventListener("focusout", (e) => this.focusOut(e));
     this.signUpButton.addEventListener("click", (e) => this.slideOutlogIn(e));
+    this.logInForm.addEventListener("submit", (e) => this.submit(e));
   }
 
   //----------------------------Methods----------------------------//
+  stripHtml(html) {
+    var tmp = document.createElement("DIV");
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || "";
+  }
+
+  declareTooltips() {
+    this.emailTippy = tippy(document.querySelector(".log-in-input-email"), {
+      theme: "red",
+      content: document.getElementById("logInEmail-check-template"),
+      allowHTML: true,
+      offset: [0, 10],
+      placement: "left-start",
+      arrow: true,
+      arrowType: "sharp",
+      animation: "scale",
+      inertia: true,
+      hideOnClick: false,
+      trigger: "none",
+    });
+  }
+
+  submit(e) {
+    e.preventDefault();
+    this.logInButton.innerHTML = `
+    <div class="lds-ellipsis" style="width: 57.0px; height: 22px left: -4px;">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    `;
+
+    const formData = new FormData(this.logInForm);
+    console.log(formData);
+    fetch("logInHandler.php", {
+      method: "post",
+      body: formData,
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((logInError) => {
+        console.log(logInError);
+        if (logInError.status == "success" && logInError.verified == 1) {
+          window.location.href = "index.php?action=login-success&email=" + this.emailInputBox.value;
+        } else if (logInError.status == "failed") {
+          console.log("masuk");
+          this.logInButton.innerHTML = `Log In`;
+          if (logInError.emailError) {
+            this.tooltipEmail.querySelector(".email-error").innerHTML = logInError.emailError;
+            if (this.tooltipEmail.querySelector(".email-error").innerHTML) {
+              this.emailTippy.show();
+            }
+          } else if (logInError.generalError) {
+            this.tooltipEmail.querySelector(".email-error").innerHTML = logInError.generalError;
+            if (this.tooltipEmail.querySelector(".email-error").innerHTML) {
+              this.emailTippy.show();
+            }
+          }
+        } else if (logInError.status == "success" && logInError.verified == 0) {
+          this.closeLogInOverlay("closeForOtherPopUp");
+          this.userUnverifiedMessage(this.emailInputBox.value);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   focusIn(e) {
-    if (e.target == this.signUpButton || e.target == this.forgotPassword) return null;
+    if (e.target == this.signUpButton || e.target == this.forgotPassword || e.target == this.logInButton) return null;
     e.target.previousElementSibling.classList.add("log-in-label-activated");
     e.target.style.backgroundColor = "rgb(215, 215, 215)";
   }
 
   focusOut(e) {
-    if (e.target == this.signUpButton || e.target == this.forgotPassword) return null;
+    if (e.target == this.signUpButton || e.target == this.forgotPassword || e.target == this.logInButton) return null;
     if (!e.target.value) {
       e.target.previousElementSibling.classList.remove("log-in-label-activated");
       e.target.style.backgroundColor = "rgb(238, 238, 238)";
+      this.emailTippy.hide();
     }
+  }
+
+  userUnverifiedMessage(userEmail) {
+    this.notificationTitle.innerHTML = `
+            Verify your SiswaMail
+            `;
+    this.notificationMessage.innerHTML =
+      `
+            Please verify your email first before attempting log in. We've sent an email to
+            <strong>` +
+      userEmail +
+      ` </strong> to verify your email address. Please click the verify button in that email to complete the registration
+            process.
+            `;
+    this.modalVerify.classList.add("animate__bounceInDown");
+    this.modalVerify.style.display = "flex";
   }
 
   onChange() {
@@ -81,12 +177,23 @@ export default class LogIn {
   }
 
   closeLogInOverlay(e) {
-    if (e.target == this.modalBackground) {
-      document.querySelector("body").classList.remove("stop-scrolling");
-      this.modalBackground.style.display = "none";
+    if (e == "closeForOtherPopUp" || e.target == this.modalBackground) {
+      this.emailTippy.hide();
       this.modalLogIn.style.display = "none";
       this.modalLogIn.classList.remove("animate__bounceInDown");
-      this.typed.destroy();
+      this.logInButton.innerHTML = `Log In`;
+      this.logInForm.reset();
+      this.tooltipEmail.querySelector(".email-error").innerHTML = "";
+      if (
+        !this.passwordVisibility.classList.contains("fa-eye-slash") &&
+        this.passwordVisibility.classList.contains("fa-eye")
+      ) {
+        this.togglePasswordVisibility();
+      }
+      this.passwordVisibility.classList.remove("fa-eye-slash");
+      if (this.typed) {
+        this.typed.destroy();
+      }
       if (document.querySelector(".typed-cursor")) {
         document.querySelector("#typed").remove();
         document.querySelector(".typed-cursor").remove();
@@ -94,6 +201,10 @@ export default class LogIn {
       setTimeout(() => {
         document.querySelector("samp").innerHTML = `<span id="typed"></span>`;
       }, 100);
+    }
+    if (e.target == this.modalBackground) {
+      document.querySelector("body").classList.remove("stop-scrolling");
+      this.modalBackground.style.display = "none";
     }
   }
 
@@ -126,7 +237,7 @@ export default class LogIn {
       <div class="shadowBox log-in container-fluid animate__animated ">
         <div class="row no-gutters">
           <div class="col-sm-7 log-in-column-1">
-            <form action="#" class="log-in-form">
+            <form action="#" class="log-in-form" method="POST">
               <div class="wrapper-up">
                 <h1 id="log-in-title">Welcome Back</h1>
                 <div id="typed-strings">
@@ -136,10 +247,13 @@ export default class LogIn {
               </div>
               <div class="wrapper">
                 <i class="fas fa-envelope log-in-icon"></i>
+                <div id="logInEmail-check-template">
+                    <p class="email-error">
+                    </p>
+                </div>
                 <label for="email" class="log-in-label-email">
-                  &nbsp; Email Address</label
+                  &nbsp; SiswaMail</label
                 >
-                <!-- <i class="fas fa-user-check email-check-icon"></i> -->
                 <input
                   type="email"
                   id="email"
@@ -150,10 +264,10 @@ export default class LogIn {
               </div>
               <div class="wrapper">
                 <i class="fas fa-key log-in-icon"></i>
+                
                 <label for="password" class="log-in-label-password"
                   >&nbsp; Password</label
                 >
-
                 <input
                   type="password"
                   id="password"
@@ -167,7 +281,7 @@ export default class LogIn {
                 <button class="log-in-button d-block font-weight-bold">
                   Log In
                 </button>
-                <a tabindex="-1" class="side-sign-up">Sign Up?</a>
+                <a tabindex="-1" class="side-sign-up">Sign Up</a>
                 <a href="#" class="side-forgot-password">Forgot Password</a>
               </div>
             </form>
