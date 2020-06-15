@@ -7,10 +7,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     $action = $_POST['action'];
 }
-
-if ($action == 'login-success') {
-    $_SESSION['userEmail'] = $_GET['email'];
-}
+if (isset($_POST['action'])) {
+    if ($action == 'login-success') {
+        $_SESSION['userEmail'] = $_GET['email'];
+    }}
 ?>
 
 

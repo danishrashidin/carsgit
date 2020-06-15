@@ -211,6 +211,8 @@ export default class LogIn {
   slideOutlogIn(e) {
     this.modalLogIn.classList.add("animate__bounceOutDown");
     this.modalSignUp.classList.add("animate__bounceInDown");
+    this.emailTippy.hide();
+    this.tooltipEmail.querySelector(".email-error").innerHTML = "";
 
     setTimeout(() => {
       this.modalSignUp.style.display = "block";
