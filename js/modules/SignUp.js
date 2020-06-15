@@ -10,6 +10,7 @@ export default class SignUp {
       //----------------------------SignUpComponent----------------------------//
       this.modalBackground = document.querySelector(".fade-background");
       this.modalSignUp = document.querySelector(".shadowBox.sign-up");
+      this.modalVerify = document.querySelector(".shadowBox.verify");
       this.signUpForm = document.querySelector(".sign-up-form");
       this.signUpButton = document.querySelector(".sign-up-button");
       this.logInButton = document.querySelector("#log-in");
@@ -18,32 +19,41 @@ export default class SignUp {
       this.progressBar = document.querySelector(".progress-bar");
       this.tooltipPassword = document.querySelector("#tippy-template");
       this.tooltipEmail = document.querySelector("#email-check-template");
+      this.tooltipMatricNumber = document.querySelector("#matricNumber-check-template");
       this.passwordVisibility = document.querySelector(".sign-up-password-check-icon");
-      this.labelFirstName = document.querySelector(".label-first-name");
-      this.labelLastName = document.querySelector(".label-last-name");
+      this.label = document.querySelectorAll(".--reset");
+      this.labelFullName = document.querySelector(".label-full-name");
+      this.labelMatricNumber = document.querySelector(".label-matric-number");
       this.labelEmail = document.querySelector(".label-email");
       this.labelPassword = document.querySelector(".label-password");
       this.labelConfirmPassword = document.querySelector(".label-confirm-password");
       this.labelDropdown1 = document.querySelector(".dropdown1");
       this.labelDropdown2 = document.querySelector(".dropdown2");
-      this.inputBoxFirstName = document.querySelector("#inputBox-first-name");
-      this.inputBoxLastName = document.querySelector("#inputBox-last-name");
+      this.input = document.querySelectorAll("input");
+      this.inputBoxFullName = document.querySelector("#inputBox-full-name");
+      this.inputBoxMatricNumber = document.querySelector("#inputBox-matric-number");
       this.inputBoxEmail = document.querySelector("#inputBox-email");
       this.inputBoxPassword = document.querySelector("#inputBox-password");
       this.inputBoxConfirmPassword = document.querySelector("#inputBox-confirm-password");
+      this.notificationTitle = document.querySelector(".notification-title");
+      this.notificationMessage = document.querySelector(".notification-message");
+      this.userVerified = document.querySelector(".--verificationSuccessfull");
       this.passwordStrength;
+      this.emailStatus;
+      this.matricNumberStatus;
       this.feedbackMessage;
       this.funFactMessage;
+      this.URL;
       this.declareTooltips();
       this.events();
     });
   }
 
-  //----------------------------Events----------------------------//
+  //--------------------------------------------------------Events--------------------------------------------------------//
   events() {
-    if (this.navSignUpButton) {
-      this.navSignUpButton.addEventListener("click", () => this.openSignUpOverlay());
-    }
+    console.log(this.userVerified);
+    if (this.userVerified) this.showVerifiedEmailMessage();
+    if (this.navSignUpButton) this.navSignUpButton.addEventListener("click", () => this.openSignUpOverlay());
     this.modalBackground.addEventListener("click", (e) => this.closeSignUpOverlay(e));
     this.signUpForm.addEventListener("submit", (e) => this.submit(e));
     this.signUpForm.addEventListener("focusin", (e) => this.focusIn(e));
@@ -57,17 +67,19 @@ export default class SignUp {
     this.dropdownList.forEach((targetedList) => {
       targetedList.addEventListener("click", () => this.selectList(targetedList));
     });
-    this.inputBoxFirstName.addEventListener("keydown", (e) => this.filterName(e));
-    this.inputBoxFirstName.addEventListener("input", (e) => this.checkName(e));
-    this.inputBoxLastName.addEventListener("keydown", (e) => this.filterName(e));
-    this.inputBoxLastName.addEventListener("input", (e) => this.checkName(e));
-    this.inputBoxPassword.addEventListener("keydown", (e) => this.filterPassword(e));
+    this.inputBoxFullName.addEventListener("keydown", (e) => this.filterName(e));
+    this.inputBoxFullName.addEventListener("input", (e) => this.checkName(e));
+    this.inputBoxMatricNumber.addEventListener("keydown", (e) => this.filterMatricNumber(e));
+    this.inputBoxMatricNumber.addEventListener("input", (e) => this.checkMatricNumber(e));
+    this.inputBoxPassword.addEventListener("keydown", (e) => this.disableWhiteSpaces(e));
     this.inputBoxPassword.addEventListener("input", () => this.onChange());
+    this.inputBoxConfirmPassword.addEventListener("keydown", (e) => this.disableWhiteSpaces(e));
     this.inputBoxConfirmPassword.addEventListener("input", () => this.checkPasswordSimilarity());
+    this.inputBoxEmail.addEventListener("keydown", (e) => this.disableWhiteSpaces(e));
     this.inputBoxEmail.addEventListener("input", () => this.checkEmailValidity());
   }
 
-  //----------------------------Methods----------------------------//
+  //--------------------------------------------------------Methods--------------------------------------------------------//
   declareTooltips() {
     tippy(document.querySelector("#inputBox-email"), {
       theme: "white",
@@ -95,20 +107,78 @@ export default class SignUp {
       hideOnClick: false,
       trigger: "focusin",
     });
+    tippy(document.querySelector("#inputBox-matric-number"), {
+      theme: "white",
+      content: document.getElementById("matricNumber-check-template"),
+      allowHTML: true,
+      placement: "right-start",
+      offset: [0, 15],
+      arrow: true,
+      maxWidth: 600,
+      arrowType: "sharp",
+      animation: "scale",
+      inertia: true,
+      hideOnClick: false,
+      trigger: "focusin",
+    });
+  }
+
+  stripHtml(html) {
+    var tmp = document.createElement("DIV");
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || "";
   }
 
   submit(e) {
     e.preventDefault();
     if (
-      !this.labelFirstName.querySelector(".fa-times-circle") &&
-      !this.labelLastName.querySelector(".fa-times-circle") &&
-      !this.labelEmail.querySelector(".fa-times-circle") &&
-      !this.labelPassword.querySelector(".fa-times-circle") &&
-      !this.labelConfirmPassword.querySelector(".fa-times-circle") &&
-      !this.labelDropdown1.querySelector(".fa-times-circle") &&
-      !this.labelDropdown2.querySelector(".fa-times-circle")
+      this.labelFullName.querySelector(".fa-check-circle") &&
+      this.labelMatricNumber.querySelector(".fa-check-circle") &&
+      this.labelEmail.querySelector(".fa-check-circle") &&
+      this.labelPassword.querySelector(".fa-check-circle") &&
+      this.labelConfirmPassword.querySelector(".fa-check-circle") &&
+      this.labelDropdown1.querySelector(".fa-check-circle") &&
+      this.labelDropdown2.querySelector(".fa-check-circle")
     ) {
-      this.signUpForm.submit();
+      this.signUpButton.innerHTML = `
+      <div class="lds-ellipsis">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      `;
+
+      const formData = new FormData(this.signUpForm);
+      fetch("registrationHandler.php", {
+        method: "post",
+        body: formData,
+      })
+        .then((response) => {
+          return response.text();
+        })
+        .then((dataReceived) => {
+          if (dataReceived == "Successful") {
+            this.closeSignUpOverlay("register");
+            this.signUpButton.innerHTML = `Submit`;
+            this.notificationTitle.innerHTML = `
+            Verify your SiswaMail
+            `;
+            this.notificationMessage.innerHTML =
+              `
+            Your account has been successfully made! We now need to verify your SiswaMail. We've sent an email to
+            <strong>` +
+              this.stripHtml(DOMPurify.sanitize(this.inputBoxEmail.value)) +
+              ` </strong> to verify your email address. Please click the verify button in that email to complete the registration
+            process.
+            `;
+            this.modalVerify.classList.add("animate__bounceInDown");
+            this.modalVerify.style.display = "flex";
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   }
 
@@ -128,8 +198,65 @@ export default class SignUp {
       document.querySelector("body").classList.remove("stop-scrolling");
       this.modalBackground.style.display = "none";
       this.modalSignUp.style.display = "none";
+      this.modalVerify.style.display = "none";
+      this.modalSignUp.classList.remove("animate__bounceInDown");
+      this.modalVerify.classList.remove("animate__bounceInDown");
+      this.logInButton.innerHTML = `Submit`;
+      this.signUpForm.reset();
+
+      this.label.forEach((eachLabel) => {
+        eachLabel.classList.remove("sign-up-activated");
+        if (eachLabel.querySelector(".fa-times-circle")) {
+          eachLabel.querySelector(".fas").classList.remove("fa-times-circle");
+        }
+        if (eachLabel.querySelector(".fa-check-circle")) {
+          eachLabel.querySelector(".fas").classList.remove("fa-check-circle");
+        }
+      });
+      this.input.forEach((eachInputBox) => {
+        eachInputBox.style.border = "none";
+        if (eachInputBox.getAttribute("name") == "action") return;
+        eachInputBox.setAttribute("value", "");
+        eachInputBox.previousElementSibling.classList.remove("log-in-label-activated");
+        eachInputBox.style.backgroundColor = "rgb(238, 238, 238)";
+      });
+      this.dropdown.forEach((eachDropdown) => {
+        eachDropdown.style.border = "none";
+        eachDropdown.querySelector("span").innerText = "";
+        eachDropdown.querySelector(".dropdown-label").classList.remove("activated");
+        eachDropdown.querySelector(".dropdown-label").style.color = "rgb(133, 127, 127)";
+      });
+
+      if (
+        !this.passwordVisibility.classList.contains("fa-eye-slash") &&
+        this.passwordVisibility.classList.contains("fa-eye")
+      ) {
+        this.togglePasswordVisibility();
+      }
+      this.passwordVisibility.classList.remove("fa-eye-slash");
+      this.tooltipEmail.querySelector(".validity").innerHTML = " ";
+      this.tooltipPassword.querySelector(".strength").innerHTML = " ";
+      this.tooltipPassword.querySelector(".feedback").innerHTML = " ";
+      this.tooltipPassword.querySelector(".funfact").innerHTML = " ";
+      document.documentElement.style.setProperty("--progressBarColor", "rgba(197, 197, 197, 0)");
+      this.progressBar.style.setProperty("--width", 0);
+    } else if (e == "register") {
+      this.modalSignUp.style.display = "none";
       this.modalSignUp.classList.remove("animate__bounceInDown");
     }
+  }
+
+  showVerifiedEmailMessage() {
+    document.querySelector("body").classList.add("stop-scrolling");
+    this.modalBackground.style.display = "flex";
+    this.notificationTitle.innerHTML = `
+            Verification Successfull <i class="fas fa-check" style="color: rgb(12, 143, 12)"></i>
+            `;
+    this.notificationMessage.innerHTML = `
+            <strong>Congratulation!</strong> your email was successfully verified. You can now login.
+            `;
+    this.modalVerify.classList.add("animate__bounceInDown");
+    this.modalVerify.style.display = "flex";
   }
 
   slideOutSignUp() {
@@ -153,25 +280,17 @@ export default class SignUp {
   focusIn(e) {
     if (e.target.previousElementSibling) {
       e.target.previousElementSibling.classList.add("sign-up-activated");
-      // e.target.style.backgroundColor = "rgb(225,225,225)";
     }
   }
 
   focusOut(e) {
     if (!e.target.value && e.target.previousElementSibling) {
-      if (!e.target.previousElementSibling.querySelector(".fa-times-circle")) {
-        e.target.previousElementSibling.classList.remove("sign-up-activated");
-      }
-      if (e.target.previousElementSibling.querySelector(".fa-check-circle")) {
-        e.target.previousElementSibling.classList.remove("sign-up-activated");
-        e.target.previousElementSibling.querySelector(".fas").classList.remove("fa-check-circle");
-        e.target.style.border = "none";
-      }
-      this.tooltipEmail.querySelector(".validity").innerHTML = "";
-      // e.target.style.backgroundColor = "rgb(238, 238, 238)";
+      e.target.previousElementSibling.classList.remove("sign-up-activated");
+      e.target.previousElementSibling.querySelector(".fas").classList.remove("fa-check-circle");
+      e.target.previousElementSibling.querySelector(".fas").classList.remove("fa-times-circle");
+      e.target.style.border = "none";
     }
   }
-
   onChange() {
     if (!this.inputBoxPassword.value) {
       this.passwordVisibility.classList.remove("fa-eye", "fa-eye-slash");
@@ -295,7 +414,7 @@ export default class SignUp {
     targetedList.parentNode.parentNode.querySelector(".dropdown-label").classList.add("activated");
     targetedList.parentNode.parentNode.querySelector("span").innerText = targetedList.innerText;
     targetedList.parentNode.parentNode.querySelector("span").style.display = "inline";
-    targetedList.parentNode.parentNode.querySelector("input").setAttribute("value", targetedList.getAttribute("id"));
+    targetedList.parentNode.parentNode.querySelector("input").setAttribute("value", targetedList.innerText);
     if (!targetedList.parentNode.parentNode.querySelector(".fas")) {
       setTimeout(function () {
         targetedList.parentNode.parentNode
@@ -316,7 +435,14 @@ export default class SignUp {
     }
   }
 
-  filterPassword(e) {
+  filterMatricNumber(e) {
+    if (e.keyCode == 8 || e.keyCode == 9) return;
+    if (!e.key.match(/(^[0-9])/g)) {
+      e.preventDefault();
+    }
+  }
+
+  disableWhiteSpaces(e) {
     if (e.keyCode == 32) e.preventDefault();
   }
 
@@ -325,7 +451,8 @@ export default class SignUp {
     this.inputBoxConfirmPassword.timer = setTimeout(() => {
       if (
         this.inputBoxConfirmPassword.value == this.inputBoxPassword.value &&
-        !this.labelConfirmPassword.querySelector(".fa-check-circle")
+        !this.labelConfirmPassword.querySelector(".fa-check-circle") &&
+        this.inputBoxConfirmPassword.value
       ) {
         if (this.labelConfirmPassword.querySelector(".fa-times-circle")) {
           this.labelConfirmPassword.querySelector(".fas").classList.remove("fa-times-circle");
@@ -343,30 +470,51 @@ export default class SignUp {
   }
 
   checkEmailValidity() {
-    this.feedbackMessage = this.inputBoxEmail.value.match(
-      /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/g
-    );
-
     clearTimeout(this.inputBoxEmail.timer);
     this.inputBoxEmail.timer = setTimeout(() => {
-      if (this.feedbackMessage && !this.labelEmail.querySelector(".fa-check-circle")) {
-        if (this.labelEmail.querySelector(".fa-times-circle")) {
-          this.labelEmail.querySelector(".fas").classList.remove("fa-times-circle");
-        }
-        this.labelEmail.querySelector(".fas").classList.add("fa-check-circle");
-        this.inputBoxEmail.style.border = "1.5px solid green";
-        this.tooltipEmail.querySelector(".validity").innerHTML = "Email is valid";
-        this.tooltipEmail.querySelector(".validity").style.color = "green";
-      }
-      if (!this.feedbackMessage) {
-        if (this.labelEmail.querySelector(".fa-check-circle")) {
-          this.labelEmail.querySelector(".fas").classList.remove("fa-check-circle");
-        }
-        this.labelEmail.querySelector(".fas").classList.add("fa-times-circle");
-        this.inputBoxEmail.style.border = "1.5px solid red";
-        this.tooltipEmail.querySelector(".validity").innerHTML = "Invalid email";
-        this.tooltipEmail.querySelector(".validity").style.color = "red";
-      }
+      fetch("registrationHandler.php", {
+        method: "post",
+        body: new URLSearchParams("email=" + this.inputBoxEmail.value + "&action=checkEmail"),
+      })
+        .then((response) => {
+          return response.text();
+        })
+        .then((status) => {
+          this.emailStatus = status;
+          this.emailValidity = this.inputBoxEmail.value.match(/(@siswa.um.edu.my)/g);
+
+          if (
+            this.emailValidity &&
+            !this.labelEmail.querySelector(".fa-check-circle") &&
+            this.emailStatus == "unique"
+          ) {
+            if (this.labelEmail.querySelector(".fa-times-circle")) {
+              this.labelEmail.querySelector(".fas").classList.remove("fa-times-circle");
+            }
+            this.labelEmail.querySelector(".fas").classList.add("fa-check-circle");
+            this.inputBoxEmail.style.border = "1.5px solid green";
+            this.tooltipEmail.querySelector(".validity").innerHTML = "SiswaMail is valid <br> and unique";
+            this.tooltipEmail.querySelector(".validity").style.color = "green";
+          }
+
+          if (!this.emailValidity || this.emailStatus == "taken") {
+            if (this.labelEmail.querySelector(".fa-check-circle")) {
+              this.labelEmail.querySelector(".fas").classList.remove("fa-check-circle");
+            }
+            this.labelEmail.querySelector(".fas").classList.add("fa-times-circle");
+            this.inputBoxEmail.style.border = "1.5px solid red";
+            this.tooltipEmail.querySelector(".validity").style.color = "red";
+
+            if (this.emailStatus == "taken") {
+              this.tooltipEmail.querySelector(".validity").innerHTML = "Student has already <br> registered";
+            } else {
+              this.tooltipEmail.querySelector(".validity").innerHTML = "Invalid SiswaMail";
+            }
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }, 500);
   }
 
@@ -388,6 +536,44 @@ export default class SignUp {
         e.target.style.border = "1.5px solid red";
       }
     }, 100);
+  }
+
+  checkMatricNumber(e) {
+    fetch("registrationHandler.php", {
+      method: "post",
+      body: new URLSearchParams("Matric_Number=" + this.inputBoxMatricNumber.value + "&action=checkMatricNumber"),
+    })
+      .then((response) => {
+        return response.text();
+      })
+      .then((status) => {
+        this.matricNumberStatus = status;
+        clearTimeout(this.inputBoxMatricNumber.timer);
+        this.inputBoxMatricNumber.timer = setTimeout(() => {
+          if (!this.labelMatricNumber.querySelector(".fa-check-circle") && this.matricNumberStatus == "exist") {
+            if (this.labelMatricNumber.querySelector(".fa-times-circle")) {
+              this.labelMatricNumber.querySelector(".fas").classList.remove("fa-times-circle");
+            }
+            this.labelMatricNumber.querySelector(".fas").classList.add("fa-check-circle");
+            this.inputBoxMatricNumber.style.border = "1.5px solid green";
+            this.tooltipMatricNumber.querySelector(".validity").innerHTML = "Student exists";
+            this.tooltipMatricNumber.querySelector(".validity").style.color = "green";
+          }
+
+          if (this.matricNumberStatus == "null") {
+            if (this.labelMatricNumber.querySelector(".fa-check-circle")) {
+              this.labelMatricNumber.querySelector(".fas").classList.remove("fa-check-circle");
+            }
+            this.labelMatricNumber.querySelector(".fas").classList.add("fa-times-circle");
+            this.inputBoxMatricNumber.style.border = "1.5px solid red";
+            this.tooltipMatricNumber.querySelector(".validity").style.color = "red";
+            this.tooltipMatricNumber.querySelector(".validity").innerHTML = "Student doesn't exists";
+          }
+        }, 500);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   injectHTML() {
@@ -449,36 +635,45 @@ export default class SignUp {
             </div>
           </div>
           <div class="col-sm-8 sign-up-column-2">
-            <form action="" class="container-fluid sign-up-form" autocomplete="off">
-              <div class="row no-gutters">
-                <div class="col text-left ml-5 pl-4 mb-1 mt-2">
-                  <h1 class="font-weight-bolder">Sign Up</h1>
+            <form class="container-fluid sign-up-form" autocomplete="on" method="POST">
+              <input type="hidden" name="action" value="register">
+
+              <div class="row no-gutters ">
+                <div class="col text-left ">
+                  <h6 class="font-weight-bolder">Create an account</h6>
                 </div>
               </div>
               <div class="row no-gutters">
                 <div class="col text-right">
-                  <label for="first-name" class="sign-up-label label-first-name"
-                    >&nbsp; First Name &nbsp; <i class="fas "></i>
+                  <label for="full-name" class="sign-up-label label-full-name --reset"
+                    >&nbsp; Full Name &nbsp; <i class="fas "></i>
                   </label>
                   <input
                     type="text"
-                    id="inputBox-first-name"
-                    name="first-name"
+                    id="inputBox-full-name"
+                    name="full-name"
                     class="sign-up-input-box"
                     onpaste="return false;"
                     required
                   />
                 </div>
                 <div class="col text-left">
+                  <div id="matricNumber-check-template">
+                    <p class="validity-label">
+                      Checking database: 
+                      <span class="validity"></span>
+                    </p>
+                  </div>
+
                   <label
-                    for="last-name"
-                    class="sign-up-label label-last-name label-right"
-                    >&nbsp; Last Name &nbsp; <i class="fas "></i></label
+                    for="matric-number"
+                    class="sign-up-label label-matric-number label-right --reset"
+                    >&nbsp; Matric Number (New) &nbsp; <i class="fas "></i></label
                   >
                   <input
                     type="text"
-                    id="inputBox-last-name"
-                    name="last-name"
+                    id="inputBox-matric-number"
+                    name="matric-number"
                     class="sign-up-input-box"
                     onpaste="return false;"
                     required
@@ -494,8 +689,8 @@ export default class SignUp {
                     </p>
                   </div>
 
-                  <label for="email" class="sign-up-label label-email"
-                    >&nbsp; Email &nbsp; <i class="fas "></i></label
+                  <label for="email" class="sign-up-label label-email --reset"
+                    >&nbsp; SiswaMail &nbsp; <i class="fas "></i></label
                   >
                   <input
                     type="text"
@@ -520,7 +715,7 @@ export default class SignUp {
                     <p class="funfact"></p>
                   </div>
 
-                  <label for="password" class="sign-up-label label-password"
+                  <label for="password" class="sign-up-label label-password --reset"
                     >&nbsp; Password &nbsp; <i class="fas "></i></label
                   >
                   <input
@@ -537,7 +732,7 @@ export default class SignUp {
                 <div class="col text-left">
                   <label
                     for="confirm-password"
-                    class="sign-up-label label-confirm-password label-right"
+                    class="sign-up-label label-confirm-password label-right --reset"
                     >&nbsp; Confirm Password &nbsp; <i class="fas "></i></label
                   >
                   <input
@@ -557,7 +752,7 @@ export default class SignUp {
                   <div class="select">
                   <span style="display: none;"></span>
                   </div>
-                  <label for="residential-college" class="dropdown-label dropdown1">
+                  <label for="residential-college" class="dropdown-label dropdown1 --reset">
                     Residential College
                   </label>
                     <input type="text" name="college" required 
@@ -584,7 +779,7 @@ export default class SignUp {
                     <div class="select">
                       <span style="display: none;"></span>
                     </div>
-                    <label for="residential-college" class="dropdown-label dropdown2">
+                    <label for="residential-college" class="dropdown-label dropdown2 --reset">
                       Faculty</label
                     >
                     <input type="text" name="faculty" required                     
@@ -615,34 +810,38 @@ export default class SignUp {
                 </div>
               </div>
               <div class="row no-gutters mb-3">
-                <div class="col-4">
+                <div class="col-3">
                   <button
-                    class="sign-up-button mt-3 mb-2 font-weight-bold"
+                    type="submit" class="sign-up-button mt-3 mb-2 font-weight-bold"
                   >
-                    Sign Up
+                  Submit 
                   </button>
                 </div>
-                <div class="col-8">
-                  <small id="have-account">
+                <div class="col-9">
+                  <p id="have-account">
                     Already have an account?
                     <a id="log-in">Log In</a> <br />
-                    <p>
+                    
                       By signing up, you agree to our
                       <a href="#" id="term-condition">Terms of Use</a> and
                       <a href="#" id="term-condition"> Privacy Policy</a>
-                    </p>
-                  </small>
-                  <!-- <span id="typed"></span> -->
-                  <!-- <div id="typed-strings">
-                    <p style="display: none;">
-                      By signing up, you agree to our
-                      <a href="#" id="term-condition">Terms of Use</a> and
-                      <a href="#" id="term-condition"> Privacy Policy</a>
-                    </p>
-                  </div> -->
+                    
+                  </p>
                 </div>
               </div>
             </form>
+          </div>
+        </div>
+      </div>
+      <div class="shadowBox verify container-fluid animate__animated" style="display: none;">
+        <div class="row verify no-gutters">
+          <div class="col verify-title">
+            <h2 class="notification-title" style="margin: 0px; padding: 15px 15px 15px 15px; text-align: center;">
+            </h2>
+          </div>
+          <div class="col verify-content">
+            <p class="notification-message" style="margin: 0px; padding: 30px 30px 30px 30px; font-size: 20px; text-align: center;">
+            </p>
           </div>
         </div>
       </div>
@@ -650,3 +849,21 @@ export default class SignUp {
     );
   }
 }
+
+// if (!e.target.previousElementSibling.querySelector(".fa-times-circle")) {
+//   e.target.previousElementSibling.classList.remove("sign-up-activated");
+// }
+// if (e.target.previousElementSibling.querySelector(".fa-check-circle")) {
+//   e.target.previousElementSibling.classList.remove("sign-up-activated");
+//   e.target.previousElementSibling.querySelector(".fas").classList.remove("fa-check-circle");
+//   e.target.style.border = "none";
+// this.tooltipPassword.querySelector(".funfact").innerHTML = "";
+
+// this.tooltipPassword.querySelector(".strength").innerHTML = "";
+// this.tooltipPassword.querySelector(".feedback").innerHTML = "";
+// this.tooltipPassword.querySelector(".funfact").innerHTML = "";
+// document.documentElement.style.setProperty("--progressBarColor", "rgba(197, 197, 197, 0)");
+// this.progressBar.style.setProperty("--width", 0);
+
+// e.target.style.backgroundColor = "rgb(238, 238, 238)";
+// }
