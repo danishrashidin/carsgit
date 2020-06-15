@@ -1,11 +1,10 @@
 <?php
 session_start();
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
     $action = $_GET['action'];
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     $action = $_POST['action'];
 }
 
