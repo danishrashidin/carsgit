@@ -29,9 +29,9 @@ function close_cart() {
   document.querySelector(".store-cart-icon").style.visibility = "visible";
   document.querySelectorAll(".food-card").forEach(function (c) {
     var w = parseInt(c.style.maxWidth) + 300;
-    console.log(w);
+    // console.log(w);
     c.style.maxWidth = w + "px";
-    console.log(c.style.maxWidth);
+    // console.log(c.style.maxWidth);
   })
 }
 
@@ -64,6 +64,7 @@ var cumulativeCartItems = [];
             // cart_item.food_price+=final_food_price;
           }
         }
+
         if (food_quantity > 1) {
           // console.log(document.querySelectorAll(".item-title")[document.querySelectorAll(".item-title").length-1]);
           document.querySelectorAll(".item-title").forEach(function (cI) {
@@ -101,7 +102,7 @@ var cumulativeCartItems = [];
         */
         const create_cart_item = document.createElement("div");
         create_cart_item.classList.add("cart-item");
-        var i = countI();
+        // var i = countI();
         create_cart_item.innerHTML =
           "<div class" + "=" + 'item-text' + ">" +
           "<div class" + "=" + 'item-title' + "><b>" + cart_item.food_name + "</b></div>" +
@@ -128,25 +129,52 @@ var cumulativeCartItems = [];
         }
       }
 
+
+      // document.querySelectorAll(".fa-trash").forEach(function (btn) {
+      //   btn.addEventListener("click", function (event) {
+      //     var temp = event.target.parentElement.parentElement.children[0].textContent;
+      //     console.log(temp);
+      //     // event.target.parentElement.parentElement.parentElement.style.padding = 0;
+      //     event.target.parentElement.parentElement.parentElement.remove();
+
+      //     // console.log(cumulativeCartItems);
+      //     const total = document.querySelector(".cart-total");
+      //     total.innerHTML = "(Total) RM " + showTotals().toFixed(2);
+      //     const n = document.querySelectorAll(".n-items");
+      //     for (var x = 0; x < n.length; x++) {
+      //       n[x].innerHTML = countItems();
+      //     }
+      //   })
+
+      // })
+      // var j = cumulativeCartItems.length - 1;
+      // while (j >= 0) {
+      //   // console.log(cumulativeCartItems[j].food_name);
+      //   var k = cumulativeCartItems[j].food_name;
+      //   if (temp == k) {
+      //     cumulativeCartItems.pop();
+
+      //   } else {
+      //     j--;
+      //   }
+      //   j--;
+      // }
+
+      var temp;
       //put inside here to remove new added item
       (function removeItem() {
         const removeBtn = document.querySelectorAll(".store-remove-icon");
         removeBtn.forEach(function (btn) {
           btn.addEventListener("click", function (event) {
             if (event.target.classList.contains("fa-trash")) {
-              var temp = event.target.parentElement.parentElement.children[0].textContent;
+              temp = event.target.parentElement.parentElement.children[0].textContent;
               console.log(temp);
               // event.target.parentElement.parentElement.parentElement.style.padding = 0;
               event.target.parentElement.parentElement.parentElement.remove();
-              var j = cumulativeCartItems.length - 1;
-              while (j >= 0) {
-                // console.log(cumulativeCartItems[j].food_name);
-                var k = cumulativeCartItems[j].food_name;
-                if (temp == k) {
-                  cumulativeCartItems.pop();
-                  j--;
-                } else {
-                  j--;
+              for (var j = 0; j < cumulativeCartItems.length; j++) {
+                if (temp == cumulativeCartItems[j].food_name) {
+                  // cumulativeCartItems.splice(j, j+1);
+                  cumulativeCartItems[j]="";
                 }
               }
               // console.log(cumulativeCartItems);
@@ -159,6 +187,18 @@ var cumulativeCartItems = [];
             }
           })
         })
+        // var j = cumulativeCartItems.length - 1;
+        // while (j >= 0) {
+        //   // console.log(cumulativeCartItems[j].food_name);
+        //   var k = cumulativeCartItems[j].food_name;
+        //   if (temp === k) {
+        //     cumulativeCartItems.pop();
+
+        //   } else {
+        //     j--;
+        //   }
+        //   j--;
+        // }
       }());
 
     })
@@ -230,9 +270,6 @@ function order_function() {
         "<input type" + "=" + 'hidden' + " name" + "=" + "count" + " value" + "='" + rows.length + "'>";
       document.querySelector(".cart").appendChild(create_hidden_input);
     }
-    // alert("Order submitted. Please pick up your food from related store by TODAY. \n\nYou can view your order status at \"MY ORDER\".");
-    // const cart = document.querySelector(".cart");
-    // cart.removeChild();
   }
 }
 
@@ -243,30 +280,51 @@ function preorder_function() {
   } else if (confirm("Total price to be paid is RM " + showTotals().toFixed(2) + ".\nYou are heading to PRE-ORDER process. \n\nChoose 'ORDER' button to make order for TODAY.\n\nClick 'OK' to confirm order.") == true) {
     // alert("Heading to proceed PRE-ORDER.");
     var date = new Date;
-    date = prompt("Choose pick up date (year/month/day) e.g. 2020/12/30 \n(*Please enter date not further than 2 weeks from today.)","2020/06/28");
+    var int_today = Number(formatDate(date));
+    var limit_date = int_today + 14;
+    const create_hidden_input = document.createElement("div");
+    create_hidden_input.classList.add("order-output");
+    create_hidden_input.innerHTML =
+      "<input type" + "=" + 'hidden' + " name" + "=" + "InvalidDate" + " value" + "='" + 1 + "'>";
+    document.querySelector(".cart").appendChild(create_hidden_input);
+    date = prompt("Enter pick up date (year/month/day) e.g. 2020/12/30 \n(*Please enter date not further than 2 weeks from today.)", "yyyy/mm/dd");
+    var int_date = Number(date.split("/").join(""));
+    // console.log(int_date);
     if (date != "") {
-      var rows = document.querySelectorAll(".cart-item");
-      for (var r = 0; r < rows.length; r++) {
-        var name = rows[r].children[0].children[0].textContent;
-        var quantity = rows[r].children[0].children[1].textContent;
-        var price = rows[r].children[0].children[2].textContent;
+      if (checkDate(date) == true) {
+        if (int_date < limit_date && int_date > int_today) {
+          var rows = document.querySelectorAll(".cart-item");
+          for (var r = 0; r < rows.length; r++) {
+            var name = rows[r].children[0].children[0].textContent;
+            var quantity = rows[r].children[0].children[1].textContent;
+            var price = rows[r].children[0].children[2].textContent;
 
-        const create_hidden_input = document.createElement("div");
-        create_hidden_input.classList.add("order-output");
-        var i = r + 1;
-        create_hidden_input.innerHTML =
-          "<input type" + "=" + 'hidden' + " name" + "=" + "'food-name-" + i + "'" + " value" + "='" + name + "'>" +
-          "<input type" + "=" + 'hidden' + " name" + "=" + "'food-quantity-" + i + "'" + " value" + "='" + quantity + "'>" +
-          "<input type" + "=" + 'hidden' + " name" + "=" + "'food-price-" + i + "'" + " value" + "='" + price + "'>" +
-          "<input type" + "=" + 'hidden' + " name" + "=" + "count" + " value" + "='" + rows.length + "'>" +
-          "<input type" + "=" + 'hidden' + " name" + "=" + "pre-order-date" + " value" + "='" + date + "'>";
+            const create_hidden_input = document.createElement("div");
+            create_hidden_input.classList.add("order-output");
+            var i = r + 1;
+            create_hidden_input.innerHTML =
+              "<input type" + "=" + 'hidden' + " name" + "=" + "'food-name-" + i + "'" + " value" + "='" + name + "'>" +
+              "<input type" + "=" + 'hidden' + " name" + "=" + "'food-quantity-" + i + "'" + " value" + "='" + quantity + "'>" +
+              "<input type" + "=" + 'hidden' + " name" + "=" + "'food-price-" + i + "'" + " value" + "='" + price + "'>" +
+              "<input type" + "=" + 'hidden' + " name" + "=" + "count" + " value" + "='" + rows.length + "'>" +
+              "<input type" + "=" + 'hidden' + " name" + "=" + "pre-order-date" + " value" + "='" + date + "'>" +
+              "<input type" + "=" + 'hidden' + " name" + "=" + "InvalidDate" + " value" + "='" + 0 + "'>";
 
-        document.querySelector(".cart").appendChild(create_hidden_input);
+            document.querySelector(".cart").appendChild(create_hidden_input);
+          }
+        } else {
+          alert("The date is invalid. You can only make pre-order for tomorrow to 2 weeks later only.");
+          preorder_function();
+
+        }
+      } else {
+        alert("The date is invalid. \nPlease enter a valid date follow format (yyyy/mm/dd).");
+        preorder_function();
       }
-      // alert("Your PRE-ORDER on " + date + " has been submitted. You can view or cancel your pre-order at \"MY PRE-ORDER\".");
 
     } else {
       alert("You didn't enter the date.");
+      preorder_function();
     }
   }
 }
@@ -295,6 +353,42 @@ function offCartEmptyMessage() {
   document.getElementById("overlayCartEmptyMessage").style.display = "none";
 }
 
-function linkToDelete(){
-  location.assign();
+function onDateInvalidMessage() {
+  document.getElementById("overlayDateInvalidMessage").style.display = "block";
 }
+
+
+function formatDate(date) {
+  var d = new Date(date),
+    month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate(),
+    year = d.getFullYear();
+
+  if (month.length < 2)
+    month = '0' + month;
+  if (day.length < 2)
+    day = '0' + day;
+
+  return [year, month, day].join('');
+}
+
+function checkDate(field) {
+  var minYear = (new Date()).getFullYear();
+
+  // regular expression to match required date format
+  var re = /^(\d{4})\/(\d{1,2})\/(\d{1,2})$/;
+
+  if (regs = field.match(re)) {
+    if (regs[1] == minYear || regs[1] == minYear + 1) {
+      if (regs[2] >= 1 && regs[2] <= 12) {
+        if (regs[3] >= 1 && regs[3] <= 31) {
+          return true;
+        }
+      }
+    }
+  }
+
+  return false;
+}
+
+

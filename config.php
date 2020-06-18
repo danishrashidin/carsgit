@@ -2,8 +2,8 @@
 
 $host = "localhost";
 $dbname = "tryguess_food";
-$dbusername = "user";
-$dbuserpassword = "userpwd";
+$dbusername = "amyng56";
+$dbuserpassword = "19990506";
 
 $connectionString = new mysqli($host,$dbusername,$dbuserpassword,$dbname);
 // echo "Database connected successfully";

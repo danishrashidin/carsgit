@@ -222,14 +222,17 @@
 
         <!-- onclick="offOrderedMessage()" title="Click anywhere to proceed." -->
         <div class="overlayMessage" id="overlayOrderedMessage">
-            <div id="Message">Order submitted. You can view your order at <a title="MY PRE-ORDER" href="myorder.php">MY ORDER</a>.</div>
+            <div id="Message">Order submitted. Please pick up your food from <?php echo $res_name ?> by TODAY. You can view your order at <a title="VIEW ORDER" href="myorder.php">MY ORDER</a>.<br><br><a href="menu.php?Restaurant_ID=<?php echo $res_id ?>">Create new order</a> </div>
         </div>
         <!-- onclick="offPreOrderedMessage()" title="Click anywhere to proceed." -->
         <div class="overlayMessage" id="overlayPreOrderedMessage">
-            <div id="Message">Order submitted. You can view or cancel your order at <a title="MY PRE-ORDER" href="mypreorder.php">MY PRE-ORDER</a>.</div>
+            <div id="Message">Order submitted. You can view or cancel your order at <a title="VIEW PRE-ORDER" href="mypreorder.php">MY PRE-ORDER</a>.<br><br><a href="menu.php?Restaurant_ID=<?php echo $res_id ?>">Create new order</a></div>
         </div>
         <div class="overlayMessage" id="overlayCartEmptyMessage">
-            <div id="Message">Failed to submit order. Your cart is empty. <a title="MY PRE-ORDER" href="menu.php?Restaurant_ID=<?php echo $res_id ?>">Back to previous</a></div>
+            <div id="Message">Failed to submit order. Your cart is empty. <br><br><a href="menu.php?Restaurant_ID=<?php echo $res_id ?>">Back to previous</a></div>
+        </div>
+        <div class="overlayMessage" id="overlayDateInvalidMessage">
+            <div id="Message">Failed to submit order. Your entered date is invalid. <br><br><a href="menu.php?Restaurant_ID=<?php echo $res_id ?>">Back to previous</a></div>
         </div>
 
     </main>
@@ -271,6 +274,7 @@ if (isset($_POST['order-now'])) {
     $pickup_date = $_POST['pre-order-date'];
     $status = "Pre-Order";
 }
+
 if (isset($_POST['count'])) {
     $total_item = $_POST['count'];
 } else {
@@ -280,6 +284,16 @@ if (isset($_POST['count'])) {
     </script>
 
     // echo "Cart is empty!";
+<?php
+}
+
+if (isset($_POST['InvalidDate']) && $_POST['InvalidDate'] == 1) {
+?>
+    <script>
+        onDateInvalidMessage();
+        offCartEmptyMessage();
+    </script>
+
     <?php
 }
 
@@ -315,14 +329,12 @@ for ($i = 1; $i <= $total_item; $i++) {
     ?>
             <script>
                 onOrderedMessage();
-                settimeout(location.assign("food.php", 10000));
             </script>
         <?php
         } elseif ($is_preorder == TRUE) {
         ?>
             <script>
                 onPreOrderedMessage();
-                settimeout(location.assign("food.php", 10000));
             </script>
 
 <?php

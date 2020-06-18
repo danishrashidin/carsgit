@@ -145,7 +145,7 @@
 
         <div class="receipt-container">
           <div class="receipt-card">
-            <a onclick="confirm('Are you sure you want to delete your Pre-order with ID <?php echo $order_no ?>?')" href="mypreorder.php?delete=<?php echo $order_no ?>" class="store-remove-icon" value="delete"><i class="fa fa-trash" style="font-size: x-large; "></i></a></form>
+            <div class="store-remove-icon" id="delete" value="delete"><i class="fa fa-trash" style="font-size: x-large; "></i></div>
             <a href="#" title="Order ID" style="font-weight: lighter ;color: rgb(119, 119, 119);"><?php echo $order_no ?></a>
             <br>
             <br>
@@ -218,7 +218,15 @@
     </div>
   </footer>
 
-
+  <script>
+    document.querySelectorAll('#delete').forEach(function(del) {
+      del.addEventListener("click", function() {
+        if (confirm('Are you sure you want to delete your Pre-order with ID <?php echo $order_no ?>?')) {
+          location.assign("mypreorder.php?delete=<?php echo $order_no ?>");
+        }
+      });
+    });
+  </script>
   <script type="text/javascript" src="js/food.js"></script>
 
 
