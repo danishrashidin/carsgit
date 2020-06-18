@@ -30,7 +30,7 @@
         <!-- Nav Container -->
         <div class="nav-container transitive" id="nav-container">
             <!-- Home brand -->
-            <a class="" href="index.html" style="float: left; padding: 0;">
+            <a class="" href="index.php" style="float: left; padding: 0;">
                 <img src="" height="30px" alt="" />
                 College Activity Registration System
             </a>
@@ -39,19 +39,19 @@
             <div class="menu" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <li class="nav-item active px-4">
-                        <a class="nav-link" href="index.html">HOME <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="index.php">HOME <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item px-4">
-                        <a class="nav-link" href="activity.html">ACTIVITIES</a>
+                        <a class="nav-link" href="activity.php">ACTIVITIES</a>
                     </li>
                     <li class="nav-item px-4">
                         <a class="nav-link" href="food.php">FOOD</a>
                     </li>
                     <li class="nav-item px-4">
-                        <a class="nav-link" href="application.html">ACCOMMODATION</a>
+                        <a class="nav-link" href="application.php">ACCOMMODATION</a>
                     </li>
                     <li class="nav-item px-4" style="margin-right: 64px;">
-                        <a class="nav-link" href="report.html">REPORT</a>
+                        <a class="nav-link" href="report.php">REPORT</a>
                     </li>
 
                     <!-- two buttons -->
@@ -72,16 +72,16 @@
 
     <header class="description">
         <?php
-        include_once("config.php");
-        $res_id = $_GET['Restaurant_ID'];
-        $sql = "SELECT restaurant.Restaurant_Name, college.College_Name, restaurant.Restaurant_hours FROM restaurant INNER JOIN college ON restaurant.College_ID = college.College_ID WHERE restaurant.Restaurant_ID=$res_id";
-        $result = $connectionString->query($sql);
-        while ($res = $result->fetch_array()) {
-            $res_name = $res['Restaurant_Name'];
-            $res_location = $res['College_Name'];
-            $res_hours = $res['Restaurant_hours'];
-        }
-        ?>
+include_once "config.php";
+$res_id = $_GET['Restaurant_ID'];
+$sql = "SELECT restaurant.Restaurant_Name, college.College_Name, restaurant.Restaurant_hours FROM restaurant INNER JOIN college ON restaurant.College_ID = college.College_ID WHERE restaurant.Restaurant_ID=$res_id";
+$result = $connectionString->query($sql);
+while ($res = $result->fetch_array()) {
+    $res_name = $res['Restaurant_Name'];
+    $res_location = $res['College_Name'];
+    $res_hours = $res['Restaurant_hours'];
+}
+?>
         <div id="menu-container">
             <style>
                 #menu-container {
@@ -93,10 +93,11 @@
                 <h1 id="name"><?php echo $res_name; ?></h1>
                 <h4 id="location"> Location: <?php echo $res_location; ?></h4>
                 <h4 id="available-hours"> Available hours: <?php echo $res_hours; ?></h4>
-                <!-- use form to go to another page -->
-                <form action="/action_page.php">
+                <!-- use form to go to search food -->
+                <form method="GET" action="menu.php">
                     <div class="search-container">
-                        <input type="text" placeholder="Search food, restaurants..." name="search">
+                        <input type="hidden" name="Restaurant_ID" value="<?php echo $res_id; ?>">
+                        <input type="text" placeholder="Search food..." name="search">
                         <button type="submit"><i class="fa fa-search"></i></button>
                     </div>
                 </form>
@@ -124,6 +125,21 @@
 
         </div> -->
     </header>
+    <div class="overlayMessage" id="overlayFoundMessage" onclick="offFoundMessage()" title="Click anywhere to close this window">
+        <div id="Message" style="color: 200; " }>Found!<table id="foundMessage">
+                <tr>
+                    <th>Food Name</th>
+                    <th>Restaurant Name</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="overlayMessage" id="overlayNotFoundMessage" onclick="offNotFoundMessage()" title="Click anywhere to close this window">
+        <div id="Message">Sorry, food not found.</div>
+    </div>
+    <div class="overlayMessage" id="overlaySearchEmptyMessage" onclick="offSearchEmptyMessage()" title="Click anywhere to close this window">
+        <div id="Message">You did not enter any key. </div>
+    </div>
 
     <!--  NAVIGATION  -->
     <div class="main-nav">
@@ -157,13 +173,13 @@
 
         <div class="menu-card-group">
             <?php
-            $sql2 = "SELECT * FROM food WHERE Restaurant_ID=$res_id ORDER BY Food_Name";
-            $result = $connectionString->query($sql2);
-            while ($food = $result->fetch_array()) {
-                $food_name = $food['Food_Name'];
-                $food_price = $food['Food_Price'];
+$sql2 = "SELECT * FROM food WHERE Restaurant_ID=$res_id ORDER BY Food_Name";
+$result = $connectionString->query($sql2);
+while ($food = $result->fetch_array()) {
+    $food_name = $food['Food_Name'];
+    $food_price = $food['Food_Price'];
 
-                echo '<div class="food-card">
+    echo '<div class="food-card">
                         <div class="foodimage"><img id="food-img" alt="' . $food_name . '" src="assets/food/' . $food_name . '.jpg">
                         </div>
 
@@ -178,7 +194,7 @@
                         </div>
                     </div>';
             }
-            $connectionString->close();
+            // $connectionString->close();
             ?>
 
             <!-- <div class="food-card">
@@ -206,7 +222,7 @@
         <div class="sticky-cart" id="st-cart">
             <div class="store-cart-icon"><span><i id="cart-icon" class="fa fa-shopping-cart" style="color: #ffff"> <b class="n-items">0</b></i></span></div>
 
-            <form id="order-form" method="post" action="processOrder.php?Restaurant_ID=<?php echo $res_id?>" onSubmit="return confirm('Are you sure you want to submit the order?')">
+            <form id="order-form" method="post" action="processOrder.php?Restaurant_ID=<?php echo $res_id ?>" onSubmit="return confirm('Are you sure you want to submit the order?')">
                 <div class="cart" id="cart">
 
                     <div class="cart-title">
@@ -215,7 +231,7 @@
                                     <b class="n-items" style="padding-left: 16px;">0</b></i></span></h3>
                     </div>
 
-                    <!--  
+                    <!--
                         <div class="cart-item">
                             <div class="item-text">
                                 <div class="item-title" name="food-name" value="food name"><b>Food name here</b></div>
@@ -255,7 +271,7 @@
     </footer>
 
 
-    <script type="text/javascript" src="js/food.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
     <!--include jquery-->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
     <script type="text/javascript" src="js/menu.js"></script>
@@ -264,3 +280,6 @@
 
 
 </html>
+<?php
+include_once("searchFilterFood.php");
+?>

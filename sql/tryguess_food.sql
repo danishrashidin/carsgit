@@ -54,11 +54,3 @@ CREATE TABLE Food
    FOREIGN KEY (Restaurant_ID) REFERENCES Restaurant(Restaurant_ID)
 );
 
-CREATE TABLE Invious
-(  Invious_ID INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-   Restaurant_ID INT UNSIGNED NOT NULL,
-   Food_Name CHAR(100) NOT NULL,
-   Food_Price FLOAT(4,2),
-
-   FOREIGN KEY (Restaurant_ID) REFERENCES Restaurant(Restaurant_ID)
-);

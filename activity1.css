@@ -1,0 +1,888 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-image: linear-gradient(to right, #fff, #fff);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  color: #fff;
+}
+
+a {
+  text-decoration: none;
+}
+
+header {
+  background-color: transparent;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+main {
+  padding: 10px 20px;
+  display: block;
+  background-color: #f5f5f5;
+  color: #fff;
+  display: block;
+  overflow: auto;
+}
+
+.row {
+  
+  margin: 20px auto 0;
+  display: grid;
+  grid-template-columns: auto auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  gap: 2px;
+  
+  
+}
+
+.fancycard {
+  float: left;
+  padding-right: 0px;
+  padding-left: 0px;
+  border-radius: 0;
+  border-top-width: 0px;
+  border-right-width: 0px;
+  border-bottom-width: 0px;
+  border-left-width: 0px;
+  border: 0;
+  width: 50%;
+  transition: 0.3s;
+  margin: 20px auto;
+  cursor: pointer;
+}
+
+.fancycard:hover {
+  transform: scale(0.9, 0.9);
+}
+
+.fancyfancycard .menu-content {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.fancycard .menu-content::before,
+.fancycard .menu-content::after {
+  content: "";
+  display: table;
+}
+
+.fancycard .menu-content::after {
+  clear: both;
+}
+
+
+.fancycard .menu-content span {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: "Roboto";
+  transform: translate(-50%, 0);
+}
+
+.fancycard .wrapper {
+  height: 500px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.2);
+  margin: 20px;
+  
+}
+
+.fancycard .menu-content {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+/* .fancycard .menu-content span{
+  position: absolute;
+  right: 50%;
+  top: 0;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: "Roboto" ;
+  transform: translate(-50%, 0);
+} */
+
+/* .fancycard .menu-status {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.fancycard .menu-status span {
+  position: absolute;
+  right: 30%;
+  top: 0;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: "Roboto";
+  transform: translate(-50%, 0);
+} */
+
+.fancycard .wrapper:hover .data {
+  transform: translateY(0);
+}
+
+.fancycard .data {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  transform: translateY(calc(70px + 1em));
+  transition: transform 0.3s;
+}
+.fancycard .data .content {
+  padding: 1em;
+  position: relative;
+  z-index: 1;
+}
+
+.fancycard .title {
+  margin-top: 10px;
+  font-family: Roboto, "sans-serif";
+}
+
+.fancycard .text {
+  height: 70px;
+  margin: 0;
+}
+
+.fancycard input[type="checkbox"] {
+  display: none;
+}
+
+.fancycard input[type="checkbox"]:checked + .menu-content {
+  transform: translateY(-60px);
+}
+
+.card-1 {
+  width: 450px;
+}
+
+.card-1 .wrapper {
+  background: url(https://images.pexels.com/photos/34514/spot-runs-start-la.jpg?cs=srgb&dl=athletes-running-on-track-and-field-oval-in-grayscale-34514.jpg&fm=jpg)
+    center / cover no-repeat;
+  /* max-height: 500px; */
+}
+
+.card-1 .wrapper:hover .menu-content span {
+  transform: translate(-50%, -10px);
+  opacity: 1;
+}
+
+.card-1 .header {
+  color: #fff;
+  padding: 1em;
+  
+}
+
+.card-1 .header::before,
+.card-1 .header::after {
+  content: "";
+  display: table;
+}
+
+.card-1 .header::after {
+  clear: both;
+}
+
+.card-1 .header .countdown {
+  float: left;
+  font-size: 12px;
+  top: 0;
+  left: 0;
+}
+
+.card-1 .menu-content {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background-color: #77d7b9;
+  width: 50px;
+  height: 100px;
+  color: #fff;
+  padding: 0.8em;
+}
+
+.card-1 .menu-content span {
+  display: inline-block;
+  text-align: center
+}
+
+.card-1 .menu-content .college{
+  font-weight: 700;
+  font-size: 14px;
+  text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.18);
+  letter-spacing: 0.5px;
+  top: 15px;
+  right: -20px;
+}
+
+.card-1 .menu-status {
+  position: absolute;
+  top: 18px;
+  right: 60px;
+  background-color: #aaa;
+  width: 80px;
+  height: 20px;
+  color: #fff;
+  padding: 0.8em;
+  border-radius: 5px;
+
+}
+
+.card-1 .menu-status span {
+  display: block;
+  text-align: center  
+}
+
+.card-1 .menu-status .status {
+  font-weight: 700;
+  font-size: 14px;
+  text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.18);
+  letter-spacing: 0.5px;
+  top: 10px;
+  right: -20px;
+  
+}
+
+.card-1 .data {
+  color: #fff;
+  transform: translateY(calc(70px + 4em));
+}
+
+.card-1 .title a {
+  color: #fff;
+  
+}
+
+.card-1 .button {
+  display: block;
+  width: 100px;
+  margin: 2em auto 1em;
+  text-align: center;
+  font-size: 12px;
+  color: #fff;
+  line-height: 1;
+  position: relative;
+  font-weight: 700;
+
+}
+
+.card-1 .button::after {
+  content: "\2192";
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+  transition: all 0.3s;
+}
+.card-1 .button:hover::after {
+  transform: translate(5px, -50%);
+  opacity: 1;
+}
+
+.card-2 {
+  width: 450px;
+}
+
+.card-2 .wrapper {
+  background: url(https://images.pexels.com/photos/2143493/pexels-photo-2143493.jpeg?cs=srgb&dl=people-performing-dragon-dance-2143493.jpg&fm=jpg)
+    center / cover no-repeat;
+  max-height: 500px;
+}
+.card-2 .wrapper:hover .menu-content span {
+  transform: translate(-50%, -10px);
+  opacity: 1;
+}
+.card-2 .header {
+  color: #fff;
+  padding: 1em;
+  top: 0;
+  left: 0;
+  float: left;
+}
+.card-2 .header::before,
+.card-2 .header::after {
+  content: "";
+  display: table;
+}
+.card-2 .header::after {
+  clear: both;
+}
+.card-2 .header .countdown {
+  float: left;
+  font-size: 12px;
+  top: 0;
+  left: 0;
+}
+.card-2 .menu-content {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background-color: #77d7b9;
+  width: 50px;
+  height: 100px;
+  color: #fff;
+  padding: 0.8em;
+}
+
+
+.card-2 .menu-content span {
+  display: block;
+  text-align: center
+}
+
+.card-2 .menu-content .college{
+  font-weight: 700;
+  font-size: 14px;
+  text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.18);
+  letter-spacing: 0.5px;
+  top: 15px;
+  right: -20px;
+}
+
+.card-2 .data {
+  color: #fff;
+  transform: translateY(calc(70px + 4em));
+}
+.card-2 .title a {
+  color: #fff;
+}
+.card-2 .button {
+  display: block;
+  width: 100px;
+  margin: 2em auto 1em;
+  text-align: center;
+  font-size: 12px;
+  color: #fff;
+  line-height: 1;
+  position: relative;
+  font-weight: 700;
+}
+.card-2 .button::after {
+  content: "\2192";
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+  transition: all 0.3s;
+}
+.card-2 .button:hover::after {
+  transform: translate(5px, -50%);
+  opacity: 1;
+}
+
+.card-3 {
+  width: 450px;
+}
+
+.card-3 .wrapper {
+  background: url(https://images.pexels.com/photos/265940/pexels-photo-265940.jpeg?cs=srgb&dl=catering-celebration-cover-covered-265940.jpg&fm=jpg) center /
+    cover no-repeat;
+  max-height: 500px;
+}
+.card-3 .wrapper:hover .menu-content span {
+  transform: translate(-50%, -10px);
+  opacity: 1;
+}
+.card-3 .header {
+  color: #fff;
+  padding: 1em;
+  top: 0;
+  left: 0;
+  float: left;
+}
+.card-3 .header::before,
+.card-3 .header::after {
+  content: "";
+  display: table;
+}
+.card-3 .header::after {
+  clear: both;
+}
+.card-3 .header .countdown {
+  float: left;
+  font-size: 12px;
+  top: 0;
+  left: 0;
+}
+
+.card-3 .menu-content {
+   position: absolute;
+   top: 0px;
+   right: 0px;
+   background-color: #77d7b9;
+   width: 50px;
+   height: 100px;
+   color: #fff;
+   padding: 0.8em;
+}
+
+.card-3 .menu-content span {
+  display: block;
+  text-align: center
+}
+
+.card-3 .menu-content .college{
+  font-weight: 700;
+   font-size: 14px;
+   text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.18);
+   letter-spacing: 0.5px;
+   top: 15px;
+   right: -20px;
+}
+
+.card-3 .data {
+  color: #fff;
+  transform: translateY(calc(70px + 4em));
+}
+.card-3 .title a {
+  color: #fff;
+}
+.card-3 .button {
+  display: block;
+  width: 100px;
+  margin: 2em auto 1em;
+  text-align: center;
+  font-size: 12px;
+  color: #fff;
+  line-height: 1;
+  position: relative;
+  font-weight: 700;
+}
+.card-3 .button::after {
+  content: "\2192";
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+  transition: all 0.3s;
+}
+.card-3 .button:hover::after {
+  transform: translate(5px, -50%);
+  opacity: 1;
+}
+
+.card-4 {
+  width: 450px;
+}
+
+.card-4 .wrapper {
+  background: url(https://images.pexels.com/photos/1714361/pexels-photo-1714361.jpeg?cs=srgb&dl=silhouette-photography-of-people-on-theater-1714361.jpg&fm=jpg)
+    center / cover no-repeat;
+  max-height: 500px;
+}
+.card-4 .wrapper:hover .menu-content span {
+  transform: translate(-50%, -10px);
+  opacity: 1;
+}
+.card-4 .header {
+  color: #fff;
+  padding: 1em;
+  top: 0;
+  left: 0;
+  float: left;
+}
+.card-4 .header::before,
+.card-4 .header::after {
+  content: "";
+  display: table;
+}
+.card-4 .header::after {
+  clear: both;
+}
+.card-4 .header .countdown {
+  float: left;
+  font-size: 12px;
+  top: 0;
+  left: 0;
+}
+.card-4 .menu-content {
+   position: absolute;
+   top: 0px;
+   right: 0px;
+   background-color: #77d7b9;
+   width: 50px;
+   height: 100px;
+   color: #fff;
+   padding: 0.8em;
+}
+
+.card-4 .menu-content span {
+  display: block;
+  text-align: center
+}
+
+.card-4 .menu-content .college{
+  font-weight: 700;
+   font-size: 14px;
+   text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.18);
+   letter-spacing: 0.5px;
+   top: 15px;
+   right: -20px;
+}
+.card-4 .data {
+  color: #fff;
+  transform: translateY(calc(70px + 4em));
+}
+.card-4 .title a {
+  color: #fff;
+}
+.card-4 .button {
+  display: block;
+  width: 100px;
+  margin: 2em auto 1em;
+  text-align: center;
+  font-size: 12px;
+  color: #fff;
+  line-height: 1;
+  position: relative;
+  font-weight: 700;
+}
+.card-4 .button::after {
+  content: "\2192";
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+  transition: all 0.3s;
+}
+.card-4 .button:hover::after {
+  transform: translate(5px, -50%);
+  opacity: 1;
+}
+
+#wrapper {
+  width: 900px;
+  margin: 30px auto;
+}
+
+.countdown {
+  color: #fff;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+  
+}
+
+li {
+  display: block;
+  font-size: 12px;
+  list-style-type: none;
+  padding: 5px;
+  text-transform: uppercase;
+  float: left;
+}
+
+li span {
+  display: block;
+  font-size: 12px;
+ 
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.5);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 150px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 80%;
+  height: 70%;
+  position: relative;
+  float: center;
+  
+
+}
+
+.popup h2{
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+
+
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  text-decoration: none;
+  color: white;
+
+}
+
+.popup .close:hover {
+  color: white;
+}
+
+
+#msform {
+  width: 400px;
+  margin: 50px auto;
+  text-align: center;
+  position: relative;
+}
+
+#msform fieldset {
+  background: white;
+  border: 0 none;
+  border-radius: 3px;
+  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+  padding: 20px 30px;
+  box-sizing: border-box;
+  width: 80%;
+  margin: 0 10%;
+
+  /*stacking fieldsets above each other*/
+  position: relative;
+}
+
+/*Hide all except first fieldset*/
+#msform fieldset:not(:first-of-type){
+  display: none;
+}
+
+/*inputs*/
+#msform input {
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: "Roboto";
+  letter-spacing: 1px;
+  color: #2C3E50;
+  font-size: 14px;
+}
+/*buttons*/
+#msform .action-button {
+  width: 100px;
+  background: #27AE60;
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius: 1px;
+  cursor: pointer;
+  padding: 10px 5px;
+  margin: 10px 5px;
+}
+#msform .action-button:hover, #msform .action-button:focus {
+  box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+}
+
+#msform .highcom-button {
+  width: 200px;
+  background: black;
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius: 1px;
+  cursor: pointer;
+  padding: 10px 5px;
+  margin: 10px 5px;
+}
+
+#msform .highcom-button:hover, #msform .highcom-button:focus {
+  box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+}
+
+#msform .member-button {
+  width: 200px;
+  background: black;
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius: 1px;
+  cursor: pointer;
+  padding: 10px 5px;
+  margin: 10px 5px;
+}
+
+#msform .member-button:hover, #msform .member-button:focus {
+  box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+}
+
+/*headings*/
+.fs-title {
+  font-size: 15px;
+  text-transform: uppercase;
+  color: #2C3E50;
+  margin-bottom: 10px;
+}
+.fs-subtitle {
+  font-weight: normal;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.fs-content {
+  font-weight: normal;
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/*progressbar*/
+#progressbar {
+  margin-bottom: 30px;
+  overflow: hidden;
+
+  /*CSS counters to number the steps*/
+  counter-reset: step;
+}
+
+#progressbar ul {
+  padding-left: 0px !important;
+}
+
+#progressbar li {
+  list-style-type: none;
+  color: white;
+  text-transform: uppercase;
+  font-size: 9px;
+  width: 50%;
+  float: left;
+  position: relative;
+}
+#progressbar li:before {
+  content: counter(step);
+  counter-increment: step;
+  width: 20px;
+  line-height: 20px;
+  display: block;
+  font-size: 10px;
+  color: #333;
+  background: white;
+  border-radius: 3px;
+  margin: 0 auto 5px auto;
+}
+/*progressbar connectors*/
+#progressbar li:after {
+  content: '';
+  width: 100%;
+  height: 2px;
+  background: white;
+  position: absolute;
+  left: -50%;
+  top: 9px;
+  z-index: -1; /*put it behind the numbers*/
+}
+#progressbar li:first-child:after {
+  /*connector not needed before the first step*/
+  content: none; 
+}
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+#progressbar li.active:before,  #progressbar li.active:after{
+  background: #27AE60;
+  color: white;
+}
+
+label {
+  display: flex;
+  cursor: pointer;
+  font-weight: 300;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0.375em;
+  color: black;
+}
+
+label input {
+  position: absolute;
+  left: -9999px;
+}
+
+label input:checked + span {
+  background-color: #d6d6e5;
+}
+
+label input:checked + span:before {
+  box-shadow: inset 0 0 0 0.4375em #00005c;
+}
+
+label span {
+  display: flex;
+  align-items: center;
+  padding: 0.375em 0.75em 0.375em 0.375em;
+  border-radius: 99em;
+  transition: 0.25s ease; 
+}
+
+label span:hover {
+  background-color: #d6d6e5;
+}
+
+label span:before {
+  display: flex;
+  flex-shrink: 0;
+  content: "";
+  background-color: #fff;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  margin-right: 0.375em;
+  transition: 0.25s ease;
+  box-shadow: inset 0 0 0 0.125em #00005c;
+}
+
+
+
+
+
+
+
+
+
+
+
+

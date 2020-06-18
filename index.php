@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
     $action = $_GET['action'];
 }
@@ -13,9 +14,9 @@ if (isset($_POST['action'])) {
     }
 }
 
-if (isset($_GET['page'])){
+if (isset($_GET['page'])) {
     $page = $_GET['page'];
-    $phpfile = $page.'.php';
+    $phpfile = $page . '.php';
 } else {
     $phpfile = 'home.php';
 }
@@ -73,33 +74,39 @@ if (isset($_GET['page'])){
 
     <?php
 
-    if (file_exists($phpfile)){
+    if (file_exists($phpfile)) {
         include($phpfile);
     } else {
         echo 'Error: No page binded';
     }
-    
+
     if (isset($action)) {
         if ($action == 'verifying') {
             include_once 'db.php';
-
-            $email = $_POST['email'];
-            $Activation_Hash = $_POST['Activation_Hash'];
+        }
+    }
+    if (isset($action)) {
+        if ($action == 'verifying' || $action == 'reset password') {
+            include_once 'db.php';
 
             $sql = "SELECT * FROM student WHERE Email = '$email' AND Activation_Hash = '$Activation_Hash'";
             $results = $connection->query($sql);
 
-            if ($results->fetch()) {
+            $sql = "SELECT * FROM student WHERE Email = '$email' AND Activation_Hash = '$Activation_Hash'";
+            $results = $connection->query($sql);
+            $data = $results->fetch();
+
+            if ($data && $action == 'reset password') {
+                echo '<input type="hidden" class="--reset_Password" name="userEmail" value="' . $email . '" >';
+            } else if ($data && $action == 'verifying') {
                 $sql = "UPDATE student SET Verified = '1' WHERE Email = '$email' AND Activation_Hash = '$Activation_Hash'";
                 $connection->query($sql);
-
                 echo '<input type="hidden" class="--verificationSuccessfull">';
             }
         }
     }
-
     include("components/footer.php");
-    
+
     ?>
 
     <script type="text/javascript" src="js/index.js"></script>

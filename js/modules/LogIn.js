@@ -3,6 +3,9 @@ export default class LogIn {
     this.injectHTML();
     document.addEventListener("DOMContentLoaded", () => {
       this.modalBackground = document.querySelector(".fade-background");
+      //----------------------------ForgotPasswordComponent----------------------------//
+      this.modalForgotPassword = document.querySelector(".shadowBox-forgotPassword-sendMail");
+
       //----------------------------SignUpComponent----------------------------//
       this.modalSignUp = document.querySelector(".shadowBox.sign-up");
 
@@ -15,7 +18,7 @@ export default class LogIn {
       this.passwordVisibility = document.querySelector(".log-in-password-check-icon");
       this.signUpButton = document.querySelector(".side-sign-up");
       this.logInButton = document.querySelector(".log-in-button");
-      this.forgotPassword = document.querySelector(".side-forgot-password");
+      this.forgotPasswordButton = document.querySelector(".side-forgot-password");
       this.tooltipEmail = document.querySelector("#logInEmail-check-template");
       this.notificationTitle = document.querySelector(".notification-title");
       this.notificationMessage = document.querySelector(".notification-message");
@@ -35,7 +38,8 @@ export default class LogIn {
     this.passwordVisibility.addEventListener("click", (e) => this.togglePasswordVisibility());
     this.logInForm.addEventListener("focusin", (e) => this.focusIn(e));
     this.logInForm.addEventListener("focusout", (e) => this.focusOut(e));
-    this.signUpButton.addEventListener("click", (e) => this.slideOutlogIn(e));
+    this.signUpButton.addEventListener("click", () => this.slideInSignUp());
+    this.forgotPasswordButton.addEventListener("click", () => this.slideInForgotPassword());
     this.logInForm.addEventListener("submit", (e) => this.submit(e));
   }
 
@@ -74,7 +78,6 @@ export default class LogIn {
     `;
 
     const formData = new FormData(this.logInForm);
-    console.log(formData);
     fetch("logInHandler.php", {
       method: "post",
       body: formData,
@@ -110,13 +113,15 @@ export default class LogIn {
   }
 
   focusIn(e) {
-    if (e.target == this.signUpButton || e.target == this.forgotPassword || e.target == this.logInButton) return null;
+    if (e.target == this.signUpButton || e.target == this.forgotPasswordButton || e.target == this.logInButton)
+      return null;
     e.target.previousElementSibling.classList.add("log-in-label-activated");
     e.target.style.backgroundColor = "rgb(215, 215, 215)";
   }
 
   focusOut(e) {
-    if (e.target == this.signUpButton || e.target == this.forgotPassword || e.target == this.logInButton) return null;
+    if (e.target == this.signUpButton || e.target == this.forgotPasswordButton || e.target == this.logInButton)
+      return null;
     if (!e.target.value) {
       e.target.previousElementSibling.classList.remove("log-in-label-activated");
       e.target.style.backgroundColor = "rgb(238, 238, 238)";
@@ -178,6 +183,7 @@ export default class LogIn {
   closeLogInOverlay(e) {
     if (e == "closeForOtherPopUp" || e.target == this.modalBackground) {
       this.emailTippy.hide();
+      this.modalForgotPassword.style.display = "none";
       this.modalLogIn.style.display = "none";
       this.modalLogIn.classList.remove("animate__bounceInDown");
       this.logInButton.innerHTML = `Log In`;
@@ -207,7 +213,7 @@ export default class LogIn {
     }
   }
 
-  slideOutlogIn(e) {
+  slideInSignUp() {
     this.modalLogIn.classList.add("animate__bounceOutDown");
     this.modalSignUp.classList.add("animate__bounceInDown");
     this.emailTippy.hide();
@@ -225,6 +231,30 @@ export default class LogIn {
         }
         this.modalLogIn.classList.remove("animate__bounceOutDown");
         this.modalSignUp.classList.remove("animate__bounceInDown");
+        this.modalLogIn.style.display = "none";
+        document.querySelector("samp").innerHTML = `<span id="typed"></span>`;
+      }, 1000);
+    }, 490);
+  }
+
+  slideInForgotPassword() {
+    this.modalLogIn.classList.add("animate__bounceOutDown");
+    this.modalForgotPassword.classList.add("animate__bounceInDown");
+    this.emailTippy.hide();
+    this.tooltipEmail.querySelector(".email-error").innerHTML = "";
+
+    setTimeout(() => {
+      this.modalForgotPassword.style.display = "block";
+      setTimeout(() => {
+        if (this.typed) {
+          this.typed.destroy();
+        }
+        if (document.querySelector(".typed-cursor")) {
+          document.querySelector("#typed").remove();
+          document.querySelector(".typed-cursor").remove();
+        }
+        this.modalLogIn.classList.remove("animate__bounceOutDown");
+        this.modalForgotPassword.classList.remove("animate__bounceInDown");
         this.modalLogIn.style.display = "none";
         document.querySelector("samp").innerHTML = `<span id="typed"></span>`;
       }, 1000);
