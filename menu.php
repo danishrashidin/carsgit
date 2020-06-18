@@ -25,6 +25,51 @@
 
 <body id="menu-body">
 
+    <!-- Navigation bar -->
+    <nav class="navbar-expand-lg transitive" id="navbar">
+        <!-- Nav Container -->
+        <div class="nav-container transitive" id="nav-container">
+            <!-- Home brand -->
+            <a class="" href="index.php" style="float: left; padding: 0;">
+                <img src="" height="30px" alt="" />
+                College Activity Registration System
+            </a>
+
+            <!-- Menus -->
+            <div class="menu" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item active px-4">
+                        <a class="nav-link" href="index.php">HOME <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item px-4">
+                        <a class="nav-link" href="activity.php">ACTIVITIES</a>
+                    </li>
+                    <li class="nav-item px-4">
+                        <a class="nav-link" href="food.php">FOOD</a>
+                    </li>
+                    <li class="nav-item px-4">
+                        <a class="nav-link" href="application.php">ACCOMMODATION</a>
+                    </li>
+                    <li class="nav-item px-4" style="margin-right: 64px;">
+                        <a class="nav-link" href="report.php">REPORT</a>
+                    </li>
+
+                    <!-- two buttons -->
+                    <li class="nav-item">
+                        <button type="button" class="btn nav-btn px-4 py-2" style="background-color: #00df89; border-color: #00df89;">
+                            CONTACT US
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" id="button-log-in" class="btn btn-outline-light nav-btn px-4 py-2">
+                            LOGIN
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
     <header class="description">
         <?php
 include_once "config.php";
@@ -48,10 +93,11 @@ while ($res = $result->fetch_array()) {
                 <h1 id="name"><?php echo $res_name; ?></h1>
                 <h4 id="location"> Location: <?php echo $res_location; ?></h4>
                 <h4 id="available-hours"> Available hours: <?php echo $res_hours; ?></h4>
-                <!-- use form to go to another page -->
-                <form action="/action_page.php">
+                <!-- use form to go to search food -->
+                <form method="GET" action="menu.php">
                     <div class="search-container">
-                        <input type="text" placeholder="Search food, restaurants..." name="search">
+                        <input type="hidden" name="Restaurant_ID" value="<?php echo $res_id; ?>">
+                        <input type="text" placeholder="Search food..." name="search">
                         <button type="submit"><i class="fa fa-search"></i></button>
                     </div>
                 </form>
@@ -79,6 +125,21 @@ while ($res = $result->fetch_array()) {
 
         </div> -->
     </header>
+    <div class="overlayMessage" id="overlayFoundMessage" onclick="offFoundMessage()" title="Click anywhere to close this window">
+        <div id="Message" style="color: 200; " }>Found!<table id="foundMessage">
+                <tr>
+                    <th>Food Name</th>
+                    <th>Restaurant Name</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="overlayMessage" id="overlayNotFoundMessage" onclick="offNotFoundMessage()" title="Click anywhere to close this window">
+        <div id="Message">Sorry, food not found.</div>
+    </div>
+    <div class="overlayMessage" id="overlaySearchEmptyMessage" onclick="offSearchEmptyMessage()" title="Click anywhere to close this window">
+        <div id="Message">You did not enter any key. </div>
+    </div>
 
     <!--  NAVIGATION  -->
     <div class="main-nav">
@@ -132,9 +193,9 @@ while ($food = $result->fetch_array()) {
                             </div>
                         </div>
                     </div>';
-}
-$connectionString->close();
-?>
+            }
+            // $connectionString->close();
+            ?>
 
             <!-- <div class="food-card">
                 <div class="foodimage"><img id="food-img" alt="food image" src="https://images.unsplash.com/photo-1481070555726-e2fe8357725c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60">
@@ -210,7 +271,7 @@ $connectionString->close();
     </footer>
 
 
-    <script type="text/javascript" src="js/food.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
     <!--include jquery-->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
     <script type="text/javascript" src="js/menu.js"></script>
@@ -219,3 +280,6 @@ $connectionString->close();
 
 
 </html>
+<?php
+include_once("searchFilterFood.php");
+?>

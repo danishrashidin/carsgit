@@ -357,6 +357,29 @@ function onDateInvalidMessage() {
   document.getElementById("overlayDateInvalidMessage").style.display = "block";
 }
 
+function offFoundMessage() {
+  document.getElementById("overlayFoundMessage").style.display = "none";
+}
+
+function onFoundMessage() {
+  document.getElementById("overlayFoundMessage").style.display = "block";
+}
+
+function offSearchEmptyMessage() {
+  document.getElementById("overlaySearchEmptyMessage").style.display = "none";
+}
+
+function onSearchEmptyMessage() {
+  document.getElementById("overlaySearchEmptyMessage").style.display = "block";
+}
+
+function offNotFoundMessage() {
+  document.getElementById("overlayNotFoundMessage").style.display = "none";
+}
+
+function onNotFoundMessage() {
+  document.getElementById("overlayNotFoundMessage").style.display = "block";
+}
 
 function formatDate(date) {
   var d = new Date(date),
@@ -390,5 +413,4 @@ function checkDate(field) {
 
   return false;
 }
-
 
