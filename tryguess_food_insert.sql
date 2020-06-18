@@ -40,4 +40,22 @@ INSERT INTO Food VALUES
   (12,1,'Maggi Goreng', 3.50),
   (13,1,'Maggi Goreng Special', 4.50),
   (14,1,'Nasi Lemak', 3.00);
+
+  
+INSERT INTO Food VALUES
+  (15,3,'Chicken Chop With Black Pepper Sauce', 7.00),
+  (16,3,'Chicken Chop With Chilli Sauce', 6.00),
+  (17,3,'French Fries', 3.00),
+  (18,3,'Fruit Salad', 6.00),
+  (19,3,'Loaded Cheese Fries', 4.00),
+  (20,3,'Macaroni', 5.00),
+  (21,3,'Mandarin Orange Salad', 6.00),
+  (22,3,'Mushroom soup', 3.50),
+  (23,3,'Spaghetti Bolognese', 6.00),
+  (24,3,'Spaghetti Carbonara', 6.00),
+  (25,3,'Vegetable Salad', 6.00),
+  (26,1,'Kuey Teow Goreng', 3.50),
+  (27,1,'Kuey Teow Soup', 4.00),
+  (28,1,'Maggi Tomyam Soup', 4.50);
+  
   

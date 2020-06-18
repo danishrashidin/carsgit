@@ -28,7 +28,7 @@
     <!-- Nav Container -->
     <div class="nav-container transitive" id="nav-container">
       <!-- Home brand -->
-      <a class="" href="index.html" style="float: left; padding: 0;">
+      <a class="" href="index.php" style="float: left; padding: 0;">
         <img src="" height="30px" alt="" />
         College Activity Registration System
       </a>
@@ -37,19 +37,19 @@
       <div class="menu" id="navbarSupportedContent">
         <ul class="navbar-nav">
           <li class="nav-item active px-4">
-            <a class="nav-link" href="index.html">HOME <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="index.php">HOME <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item px-4">
-            <a class="nav-link" href="activity.html">ACTIVITIES</a>
+            <a class="nav-link" href="activity.php">ACTIVITIES</a>
           </li>
           <li class="nav-item px-4">
             <a class="nav-link" href="food.php">FOOD</a>
           </li>
           <li class="nav-item px-4">
-            <a class="nav-link" href="application.html">ACCOMMODATION</a>
+            <a class="nav-link" href="application.php">ACCOMMODATION</a>
           </li>
           <li class="nav-item px-4" style="margin-right: 64px;">
-            <a class="nav-link" href="report.html">REPORT</a>
+            <a class="nav-link" href="report.php">REPORT</a>
           </li>
 
           <!-- two buttons -->
@@ -72,16 +72,31 @@
     <div class="main-container">
 
       <h1> My Pre-order </h1>
-      <!-- use form to go to another page -->
-      <form action="/action_page.php">
+      <!-- use form to go to search food -->
+      <form method="GET" action="mypreorder.php">
         <div class="search-container">
-          <input type="text" placeholder="Search food, restaurants..." name="search">
+          <input type="text" placeholder="Search food..." name="search">
           <button type="submit"><i class="fa fa-search"></i></button>
         </div>
       </form>
 
     </div>
   </header>
+  <div class="overlayMessage" id="overlayFoundMessage" onclick="offFoundMessage()" title="Click anywhere to close this window">
+    <div id="Message" style="color: 200; " }>Found!<table id="foundMessage">
+        <tr>
+          <th>Food Name</th>
+          <th>Restaurant Name</th>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="overlayMessage" id="overlayNotFoundMessage" onclick="offNotFoundMessage()" title="Click anywhere to close this window">
+    <div id="Message">Sorry, food not found.</div>
+  </div>
+  <div class="overlayMessage" id="overlaySearchEmptyMessage" onclick="offSearchEmptyMessage()" title="Click anywhere to close this window">
+    <div id="Message">You did not enter any key. </div>
+  </div>
 
   <!--  NAVIGATION  -->
   <div class="main-nav">
@@ -198,7 +213,7 @@
       }
     }
 
-    $connectionString->close();
+    // $connectionString->close();
     ?>
 
     </div>
@@ -227,10 +242,14 @@
       });
     });
   </script>
-  <script type="text/javascript" src="js/food.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
+  <script type="text/javascript" src="js/menu.js"></script>
 
 
 
 </body>
 
 </html>
+<?php
+include_once("searchFilterFood.php");
+?>
