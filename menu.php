@@ -25,6 +25,7 @@
 
 <body id="menu-body">
 
+<<<<<<< HEAD
     <!-- Navigation bar -->
     <nav class="navbar-expand-lg transitive" id="navbar">
         <!-- Nav Container -->
@@ -70,18 +71,20 @@
         </div>
     </nav>
 
+=======
+>>>>>>> 18c6fb85a7a075f5e18e0aed90394f0f3e98fa9c
     <header class="description">
         <?php
-        include_once("config.php");
-        $res_id = $_GET['Restaurant_ID'];
-        $sql = "SELECT restaurant.Restaurant_Name, college.College_Name, restaurant.Restaurant_hours FROM restaurant INNER JOIN college ON restaurant.College_ID = college.College_ID WHERE restaurant.Restaurant_ID=$res_id";
-        $result = $connectionString->query($sql);
-        while ($res = $result->fetch_array()) {
-            $res_name = $res['Restaurant_Name'];
-            $res_location = $res['College_Name'];
-            $res_hours = $res['Restaurant_hours'];
-        }
-        ?>
+include_once "config.php";
+$res_id = $_GET['Restaurant_ID'];
+$sql = "SELECT restaurant.Restaurant_Name, college.College_Name, restaurant.Restaurant_hours FROM restaurant INNER JOIN college ON restaurant.College_ID = college.College_ID WHERE restaurant.Restaurant_ID=$res_id";
+$result = $connectionString->query($sql);
+while ($res = $result->fetch_array()) {
+    $res_name = $res['Restaurant_Name'];
+    $res_location = $res['College_Name'];
+    $res_hours = $res['Restaurant_hours'];
+}
+?>
         <div id="menu-container">
             <style>
                 #menu-container {
@@ -173,13 +176,13 @@
 
         <div class="menu-card-group">
             <?php
-            $sql2 = "SELECT * FROM food WHERE Restaurant_ID=$res_id ORDER BY Food_Name";
-            $result = $connectionString->query($sql2);
-            while ($food = $result->fetch_array()) {
-                $food_name = $food['Food_Name'];
-                $food_price = $food['Food_Price'];
+$sql2 = "SELECT * FROM food WHERE Restaurant_ID=$res_id ORDER BY Food_Name";
+$result = $connectionString->query($sql2);
+while ($food = $result->fetch_array()) {
+    $food_name = $food['Food_Name'];
+    $food_price = $food['Food_Price'];
 
-                echo '<div class="food-card">
+    echo '<div class="food-card">
                         <div class="foodimage"><img id="food-img" alt="' . $food_name . '" src="assets/food/' . $food_name . '.jpg">
                         </div>
 
@@ -193,9 +196,15 @@
                             </div>
                         </div>
                     </div>';
+<<<<<<< HEAD
             }
             // $connectionString->close();
             ?>
+=======
+}
+$connectionString->close();
+?>
+>>>>>>> 18c6fb85a7a075f5e18e0aed90394f0f3e98fa9c
 
             <!-- <div class="food-card">
                 <div class="foodimage"><img id="food-img" alt="food image" src="https://images.unsplash.com/photo-1481070555726-e2fe8357725c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60">
@@ -231,7 +240,7 @@
                                     <b class="n-items" style="padding-left: 16px;">0</b></i></span></h3>
                     </div>
 
-                    <!--  
+                    <!--
                         <div class="cart-item">
                             <div class="item-text">
                                 <div class="item-title" name="food-name" value="food name"><b>Food name here</b></div>

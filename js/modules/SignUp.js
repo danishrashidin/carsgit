@@ -160,7 +160,7 @@ export default class SignUp {
         .then((dataReceived) => {
           if (dataReceived == "Successful") {
             this.closeSignUpOverlay("register");
-            this.signUpButton.innerHTML = `Submit`;
+            this.signUpButton.innerHTML = "Submit";
             this.notificationTitle.innerHTML = `
             Verify your SiswaMail
             `;
@@ -201,7 +201,7 @@ export default class SignUp {
       this.modalVerify.style.display = "none";
       this.modalSignUp.classList.remove("animate__bounceInDown");
       this.modalVerify.classList.remove("animate__bounceInDown");
-      this.logInButton.innerHTML = `Submit`;
+      this.signUpButton.innerHTML = "Submit";
       this.signUpForm.reset();
 
       this.label.forEach((eachLabel) => {
@@ -214,6 +214,7 @@ export default class SignUp {
         }
       });
       this.input.forEach((eachInputBox) => {
+        if (eachInputBox.getAttribute("name") == "forgot-email") return;
         eachInputBox.style.border = "none";
         if (eachInputBox.getAttribute("name") == "action") return;
         eachInputBox.setAttribute("value", "");

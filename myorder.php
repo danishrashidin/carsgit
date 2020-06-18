@@ -23,6 +23,7 @@
 
 
 <body id="food-body">
+<<<<<<< HEAD
   <!-- Navigation bar -->
   <nav class="navbar-expand-lg transitive" id="navbar">
     <!-- Nav Container -->
@@ -67,6 +68,8 @@
       </div>
     </div>
   </nav>
+=======
+>>>>>>> 18c6fb85a7a075f5e18e0aed90394f0f3e98fa9c
 
   <header class="description">
     <div class="main-container">
@@ -125,22 +128,22 @@
       </div>
     </div>
     <?php
-    include_once("config.php");
-    $student_id = 1; //assume 1st;
-    date_default_timezone_set("Asia/Kuala_Lumpur");
-    $today = date("Y/m/d");
+include_once "config.php";
+$student_id = 1; //assume 1st;
+date_default_timezone_set("Asia/Kuala_Lumpur");
+$today = date("Y/m/d");
 
-    $sql = "SELECT Count(Food_ID), Order_No FROM foodorder WHERE Student_ID = $student_id and Order_Date='$today' and Order_Status='Order' GROUP BY Order_No ORDER BY Order_No DESC";
-    $result = $connectionString->query($sql);
-    while ($row = $result->fetch_array()) {
-      $n = $row['Count(Food_ID)'];
-      $order_no = $row['Order_No'];
+$sql = "SELECT Count(Food_ID), Order_No FROM foodorder WHERE Student_ID = $student_id and Order_Date='$today' and Order_Status='Order' GROUP BY Order_No ORDER BY Order_No DESC";
+$result = $connectionString->query($sql);
+while ($row = $result->fetch_array()) {
+    $n = $row['Count(Food_ID)'];
+    $order_no = $row['Order_No'];
 
-      $sql2 = "SELECT restaurant.Restaurant_Name FROM (foodorder INNER JOIN food ON food.Food_ID = foodorder.Food_ID) INNER JOIN restaurant ON restaurant.Restaurant_ID = food.restaurant_ID WHERE Order_No = '$order_no' ORDER BY Order_ID";
-      $result2 = $connectionString->query($sql2);
-      while ($res = $result2->fetch_array()) {
+    $sql2 = "SELECT restaurant.Restaurant_Name FROM (foodorder INNER JOIN food ON food.Food_ID = foodorder.Food_ID) INNER JOIN restaurant ON restaurant.Restaurant_ID = food.restaurant_ID WHERE Order_No = '$order_no' ORDER BY Order_ID";
+    $result2 = $connectionString->query($sql2);
+    while ($res = $result2->fetch_array()) {
         $res_name = $res['Restaurant_Name'];
-      }
+    }
     ?>
 
       <div class="receipt-container">
@@ -152,33 +155,39 @@
           <p style="text-decoration: underline; ">Food Name<span class="quantity" style="color: black;">Quantity</span><span class="price" style="color: black;">RM</span></p>
 
           <?php
-          $sql3 = "SELECT food.Food_Name,foodorder.Quantity,foodorder.Total_Price FROM foodorder INNER JOIN food ON food.Food_ID = foodorder.Food_ID WHERE Order_No = '$order_no' ORDER BY Order_ID";
-          $result3 = $connectionString->query($sql3);
-          $total_price = 0;
-          while ($order = $result3->fetch_array()) {
-            $food_name = $order['Food_Name'];
-            $food_quantity = $order['Quantity'];
-            $food_price = $order['Total_Price'];
+$sql3 = "SELECT food.Food_Name,foodorder.Quantity,foodorder.Total_Price FROM foodorder INNER JOIN food ON food.Food_ID = foodorder.Food_ID WHERE Order_No = '$order_no' ORDER BY Order_ID";
+    $result3 = $connectionString->query($sql3);
+    $total_price = 0;
+    while ($order = $result3->fetch_array()) {
+        $food_name = $order['Food_Name'];
+        $food_quantity = $order['Quantity'];
+        $food_price = $order['Total_Price'];
 
-            $total_price += $food_price;
+        $total_price += $food_price;
 
-          ?>
+        ?>
 
             <p class="fname"><?php echo $food_name ?> <span class="quantity"><?php echo $food_quantity ?></span><span class="price"><?php echo $food_price ?></span></p>
 
           <?php
 
-          }
-          ?>
+    }
+    ?>
           <hr>
           <p>Total payment to be paid<span class="quantity"></span><span class="price" style="color:black"><b>RM <?php echo number_format($total_price, 2) ?></b></span></p>
         </div>
       </div>
 
     <?php
+<<<<<<< HEAD
     }
     // $connectionString->close();
     ?>
+=======
+}
+$connectionString->close();
+?>
+>>>>>>> 18c6fb85a7a075f5e18e0aed90394f0f3e98fa9c
 
     <p style="text-align: center; color: rgb(119, 119, 119);">You've seen all your orders.</p>
 

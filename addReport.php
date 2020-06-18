@@ -1,42 +1,42 @@
 <?php
 //including the database connection file
-$flag=false;
+$flag = false;
 
-if ($_SERVER["REQUEST_METHOD"]==="POST") {
-  if(isset($_POST['add'])){
-    include_once("configReport.php");
-    $collegeName = $_POST['collegeName'];
-    $collegeProblem = $_POST['collegeProblem'];
-    $message1 = $_POST['message1'];
-    $hd_location = $_POST['hd_location'];
-    $uploadedfile = $_POST['uploadedfile'];
-    $status="";
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if (isset($_POST['add'])) {
+        include_once "configReport.php";
+        $collegeName = $_POST['collegeName'];
+        $collegeProblem = $_POST['collegeProblem'];
+        $message1 = $_POST['message1'];
+        $hd_location = $_POST['hd_location'];
+        $uploadedfile = $_POST['uploadedfile'];
+        $status = "";
 
-    // checking empty fields
-    if(empty($collegeName) || empty($collegeProblem) || empty($message1) || empty($hd_location)) {                
-        if(empty($collegeName)){
-            echo "<font color='red'>Residential College is empty.</font><br/>";
-        }
-        
-        if(empty($collegeProblem)) {
-            echo "<font color='red'>College Problem field is empty.</font><br/>";
-        }
-        
-        if(empty($message1)) {
-            echo "<font color='red'>Problem Details field is empty.</font><br/>";
-        }
-        if(empty($hd_location)) {
-            echo "<font color='red'>Problem Location field is empty.</font><br/>";
-        }
-    } else {
-        $sql = "INSERT INTO report(Residential_College, Problem_Type, Problem_Details, Problem_Location, File_Upload ) 
+        // checking empty fields
+        if (empty($collegeName) || empty($collegeProblem) || empty($message1) || empty($hd_location)) {
+            if (empty($collegeName)) {
+                echo "<font color='red'>Residential College is empty.</font><br/>";
+            }
+
+            if (empty($collegeProblem)) {
+                echo "<font color='red'>College Problem field is empty.</font><br/>";
+            }
+
+            if (empty($message1)) {
+                echo "<font color='red'>Problem Details field is empty.</font><br/>";
+            }
+            if (empty($hd_location)) {
+                echo "<font color='red'>Problem Location field is empty.</font><br/>";
+            }
+        } else {
+            $sql = "INSERT INTO report(Residential_College, Problem_Type, Problem_Details, Problem_Location, File_Upload )
         VALUES('$collegeName','$collegeProblem','$message1','$hd_location','$uploadedfile')";
-        
-        $mysqli->query($sql);
-        $result = $mysqli->query("INSERT INTO report(Residential College, Problem Type, Problem Details, Problem Location, File ) VALUES('$collegeName','$collegeProblem','$message1','$hd_location','$uploadedfile')");
-        $flag=true;
+
+            $mysqli->query($sql);
+            $result = $mysqli->query("INSERT INTO report(Residential College, Problem Type, Problem Details, Problem Location, File ) VALUES('$collegeName','$collegeProblem','$message1','$hd_location','$uploadedfile')");
+            $flag = true;
+        }
     }
-  }
 }
 ?>
 
@@ -53,60 +53,13 @@ if ($_SERVER["REQUEST_METHOD"]==="POST") {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
   <link rel="stylesheet" href="css/report.css" />
   <link rel="stylesheet" type="text/css" href="css/styles.css" />
-  
+
     <!-- Fonting -->
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@800&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet" />
-
 </head>
 
 <body>
-
-  <!-- Navigation bar -->
-  <nav class="navbar-expand-lg transitive" id="navbar">
-    <!-- Nav Container -->
-    <div class="nav-container transitive" id="nav-container">
-      <!-- Home brand -->
-      <a class="" href="index.html" style="float: left; padding: 0;">
-        <img src="" height="30px" alt="" />
-        College Activity Registration System
-      </a>
-
-      <!-- Menus -->
-      <div class="menu" id="navbarSupportedContent">
-        <ul class="navbar-nav">
-          <li class="nav-item active px-4">
-            <a class="nav-link" href="index.html">HOME <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item px-4">
-            <a class="nav-link" href="activity.html">ACTIVITIES</a>
-          </li>
-          <li class="nav-item px-4">
-            <a class="nav-link" href="food.html">FOOD</a>
-          </li>
-          <li class="nav-item px-4">
-            <a class="nav-link" href="application.html">ACCOMMODATION</a>
-          </li>
-          <li class="nav-item px-4" style="margin-right: 64px;">
-            <a class="nav-link" href="report.html">REPORT</a>
-          </li>
-          <!-- two buttons -->
-          <li class="nav-item">
-            <button type="button" class="btn nav-btn px-4 py-2"
-              style="background-color: #00df89; border-color: #00df89;">
-              CONTACT US
-            </button>
-          </li>
-          <li class="nav-item">
-            <button type="button" id="button-log-in" class="btn btn-outline-light nav-btn px-4 py-2">
-              LOGIN
-            </button>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
   <main>
     <div class="container bg-dark text-white"
       style="margin:auto; text-align:center;background-size: 150px;padding-top: 32px;padding-bottom: 30px;">
@@ -134,9 +87,9 @@ if ($_SERVER["REQUEST_METHOD"]==="POST") {
               <div class="select">
                 <span style="display: none; position: absolute; top: -5px; left: 10px;"></span>
               </div>
-              <input type="text" id="CollegeName" name="collegeName" class="CollegeName" required style="border:none; outline: none; 
-            background: red; position: absolute; 
-            top:13px; left:10px; opacity: 0; 
+              <input type="text" id="CollegeName" name="collegeName" class="CollegeName" required style="border:none; outline: none;
+            background: red; position: absolute;
+            top:13px; left:10px; opacity: 0;
             pointer-events: none;" />
               <ul class="dropdown-menu">
                 <li id="1">1st Residential College</li>
@@ -165,9 +118,9 @@ if ($_SERVER["REQUEST_METHOD"]==="POST") {
               <div class="select">
                 <span style="display: none; position: absolute; top: -5px; left: 10px;"></span>
               </div>
-              <input type="text" id="CollegeProblem" name="collegeProblem" class="CollegeProblem" required style="border:none; outline: none; 
-            background: red; position: absolute; 
-            top:13px; left:10px; opacity: 0; 
+              <input type="text" id="CollegeProblem" name="collegeProblem" class="CollegeProblem" required style="border:none; outline: none;
+            background: red; position: absolute;
+            top:13px; left:10px; opacity: 0;
             pointer-events: none;" />
               <ul class="dropdown-menu">
                 <li id="1">ACCOMMODATION FEE</li>
@@ -269,7 +222,7 @@ if ($_SERVER["REQUEST_METHOD"]==="POST") {
           <div class="btn-group">
             <button class="btn" id="submitBtn"><i class="fa fa-check" type="submit" value="Add" name="Submit"></i> Submit</button>
             <?php
-            if($flag==true){?>
+if ($flag == true) {?>
             <div id="myModal" class="modal  animate__animated animate__rotateIn">
               <div class="w3-modal-content" style="max-width:600px">
                 <span class="close">&times;</span>
@@ -279,8 +232,8 @@ if ($_SERVER["REQUEST_METHOD"]==="POST") {
               </div>
             </div>
             <?php
-            }
-            ?>
+}
+?>
           </div>
           <div class="btn-group">
             <button type="button" class="btn" id="cancel" onClick="window.location.reload();"><i
