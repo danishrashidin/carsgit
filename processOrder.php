@@ -25,63 +25,20 @@
 
 <body id="menu-body">
 
-    <!-- Navigation bar -->
-    <nav class="navbar-expand-lg transitive" id="navbar">
-        <!-- Nav Container -->
-        <div class="nav-container transitive" id="nav-container">
-            <!-- Home brand -->
-            <a class="" href="index.html" style="float: left; padding: 0;">
-                <img src="" height="30px" alt="" />
-                College Activity Registration System
-            </a>
 
-            <!-- Menus -->
-            <div class="menu" id="navbarSupportedContent">
-                <ul class="navbar-nav">
-                    <li class="nav-item active px-4">
-                        <a class="nav-link" href="index.html">HOME <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item px-4">
-                        <a class="nav-link" href="activity.html">ACTIVITIES</a>
-                    </li>
-                    <li class="nav-item px-4">
-                        <a class="nav-link" href="food.php">FOOD</a>
-                    </li>
-                    <li class="nav-item px-4">
-                        <a class="nav-link" href="application.html">ACCOMMODATION</a>
-                    </li>
-                    <li class="nav-item px-4" style="margin-right: 64px;">
-                        <a class="nav-link" href="report.html">REPORT</a>
-                    </li>
-
-                    <!-- two buttons -->
-                    <li class="nav-item">
-                        <button type="button" class="btn nav-btn px-4 py-2" style="background-color: #00df89; border-color: #00df89;">
-                            CONTACT US
-                        </button>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" id="button-log-in" class="btn btn-outline-light nav-btn px-4 py-2">
-                            LOGIN
-                        </button>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
     <header class="description">
         <?php
-        include_once("config.php");
-        $res_id = $_GET['Restaurant_ID'];
-        $sql = "SELECT restaurant.Restaurant_Name, college.College_Name, restaurant.Restaurant_hours FROM restaurant INNER JOIN college ON restaurant.College_ID = college.College_ID WHERE restaurant.Restaurant_ID=$res_id";
-        $result = $connectionString->query($sql);
-        while ($res = $result->fetch_array()) {
-            $res_name = $res['Restaurant_Name'];
-            $res_location = $res['College_Name'];
-            $res_hours = $res['Restaurant_hours'];
-        }
-        ?>
+include_once "config.php";
+$res_id = $_GET['Restaurant_ID'];
+$sql = "SELECT restaurant.Restaurant_Name, college.College_Name, restaurant.Restaurant_hours FROM restaurant INNER JOIN college ON restaurant.College_ID = college.College_ID WHERE restaurant.Restaurant_ID=$res_id";
+$result = $connectionString->query($sql);
+while ($res = $result->fetch_array()) {
+    $res_name = $res['Restaurant_Name'];
+    $res_location = $res['College_Name'];
+    $res_hours = $res['Restaurant_hours'];
+}
+?>
         <div id="menu-container">
             <style>
                 #menu-container {
@@ -157,13 +114,13 @@
 
         <div class="menu-card-group">
             <?php
-            $sql2 = "SELECT * FROM food WHERE Restaurant_ID=$res_id ORDER BY Food_Name";
-            $result = $connectionString->query($sql2);
-            while ($food = $result->fetch_array()) {
-                $food_name = $food['Food_Name'];
-                $food_price = $food['Food_Price'];
+$sql2 = "SELECT * FROM food WHERE Restaurant_ID=$res_id ORDER BY Food_Name";
+$result = $connectionString->query($sql2);
+while ($food = $result->fetch_array()) {
+    $food_name = $food['Food_Name'];
+    $food_price = $food['Food_Price'];
 
-                echo '<div class="food-card">
+    echo '<div class="food-card">
                         <div class="foodimage"><img id="food-img" alt="' . $food_name . '" src="assets/food/' . $food_name . '.jpg">
                         </div>
 
@@ -177,9 +134,9 @@
                             </div>
                         </div>
                     </div>';
-            }
-            // $connectionString->close();
-            ?>
+}
+// $connectionString->close();
+?>
             <br>
 
         </div>
@@ -195,7 +152,7 @@
                                     <b class="n-items" style="padding-left: 16px;">0</b></i></span></h3>
                     </div>
 
-                    <!--  
+                    <!--
                         <div class="cart-item">
                             <div class="item-text">
                                 <div class="item-title" name="food-name" value="food name"><b>Food name here</b></div>
@@ -278,7 +235,7 @@ if (isset($_POST['order-now'])) {
 if (isset($_POST['count'])) {
     $total_item = $_POST['count'];
 } else {
-?>
+    ?>
     <script>
         onCartEmptyMessage()
     </script>
@@ -288,7 +245,7 @@ if (isset($_POST['count'])) {
 }
 
 if (isset($_POST['InvalidDate']) && $_POST['InvalidDate'] == 1) {
-?>
+    ?>
     <script>
         onDateInvalidMessage();
         offCartEmptyMessage();
@@ -299,8 +256,8 @@ if (isset($_POST['InvalidDate']) && $_POST['InvalidDate'] == 1) {
 
 // echo $total_item;
 $generate_id_date = date("md");
-$generate_id_time =  time();
-$generated_id =  strval($generate_id_date) . strval($generate_id_time);
+$generate_id_time = time();
+$generated_id = strval($generate_id_date) . strval($generate_id_time);
 
 for ($i = 1; $i <= $total_item; $i++) {
     $name = "food-name-" . $i;
@@ -324,27 +281,26 @@ for ($i = 1; $i <= $total_item; $i++) {
 
     $sql4 = "INSERT INTO foodorder(Order_ID,Order_No,Student_ID,Order_Date,Pickup_Date,Order_Status,Food_ID,Restaurant_ID,Quantity,Total_Price ) VALUES ('$order_id','$generated_id','$student_id','$order_date','$pickup_date','$status','$food_id','$res_id','$food_quantity','$food_price')";
     // $connectionString->query($sql2);
-    if ($connectionString->query($sql4) === TRUE) {
-        if ($is_ordernow == TRUE) {
-    ?>
+    if ($connectionString->query($sql4) === true) {
+        if ($is_ordernow == true) {
+            ?>
             <script>
                 onOrderedMessage();
             </script>
         <?php
-        } elseif ($is_preorder == TRUE) {
-        ?>
+} elseif ($is_preorder == true) {
+            ?>
             <script>
                 onPreOrderedMessage();
             </script>
 
 <?php
-        }
+}
         // echo "New record created successfully";
     } else {
         echo "Error: " . $sql4 . "<br>" . $connectionString->error;
     }
 }
-
 
 $connectionString->close();
 ?>

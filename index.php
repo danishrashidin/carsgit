@@ -44,54 +44,7 @@ if (isset($_POST['action'])) {
 
     <body style="margin: 0;">
     <div class="nav-content-wrapper">
-        <!-- Navigation bar -->
-        <nav class="navbar-expand-lg transitive" id="navbar">
-        <!-- Nav Container -->
-        <div class="nav-container transitive" id="nav-container">
-            <!-- Home brand -->
-            <a class="" href="index.html" style="float: left; padding: 0;">
-            <img src="" height="30px" alt="" />
-            College Activity Registration System
-            </a>
 
-            <!-- Menus -->
-            <div class="menu" id="navbarSupportedContent">
-            <ul class="navbar-nav">
-                <li class="nav-item active px-4">
-                <a class="nav-link" href="index.html">HOME <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item px-4">
-                <a class="nav-link" href="activity.html">ACTIVITIES</a>
-                </li>
-                <li class="nav-item px-4">
-                <a class="nav-link" href="food.html">FOOD</a>
-                </li>
-                <li class="nav-item px-4">
-                <a class="nav-link" href="application.html">ACCOMMODATION</a>
-                </li>
-                <li class="nav-item px-4" style="margin-right: 64px;">
-                <a class="nav-link" href="report.html">REPORT</a>
-                </li>
-
-                <!-- two buttons -->
-                <li class="nav-item">
-                <button
-                    type="button"
-                    class="btn nav-btn px-4 py-2"
-                    style="background-color: #00df89; border-color: #00df89;"
-                >
-                    CONTACT US
-                </button>
-                </li>
-                <li class="nav-item">
-                <button type="button" id="button-log-in" class="btn btn-outline-light nav-btn px-4 py-2">
-                    LOGIN
-                </button>
-                </li>
-            </ul>
-            </div>
-        </div>
-        </nav>
 
         <!-- Header -->
         <header id="header" style="overflow: hidden; display: flex; flex-direction: row;">
