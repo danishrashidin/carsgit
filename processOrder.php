@@ -25,7 +25,6 @@
 
 <body id="menu-body">
 
-<<<<<<< HEAD
     <!-- Navigation bar -->
     <nav class="navbar-expand-lg transitive" id="navbar">
         <!-- Nav Container -->
@@ -70,9 +69,6 @@
             </div>
         </div>
     </nav>
-=======
-
->>>>>>> 18c6fb85a7a075f5e18e0aed90394f0f3e98fa9c
 
     <header class="description">
         <?php
