@@ -93,6 +93,8 @@ export default class ForgotPassword {
       .then((emailCheck) => {
         if (emailCheck.status == "failed") {
           this.sendResetLinkButton.innerHTML = `Reset Password`;
+          this.tooltipEmailCheck.querySelector(".email-error").innerHTML = emailCheck.emailError;
+          this.emailTippy.show();
         }
 
         if (emailCheck.status == "success") {
@@ -360,8 +362,8 @@ export default class ForgotPassword {
                 <p class="col-12 forgot-description">
                   Idiot, don't worry! Just fill in your SiswaMail and we'll send you a link to reset your password.
                 </p>
-                <div id="forgotPassword-email-check-template">
-                    <p class="email-error">
+                <div id="forgotPassword-email-check-template" >
+                    <p class="email-error" style ="max-width: 241px">
                     </p>
                 </div>
                 

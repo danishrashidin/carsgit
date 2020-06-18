@@ -74,37 +74,35 @@ if (isset($_GET['page'])) {
 
     <?php
 
-    if (file_exists($phpfile)) {
-        include($phpfile);
-    } else {
-        echo 'Error: No page binded';
-    }
+if (file_exists($phpfile)) {
+    include $phpfile;
+} else {
+    echo 'Error: No page binded';
+}
 
-    if (isset($action)) {
-        if ($action == 'verifying') {
-            include_once 'db.php';
+if (isset($action)) {
+    if ($action == 'verifying' || $action == 'reset password') {
+        include_once 'db.php';
+
+        $email = $_POST['email'];
+        $Activation_Hash = $_POST['Activation_Hash'];
+
+        $sql = "SELECT * FROM student WHERE Email = '$email' AND Activation_Hash = '$Activation_Hash'";
+        $results = $connection->query($sql);
+        $data = $results->fetch();
+
+        if ($data && $action == 'reset password') {
+            echo '<input type="hidden" class="--reset_Password" name="userEmail" value="' . $email . '" >';
+        } else if ($data && $action == 'verifying') {
+            $sql = "UPDATE student SET Verified = '1' WHERE Email = '$email' AND Activation_Hash = '$Activation_Hash'";
+            $connection->query($sql);
+            echo '<input type="hidden" class="--verificationSuccessfull">';
         }
     }
-    if (isset($action)) {
-        if ($action == 'verifying' || $action == 'reset password') {
-            include_once 'db.php';
+}
+include "components/footer.php";
 
-            $sql = "SELECT * FROM student WHERE Email = '$email' AND Activation_Hash = '$Activation_Hash'";
-            $results = $connection->query($sql);
-            $data = $results->fetch();
-
-            if ($data && $action == 'reset password') {
-                echo '<input type="hidden" class="--reset_Password" name="userEmail" value="' . $email . '" >';
-            } else if ($data && $action == 'verifying') {
-                $sql = "UPDATE student SET Verified = '1' WHERE Email = '$email' AND Activation_Hash = '$Activation_Hash'";
-                $connection->query($sql);
-                echo '<input type="hidden" class="--verificationSuccessfull">';
-            }
-        }
-    }
-    include("components/footer.php");
-
-    ?>
+?>
 
     <script type="text/javascript" src="js/index.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.11/typed.min.js"></script>

@@ -19,7 +19,7 @@ $emailCheck = $connection->query($sql);
 //store fetch data into array
 $data = $emailCheck->fetch();
 
-// echo $data;
+// print_r($data);
 
 if (!$data) {
     $response['status'] = 'failed';
