@@ -9,9 +9,9 @@ function scrollFunction() {
   if (document.body.scrollTop > 48 || document.documentElement.scrollTop > 48) {
     // Scrolled position
     navbar.style.padding = "12px 48px 12px";
-    navbar.style.background = "#321575";
+    // navbar.style.background = "#321575";
   } else {
-    navbar.style.background = "transparent";
+    // navbar.style.background = "transparent";
     navbar.style.padding = "40px 128px 12px";
   }
 } 
