@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
     $action = $_GET['action'];
 }
@@ -44,6 +45,55 @@ if (isset($_POST['action'])) {
 
     <body style="margin: 0;">
     <div class="nav-content-wrapper">
+
+     <!-- Navigation bar -->
+        <nav class="navbar-expand-lg transitive" id="navbar">
+        <!-- Nav Container -->
+        <div class="nav-container transitive" id="nav-container">
+            <!-- Home brand -->
+            <a class="" href="index.html" style="float: left; padding: 0;">
+            <img src="" height="30px" alt="" />
+            College Activity Registration System
+            </a>
+
+            <!-- Menus -->
+            <div class="menu" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+                <li class="nav-item active px-4">
+                <a class="nav-link" href="index.html">HOME <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item px-4">
+                <a class="nav-link" href="activity.html">ACTIVITIES</a>
+                </li>
+                <li class="nav-item px-4">
+                <a class="nav-link" href="food.html">FOOD</a>
+                </li>
+                <li class="nav-item px-4">
+                <a class="nav-link" href="application.html">ACCOMMODATION</a>
+                </li>
+                <li class="nav-item px-4" style="margin-right: 64px;">
+                <a class="nav-link" href="report.html">REPORT</a>
+                </li>
+
+                <!-- two buttons -->
+                <li class="nav-item">
+                <button
+                    type="button"
+                    class="btn nav-btn px-4 py-2"
+                    style="background-color: #00df89; border-color: #00df89;"
+                >
+                    CONTACT US
+                </button>
+                </li>
+                <li class="nav-item">
+                <button type="button" id="button-log-in" class="btn btn-outline-light nav-btn px-4 py-2">
+                    LOGIN
+                </button>
+                </li>
+            </ul>
+            </div>
+        </div>
+        </nav>
 
 
         <!-- Header -->
@@ -163,7 +213,7 @@ if (isset($_POST['action'])) {
 
 
 <?php if (isset($action)) {
-    if ($action == 'verifying') {
+    if ($action == 'verifying' || $action == 'reset password') {
         include_once 'db.php';
 
         $email = $_POST['email'];
@@ -171,14 +221,16 @@ if (isset($_POST['action'])) {
 
         $sql = "SELECT * FROM student WHERE Email = '$email' AND Activation_Hash = '$Activation_Hash'";
         $results = $connection->query($sql);
+        $data = $results->fetch();
 
-        if ($results->fetch()) {
+        if ($data && $action == 'reset password') {
+            echo '<input type="hidden" class="--reset_Password" name="userEmail" value="' . $email . '" >';
+
+        } else if ($data && $action == 'verifying') {
             $sql = "UPDATE student SET Verified = '1' WHERE Email = '$email' AND Activation_Hash = '$Activation_Hash'";
             $connection->query($sql);
-            ?>
-            <input type="hidden" class="--verificationSuccessfull">
-    <?php
-}
+            echo '<input type="hidden" class="--verificationSuccessfull">';
+        }
     }
 }?>
 

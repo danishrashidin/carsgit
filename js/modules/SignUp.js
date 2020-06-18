@@ -51,7 +51,6 @@ export default class SignUp {
 
   //--------------------------------------------------------Events--------------------------------------------------------//
   events() {
-    console.log(this.userVerified);
     if (this.userVerified) this.showVerifiedEmailMessage();
     if (this.navSignUpButton) this.navSignUpButton.addEventListener("click", () => this.openSignUpOverlay());
     this.modalBackground.addEventListener("click", (e) => this.closeSignUpOverlay(e));
@@ -219,6 +218,7 @@ export default class SignUp {
         if (eachInputBox.getAttribute("name") == "action") return;
         eachInputBox.setAttribute("value", "");
         eachInputBox.previousElementSibling.classList.remove("log-in-label-activated");
+        eachInputBox.previousElementSibling.classList.remove("reset-password-label-activated");
         eachInputBox.style.backgroundColor = "rgb(238, 238, 238)";
       });
       this.dropdown.forEach((eachDropdown) => {
