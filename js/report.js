@@ -22,7 +22,7 @@ function scrollFunction() {
 } 
 
 function initHeaderMargin() {
-   header.style.marginTop = navbar.offsetHeight + "px";
+  header.style.marginTop = navbar.offsetHeight + "px";
 }
 
 initHeaderMargin();
@@ -60,110 +60,32 @@ dropdownList.forEach((currentList) => {
   });
 });
 
-document.querySelector("#add-complaint").addEventListener("click", function (e) {
- idCollege=document.querySelector(".CollegeName").getAttribute("value");
- idProblem=document.querySelector(".CollegeProblem").getAttribute("value");
- idProblemDetails=document.querySelector(".ProblemDetails").value;
- idProblemLocation=document.querySelector(".ProblemLocation").value;
- idfileUpload=document.querySelector(".fileUpload").value;
- console.log(document.querySelector(".CollegeName").getAttribute("value"));
- console.log(document.querySelector(".CollegeProblem").getAttribute("value"));
- console.log(document.querySelector(".ProblemDetails").value);
- console.log(document.querySelector(".ProblemLocation").value);
- console.log(document.querySelector(".fileUpload").value);
-});
-
-function validateForm() {
-  var x = document.forms["reportForm"][".CollegeName"].value;
-  var y=document.forms["reportForm"][".CollegeProblem"].value;
-  var z=document.forms["reportForm"][".ProblemDetails"].value;
-  var m=document.forms["reportForm"][".ProblemLocation"].value;
-  if (x == "") {
-    // alert("Residential College must be filled out");
-    return false;
-  }
-  if (y == "") {
-    // alert("College Problem must be filled out");
-    return false;
-  }
-  if (z == "") {
-    // alert("Problem Details must be filled out");
-    return false;
-  }
-  if (m == "") {
-    // alert("Problem Location must be filled out");
-    return false;
-  }
-  return true;
-  }
-
-
-var table
-
+// var table
 // Get the modal
 var modal = document.getElementById("myModal");
 
-// Get the button that opens the modal
-var submitBtn = document.getElementById("submit");
-
 // Get the <span> element that closes the modal
-var spant = document.getElementsByClassName("close")[0];
+var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on the button, open the modal
-submitBtn.onclick = function() {
-  if (validateForm()== true){
+if(modal!=null){
     modal.style.display = "block";
-  }
 }
 
 // When the user clicks on <span> (x), close the modal
-spant.onclick = function() {
+if(modal!=null){
+span.onclick = function() {
   modal.style.display = "none";
 }
-
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
-  else if (event.target ==comModal)
-  {
-    comModal.style.display = "none";
-  }
+}
 }
 
-var comModal = document.getElementById("complainModal");
 
-// Get the button that opens the modal
-var recordBtn = document.getElementById("record");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("clase")[0];
-
-// When the user clicks on the button, open the modal
-recordBtn.onclick = function() {
-  comModal.style.display = "block";
-}
-
-span.onclick = function() {
-  comModal.style.display = "none";
-}
-
-function insertData() {
-  $("#TableBody").append(
-    "<tr><td>" +
-      $(".CollegeName").val() +
-      "</td><td>" +
-      $(".CollegeProblem").val() +
-      "</td><td>" +
-      $(".ProblemDetails").val() +
-      "</td><td>" +
-      $(".ProblemLocation").val() +
-      "</td><td>" +
-      $(".fileUpload").val() +
-      "</td></tr>"
-  );
-}
 
 
 

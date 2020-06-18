@@ -87,7 +87,6 @@ export default class LogIn {
         if (logInError.status == "success" && logInError.verified == 1) {
           window.location.href = "index.php?action=login-success&email=" + this.emailInputBox.value;
         } else if (logInError.status == "failed") {
-          console.log("masuk");
           this.logInButton.innerHTML = `Log In`;
           if (logInError.emailError) {
             this.tooltipEmail.querySelector(".email-error").innerHTML = logInError.emailError;
@@ -101,8 +100,8 @@ export default class LogIn {
             }
           }
         } else if (logInError.status == "success" && logInError.verified == 0) {
-          this.closeLogInOverlay("closeForOtherPopUp");
           this.userUnverifiedMessage(this.emailInputBox.value);
+          this.closeLogInOverlay("closeForOtherPopUp");
         }
       })
       .catch((error) => {
@@ -131,7 +130,7 @@ export default class LogIn {
             `;
     this.notificationMessage.innerHTML =
       `
-            Please verify your email first before attempting log in. We've sent an email to
+            Please verify your email first before attempting to log in. We've sent an email to
             <strong>` +
       userEmail +
       ` </strong> to verify your email address. Please click the verify button in that email to complete the registration

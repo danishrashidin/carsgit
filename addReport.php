@@ -1,3 +1,45 @@
+<?php
+//including the database connection file
+$flag=false;
+
+if ($_SERVER["REQUEST_METHOD"]==="POST") {
+  if(isset($_POST['add'])){
+    include_once("configReport.php");
+    $collegeName = $_POST['collegeName'];
+    $collegeProblem = $_POST['collegeProblem'];
+    $message1 = $_POST['message1'];
+    $hd_location = $_POST['hd_location'];
+    $uploadedfile = $_POST['uploadedfile'];
+    $status="";
+
+    // checking empty fields
+    if(empty($collegeName) || empty($collegeProblem) || empty($message1) || empty($hd_location)) {                
+        if(empty($collegeName)){
+            echo "<font color='red'>Residential College is empty.</font><br/>";
+        }
+        
+        if(empty($collegeProblem)) {
+            echo "<font color='red'>College Problem field is empty.</font><br/>";
+        }
+        
+        if(empty($message1)) {
+            echo "<font color='red'>Problem Details field is empty.</font><br/>";
+        }
+        if(empty($hd_location)) {
+            echo "<font color='red'>Problem Location field is empty.</font><br/>";
+        }
+    } else {
+        $sql = "INSERT INTO report(Residential_College, Problem_Type, Problem_Details, Problem_Location, File_Upload ) 
+        VALUES('$collegeName','$collegeProblem','$message1','$hd_location','$uploadedfile')";
+        
+        $mysqli->query($sql);
+        $result = $mysqli->query("INSERT INTO report(Residential College, Problem Type, Problem Details, Problem Location, File ) VALUES('$collegeName','$collegeProblem','$message1','$hd_location','$uploadedfile')");
+        $flag=true;
+    }
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,10 +106,10 @@
       </div>
     </div>
   </nav>
-  <main>
 
+  <main>
     <div class="container bg-dark text-white"
-      style="margin:auto; width:800; text-align:center;background-size: 150px;padding-top: 32px;padding-bottom: 30px;">
+      style="margin:auto; text-align:center;background-size: 150px;padding-top: 32px;padding-bottom: 30px;">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
       <!-- <div class="jumbotron" id="jumbotron" style="margin-bottom:0; width:800; text-align:center;background-size: 150px;padding-top: 32px;padding-bottom: 30px;"> -->
       <h4>REPORT COLLEGE ISSUE </h4>
@@ -77,8 +119,8 @@
       </div>
       </p>
     </div>
-    </div>
-    <form id="report-form" name="reportForm" method="post" onsubmit="return validateForm()">
+    <form id="report-form" name="reportForm" method="post" action="addReport.php" >
+      <input type="hidden" name="add" value="Add">
       <div class="container p-3" style="background-color: white; padding-top: 40px;">
         <div class="row">
           <div class="col-3 text-right">
@@ -92,7 +134,7 @@
               <div class="select">
                 <span style="display: none; position: absolute; top: -5px; left: 10px;"></span>
               </div>
-              <input type="text" name="college" class="CollegeName" required style="border:none; outline: none; 
+              <input type="text" id="CollegeName" name="collegeName" class="CollegeName" required style="border:none; outline: none; 
             background: red; position: absolute; 
             top:13px; left:10px; opacity: 0; 
             pointer-events: none;" />
@@ -123,7 +165,7 @@
               <div class="select">
                 <span style="display: none; position: absolute; top: -5px; left: 10px;"></span>
               </div>
-              <input type="text" name="college" class="CollegeProblem" required style="border:none; outline: none; 
+              <input type="text" id="CollegeProblem" name="collegeProblem" class="CollegeProblem" required style="border:none; outline: none; 
             background: red; position: absolute; 
             top:13px; left:10px; opacity: 0; 
             pointer-events: none;" />
@@ -215,7 +257,7 @@
         </div>
         <div class="row">
           <div class="col-3 text-right">
-            <label for="exampleInputFile" class="">Upload File :</label>
+            <label for="exampleInputFile" class="" action="upload.php" enctype="multipart/form-data">Upload File :</label>
           </div>
           <div class="col-9">
             <input name="uploadedfile" type="file" id="uploadedfile" class="fileUpload" />
@@ -224,50 +266,10 @@
             </p>
           </div>
         </div>
-        <div class="text-center bgimg">
           <div class="btn-group">
-            <button type="button" class="btn" id="add-complaint" onClick="insertData()" value="Add Complaint"><i
-                class="fa fa-plus"></i> New Complaint</button>
-          </div>
-          <div class="btn-group">
-            <button type="button" class="btn" id="record"><i class="fa fa-folder"></i> See All Complaints </button>
-            <div id="complainModal" class="modal  animate__animated animate__zoomIn">
-              <div class="w2-modal-content" style="max-width:1000px">
-                <span class="clase">&times;</span>
-                <caption>COMPLAINT TABLE</caption>
-                <table style="width:100%" class="table table-bordered" id="reportTable">
-                  <colgroup>
-                    <col span="20" class="c2">
-                    <col>
-                    <col class="c1">
-                  </colgroup>
-                  <thead>
-                    <tr>
-                      <th>
-                        Residential College
-                      </th>
-                      <th>
-                        Problem Type
-                      </th>
-                      <th>
-                        Problem Details
-                      </th>
-                      <th>
-                        Problem Location
-                      </th>
-                      <th>
-                        File Upload
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody id="TableBody">
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-          <div class="btn-group">
-            <button class="btn" id="submit"><i class="fa fa-check" type="submit" value="submit"></i> Submit</button>
+            <button class="btn" id="submitBtn"><i class="fa fa-check" type="submit" value="Add" name="Submit"></i> Submit</button>
+            <?php
+            if($flag==true){?>
             <div id="myModal" class="modal  animate__animated animate__rotateIn">
               <div class="w3-modal-content" style="max-width:600px">
                 <span class="close">&times;</span>
@@ -276,22 +278,22 @@
                   Your report was submitted successfully.</p>
               </div>
             </div>
+            <?php
+            }
+            ?>
           </div>
           <div class="btn-group">
             <button type="button" class="btn" id="cancel" onClick="window.location.reload();"><i
                 class="fa fa-close"></i>
               Cancel</button>
           </div>
-        </div>
       </div>
     </form>
-    </div>
-    </div>
   </main>
 
   <footer>
     <div class="copyright">
-      <p>&copy 2020 - Try Guess</p>
+      <p>&copy 2020 - Cuba Teka</p>
     </div>
     <div class="social">
       <a href="#" class="support">Contact Us</a>
@@ -300,7 +302,6 @@
       <a href="#" class="linked">ig</a>
     </div>
   </footer>
-  <script src="https://kit.fontawesome.com/e881600de5.js" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
     crossorigin="anonymous"></script>
