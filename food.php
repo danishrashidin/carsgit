@@ -7,12 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
-<<<<<<< HEAD
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-=======
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
->>>>>>> 18c6fb85a7a075f5e18e0aed90394f0f3e98fa9c
 
   <title>Food</title>
   <link rel="stylesheet" type="text/css" href="css/food.css">
@@ -28,7 +23,6 @@
 
 <body id="food-body">
 
-<<<<<<< HEAD
   <!-- Navigation bar -->
   <nav class="navbar-expand-lg transitive" id="navbar">
     <!-- Nav Container -->
@@ -73,9 +67,6 @@
       </div>
     </div>
   </nav>
-=======
-
->>>>>>> 18c6fb85a7a075f5e18e0aed90394f0f3e98fa9c
   <header class="description">
     <div class="main-container">
 
@@ -125,7 +116,6 @@
   <main>
     <div class="horizontal-bar-row">
       <?php
-<<<<<<< HEAD
       include_once('config.php');
       $student_id = 1;
       $sql = "SELECT college.College_ID, college.College_Name FROM student INNER JOIN college ON student.College_ID = college.College_ID WHERE Student_ID=$student_id";
@@ -135,24 +125,12 @@
         $res_location = $row['College_Name'];
       }
       ?>
-=======
-include_once 'config.php';
-$student_id = 1;
-$sql = "SELECT college.College_ID, college.College_Name FROM student INNER JOIN college ON student.College_ID = college.College_ID WHERE Student_ID=$student_id";
-$result = $connectionString->query($sql);
-while ($row = $result->fetch_array()) {
-    $col_id = $row['College_ID'];
-    $res_location = $row['College_Name'];
-}
-?>
->>>>>>> 18c6fb85a7a075f5e18e0aed90394f0f3e98fa9c
       <h2><?php echo $res_location; ?></h2>
     </div>
 
     <!-- create a group to store restaurant cards -->
     <div class="card-group">
       <?php
-<<<<<<< HEAD
       $sql2 = "SELECT restaurant.Restaurant_ID, restaurant.Restaurant_Name, restaurant.Restaurant_Type, restaurant.Restaurant_hours FROM restaurant WHERE College_ID=$col_id ORDER BY restaurant.Restaurant_Name";
       $result2 = $connectionString->query($sql2);
       while ($res = $result2->fetch_array()) {
@@ -163,18 +141,6 @@ while ($row = $result->fetch_array()) {
 
         /*attention: all restaurant img should be in .JPG format. */
         echo '  <div class="restaurant-card">
-=======
-$sql2 = "SELECT restaurant.Restaurant_ID, restaurant.Restaurant_Name, restaurant.Restaurant_Type, restaurant.Restaurant_hours FROM restaurant WHERE College_ID=$col_id ORDER BY restaurant.Restaurant_Name";
-$result2 = $connectionString->query($sql2);
-while ($res = $result2->fetch_array()) {
-    $res_id = $res['Restaurant_ID'];
-    $res_name = $res['Restaurant_Name'];
-    $res_type = $res['Restaurant_Type'];
-    $res_hours = $res['Restaurant_hours'];
-
-    /*attention: all restaurant img should be in .JPG format. */
-    echo '  <div class="restaurant-card">
->>>>>>> 18c6fb85a7a075f5e18e0aed90394f0f3e98fa9c
                         <img id="res-img" src="assets/restaurant/' . $res_name . '.jpg" alt="' . $res_name . '">
                         <div class="card-container">
                             <h4><b id="name" >' . $res_name . '</b></h4>
@@ -187,15 +153,9 @@ while ($res = $result2->fetch_array()) {
                             <a id="menu" href="menu.php?Restaurant_ID=' . $res_id . '"><button class="view_menu" title="Click to view menu">View Menu</button></a>
                         </div>
                     </div>';
-<<<<<<< HEAD
       }
       // $connectionString->close();
       ?>
-=======
-}
-$connectionString->close();
-?>
->>>>>>> 18c6fb85a7a075f5e18e0aed90394f0f3e98fa9c
     </div>
     <!-- card-group end -->
 

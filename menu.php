@@ -25,7 +25,6 @@
 
 <body id="menu-body">
 
-<<<<<<< HEAD
     <!-- Navigation bar -->
     <nav class="navbar-expand-lg transitive" id="navbar">
         <!-- Nav Container -->
@@ -71,8 +70,6 @@
         </div>
     </nav>
 
-=======
->>>>>>> 18c6fb85a7a075f5e18e0aed90394f0f3e98fa9c
     <header class="description">
         <?php
 include_once "config.php";
@@ -196,15 +193,9 @@ while ($food = $result->fetch_array()) {
                             </div>
                         </div>
                     </div>';
-<<<<<<< HEAD
             }
             // $connectionString->close();
             ?>
-=======
-}
-$connectionString->close();
-?>
->>>>>>> 18c6fb85a7a075f5e18e0aed90394f0f3e98fa9c
 
             <!-- <div class="food-card">
                 <div class="foodimage"><img id="food-img" alt="food image" src="https://images.unsplash.com/photo-1481070555726-e2fe8357725c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60">

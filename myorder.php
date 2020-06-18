@@ -23,7 +23,6 @@
 
 
 <body id="food-body">
-<<<<<<< HEAD
   <!-- Navigation bar -->
   <nav class="navbar-expand-lg transitive" id="navbar">
     <!-- Nav Container -->
@@ -68,8 +67,6 @@
       </div>
     </div>
   </nav>
-=======
->>>>>>> 18c6fb85a7a075f5e18e0aed90394f0f3e98fa9c
 
   <header class="description">
     <div class="main-container">
@@ -179,15 +176,9 @@ $sql3 = "SELECT food.Food_Name,foodorder.Quantity,foodorder.Total_Price FROM foo
       </div>
 
     <?php
-<<<<<<< HEAD
     }
     // $connectionString->close();
     ?>
-=======
-}
-$connectionString->close();
-?>
->>>>>>> 18c6fb85a7a075f5e18e0aed90394f0f3e98fa9c
 
     <p style="text-align: center; color: rgb(119, 119, 119);">You've seen all your orders.</p>
 

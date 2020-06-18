@@ -2,9 +2,6 @@
 
 include_once("config.php");
 
-
-
-
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     if (isset($_GET['search'])) {
         if (!$_GET['search'] == "") {
