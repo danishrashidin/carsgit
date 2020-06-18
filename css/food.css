@@ -6,19 +6,6 @@
   margin: 20px;
 }
 
-nav {
-  background-image: linear-gradient(
-    -225deg,
-    #ff057c 0,
-    #8d0b93 50%,
-    #321575 100%
-  ) !important;
-
-  -webkit-box-shadow: 0px 5px 50px -10px rgba(0, 0, 0, 0.4);
-  -moz-box-shadow: 0px 5px 50px -10px rgba(0, 0, 0, 0.4);
-  box-shadow: 0px 5px 50px -10px rgba(0, 0, 0, 0.4);
-}
-
 .main-container {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   background: url(https://images.pexels.com/photos/1565982/pexels-photo-1565982.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940); 

@@ -12,7 +12,6 @@
   <title>Food</title>
   <link rel="stylesheet" type="text/css" href="css/food.css">
   <link rel="stylesheet" type="text/css" href="css/menu.css">
-  <link rel="stylesheet" type="text/css" href="css/styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
   <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale.css" />
   <link rel="stylesheet" href="css/login.css" />
@@ -39,7 +38,7 @@
 
   </header>
   <div class="overlayMessage" id="overlayFoundMessage" onclick="offFoundMessage()" title="Click anywhere to close this window">
-    <div id="Message" style="color: 200; " }>Found!<table id="foundMessage">
+    <div id="Message" style="color: 200; ">Found!<table id="foundMessage">
         <tr>
           <th>Food Name</th>
           <th>Restaurant Name</th>
@@ -129,7 +128,6 @@
   </footer>
 
   <script type="text/javascript" src="js/menu.js"></script>
-  <script type="text/javascript" src="js/index.js"></script>
 
 </body>
 
