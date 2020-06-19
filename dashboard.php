@@ -2,36 +2,36 @@
 
 $pagename = "";
 if (isset($_GET['page'])) {
-  $name = $_GET['page'];
-  switch ($name) {
-    case 'dashboard':
-      $pagename = "Dashboard";
-      break;
-    case 'activities':
-      $pagename = "Activities";
-      break;
-    case 'food':
-      $pagename = "Food";
-      break;
-    case 'acommodation':
-      $pagename = "Acommodation";
-      break;
-    case 'report':
-      $pagename = "Report";
-      break;
-    case 'profile':
-      $pagename = "Your Profile";
-      break;
-    default:
-      $pagename = "Dashboard";
-  }
+    $name = $_GET['page'];
+    switch ($name) {
+        case 'dashboard':
+            $pagename = "Dashboard";
+            break;
+        case 'activities':
+            $pagename = "Activities";
+            break;
+        case 'food':
+            $pagename = "Food";
+            break;
+        case 'acommodation':
+            $pagename = "Acommodation";
+            break;
+        case 'report':
+            $pagename = "Report";
+            break;
+        case 'profile':
+            $pagename = "Your Profile";
+            break;
+        default:
+            $pagename = "Dashboard";
+    }
 }
 
 // Get session variable
 if (isset($_SESSION["email"])) {
-  $identifier = $_SESSION["userEmail"];
+    $identifier = $_SESSION["userEmail"];
 } else {
-  //die("Please login");
+    //die("Please login");
 }
 
 // DB connection
@@ -226,18 +226,18 @@ $_SESSION['Student_ID'] = 2;
             </div>
             <div class="fragment">
             <?php
-            if (isset($_GET['page'])) {
-              $display = $name . '.php';
-              if ($name == "dashboard") {
-              } else if (file_exists($display)) {
-                include_once($display);
-              } else {
-                echo $display . " does not exist";
-              }
-            } else {
-              echo "No page binded";
-            }
-            ?>
+if (isset($_GET['page'])) {
+    $display = $name . '.php';
+    if ($name == "dashboard") {
+    } else if (file_exists($display)) {
+        include_once $display;
+    } else {
+        echo $display . " does not exist";
+    }
+} else {
+    echo "No page binded";
+}
+?>
             </div>
           </div>
         </div>
