@@ -46,4 +46,7 @@ function cal() {
     else if (cost < 0) return "Invalid date!";
     else return "RM" + cost;
   }
+
+
+  
 }

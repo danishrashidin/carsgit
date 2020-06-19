@@ -87,12 +87,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   box-shadow: none;
 }
 
-#Department {
-  border: 0;
-  background: transparent;
-  box-shadow: none;
-}
-
 #Phonenumber {
   border: 0;
   background: transparent;
