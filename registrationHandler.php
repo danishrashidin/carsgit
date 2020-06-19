@@ -6,7 +6,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 
 //include db connection
-include_once 'db.php';
+include_once 'pdo.php';
 
 // prevent Cross-site Scripting (XSS)
 function sanitizingData($data)
