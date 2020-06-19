@@ -82,7 +82,7 @@ if (file_exists($phpfile)) {
 
 if (isset($action)) {
     if ($action == 'verifying' || $action == 'reset password') {
-        include_once 'db.php';
+        include_once 'pdo.php';
 
         $email = $_POST['email'];
         $Activation_Hash = $_POST['Activation_Hash'];

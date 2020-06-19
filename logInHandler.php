@@ -1,6 +1,6 @@
 <?php
 
-include_once 'db.php';
+include_once 'pdo.php';
 
 $response = array("status" => "", "emailError" => "", "generalError" => "", "verified" => 0);
 

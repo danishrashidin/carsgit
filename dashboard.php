@@ -113,7 +113,8 @@ $connect->query($student_data); ?>
       <?php
       echo 'window.addEventListener("DOMContentLoaded", function() {
         (function($) {
-          document.getElementById("' . $name . '-button").classList.add("active")
+          document.getElementById("' . $name . '-button").classList.add("active");
+          feather.replace();
         })(jQuery)
       })';
       ?>
