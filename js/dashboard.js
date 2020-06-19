@@ -1,9 +1,11 @@
 // Set main margin
-var main = document.querySelector("main");
-var navbar = document.getElementById("navbar");
+const navbar = document.querySelector("nav");
+const frag = document.querySelector(".fragment");
+const dashboard = document.querySelector("main");
 
 function init() {
-  main.style.top = navbar.offsetHeight + "px";
+  dashboard.style.top += navbar.offsetHeight + "px";
+  console.log("Set : " + navbar.offsetHeight);
 }
 
-window.onload(init());
+dashboard.onload = init();

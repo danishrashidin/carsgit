@@ -221,3 +221,8 @@ footer .social a:hover {
 .transitive {
   transition: 0.4s; /* Adds a transition effect when the padding is decreased */
 }
+
+/* html {
+  visibility: visible;
+  opacity: 1;
+} */

@@ -1,94 +1,85 @@
-<!DOCTYPE html>
-<html>
+<link rel="stylesheet" type="text/css" href="css/food.css">
+<link rel="stylesheet" type="text/css" href="css/menu.css">
+<!-- for search icon -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<head id="food-head">
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Food</title>
-  <link rel="stylesheet" type="text/css" href="css/food.css">
-  <link rel="stylesheet" type="text/css" href="css/menu.css">
+<div class="description">
+  <div class="main-container">
 
-  <!-- for search icon -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-
-<body id="food-body">
-
-  <header class="description">
-    <div class="main-container">
-
-      <h1> online food order </h1>
-      <h2> lazy to queue up for food everyday? <br> </h2>
-      <h3> now you can order food online!</h3>
-      <!-- use form to go to another page -->
-      <form method="GET" action="food.php">
-        <div class="search-container">
-          <input type="text" placeholder="Search food..." name="search">
-          <button type="submit"><i class="fa fa-search"></i></button>
-        </div>
-      </form>
-
-  </header>
-  <div class="overlayMessage" id="overlayFoundMessage" onclick="offFoundMessage()" title="Click anywhere to close this window">
-    <div id="Message" style="color: 200; ">Found!<table id="foundMessage">
-        <tr>
-          <th>Food Name</th>
-          <th>Restaurant Name</th>
-        </tr>
-      </table>
-    </div>
+    <h1> online food order </h1>
+    <h2> lazy to queue up for food everyday? <br> </h2>
+    <h3> now you can order food online!</h3>
+    <!-- use form to go to another page -->
+    <form method="GET" action="food.php">
+      <div class="search-container">
+        <input type="text" placeholder="Search food..." name="search">
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </div>
+    </form>
   </div>
-  <div class="overlayMessage" id="overlayNotFoundMessage" onclick="offNotFoundMessage()" title="Click anywhere to close this window">
-    <div id="Message">Sorry, food not found.</div>
+</div>
+
+<div class="overlayMessage" id="overlayFoundMessage" onclick="offFoundMessage()" title="Click anywhere to close this window">
+  <div id="Message" style="color: 200; ">Found!
+    <table id="foundMessage">
+      <tr>
+        <th>Food Name</th>
+        <th>Restaurant Name</th>
+      </tr>
+    </table>
   </div>
-  <div class="overlayMessage" id="overlaySearchEmptyMessage" onclick="offSearchEmptyMessage()" title="Click anywhere to close this window">
-    <div id="Message">You did not enter any key. </div>
+</div>
+<div class="overlayMessage" id="overlayNotFoundMessage" onclick="offNotFoundMessage()" title="Click anywhere to close this window">
+  <div id="Message">Sorry, food not found.</div>
+</div>
+<div class="overlayMessage" id="overlaySearchEmptyMessage" onclick="offSearchEmptyMessage()" title="Click anywhere to close this window">
+  <div id="Message">You did not enter any key. </div>
+</div>
+
+<!--  NAVIGATION  -->
+<div class="main-nav">
+  <ul>
+    <li>
+      <a href="myorder.php">my order</a>
+    </li>
+    <li>
+      <a href="mypreorder.php">my pre-order</a>
+    </li>
+    <li>
+      <a href="orderhistory.php">order history</a>
+    </li>
+  </ul>
+</div>
+<!--  NAVIGATION END  -->
+
+<div>
+  <div class="horizontal-bar-row">
+    <?php
+    include_once('config.php');
+    $student_id = 1;
+    $sql = "SELECT college.College_ID, college.College_Name FROM student INNER JOIN college ON student.College_ID = college.College_ID WHERE Student_ID=$student_id";
+    $result = $connectionString->query($sql);
+    while ($row = $result->fetch_array()) {
+      $col_id = $row['College_ID'];
+      $res_location = $row['College_Name'];
+    }
+    ?>
+    <h2><?php echo $res_location; ?></h2>
   </div>
 
-  <!--  NAVIGATION  -->
-  <div class="main-nav">
-    <ul>
-      <li>
-        <a href="myorder.php">my order</a>
-      </li>
-      <li>
-        <a href="mypreorder.php">my pre-order</a>
-      <li>
-        <a href="orderhistory.php">order history</a>
-      </li>
-    </ul>
-  </div>
-  <!--  NAVIGATION END  -->
+  <!-- create a group to store restaurant cards -->
+  <div class="card-group">
+    <?php
+    $sql2 = "SELECT restaurant.Restaurant_ID, restaurant.Restaurant_Name, restaurant.Restaurant_Type, restaurant.Restaurant_hours FROM restaurant WHERE College_ID=$col_id ORDER BY restaurant.Restaurant_Name";
+    $result2 = $connectionString->query($sql2);
+    while ($res = $result2->fetch_array()) {
+      $res_id = $res['Restaurant_ID'];
+      $res_name = $res['Restaurant_Name'];
+      $res_type = $res['Restaurant_Type'];
+      $res_hours = $res['Restaurant_hours'];
 
-  <main>
-    <div class="horizontal-bar-row">
-      <?php
-      include_once('config.php');
-      $student_id = 1;
-      $sql = "SELECT college.College_ID, college.College_Name FROM student INNER JOIN college ON student.College_ID = college.College_ID WHERE Student_ID=$student_id";
-      $result = $connectionString->query($sql);
-      while ($row = $result->fetch_array()) {
-        $col_id = $row['College_ID'];
-        $res_location = $row['College_Name'];
-      }
-      ?>
-      <h2><?php echo $res_location; ?></h2>
-    </div>
-
-    <!-- create a group to store restaurant cards -->
-    <div class="card-group">
-      <?php
-      $sql2 = "SELECT restaurant.Restaurant_ID, restaurant.Restaurant_Name, restaurant.Restaurant_Type, restaurant.Restaurant_hours FROM restaurant WHERE College_ID=$col_id ORDER BY restaurant.Restaurant_Name";
-      $result2 = $connectionString->query($sql2);
-      while ($res = $result2->fetch_array()) {
-        $res_id = $res['Restaurant_ID'];
-        $res_name = $res['Restaurant_Name'];
-        $res_type = $res['Restaurant_Type'];
-        $res_hours = $res['Restaurant_hours'];
-
-        /*attention: all restaurant img should be in .JPG format. */
-        echo '  <div class="restaurant-card">
+      /*attention: all restaurant img should be in .JPG format. */
+      echo '  <div class="restaurant-card">
                         <img id="res-img" src="assets/restaurant/' . $res_name . '.jpg" alt="' . $res_name . '">
                         <div class="card-container">
                             <h4><b id="name" >' . $res_name . '</b></h4>
@@ -101,31 +92,13 @@
                             <a id="menu" href="menu.php?Restaurant_ID=' . $res_id . '"><button class="view_menu" title="Click to view menu">View Menu</button></a>
                         </div>
                     </div>';
-      }
-      // $connectionString->close();
-      ?>
-    </div>
-    <!-- card-group end -->
+    }
+    // $connectionString->close();
+    ?>
+  </div>
+  <!-- card-group end -->
 
-  </main>
-  <footer>
-    <div class="copyright">
-      <p>&copy 2020 - Try Guess</p>
-    </div>
-    <div class="social">
-      <a href="#" class="support">Contact Us</a>
-      <a href="#" class="face">f</a>
-      <a href="#" class="tweet">t</a>
-      <a href="#" class="linked">ig</a>
-    </div>
-  </footer>
-
-  <script type="text/javascript" src="js/menu.js"></script>
-
-</body>
-
-</html>
-
-<?php
-include_once("searchFilterFood.php");
-?>
+  <?php
+  include_once("searchFilterFood.php");
+  ?>
+</div>
