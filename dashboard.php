@@ -35,16 +35,24 @@ if (isset($_SESSION["email"])) {
 }
 
 // DB connection
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "test";
+include_once('config.php');
 
-$connect = new mysqli($servername, $username, $password, $dbname);
+// if(isset($_POST['action'])){
+//   if($_POST['action'] == 'login-success'){
+//     if(isset($_POST['id'])){
+//       session_start();
+//       $_SESSION['student_id'] = $_POST['id'];
+//     }
+//   } else {
+//     die("Please login");
+//   } 
+// } else {
+//   die('Please login');
+// }
 
-if ($connect->connect_error) { die("Failed"); } $student_data = 'SELECT * FROM
-student WHERE Email="wif180040@siswa.um.edu.my"'; $result =
-$connect->query($student_data); ?>
+session_start();
+$_SESSION['Student_ID'] = 2;
+?>
 
 <!DOCTYPE html>
 <html>
@@ -109,16 +117,6 @@ $connect->query($student_data); ?>
       crossorigin="anonymous"
       defer
     ></script>
-    <script type="text/javascript">
-      <?php
-      echo 'window.addEventListener("DOMContentLoaded", function() {
-        (function($) {
-          document.getElementById("' . $name . '-button").classList.add("active");
-          feather.replace();
-        })(jQuery)
-      })';
-      ?>
-  </script>
   </head>
 
   <body>
@@ -245,7 +243,16 @@ $connect->query($student_data); ?>
         </div>
       </div>
     </main>
-  
+    <script type="text/javascript">
+      <?php
+      echo 'window.addEventListener("DOMContentLoaded", function() {
+        (function($) {
+          document.getElementById("' . $name . '-button").classList.add("active");
+          feather.replace();
+        })(jQuery)
+      })';
+      ?>
+  </script>
     
   </body>
 </html>

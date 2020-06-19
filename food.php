@@ -57,9 +57,9 @@
     <div class="horizontal-bar-row">
       <?php
       include_once('config.php');
-      $student_id = 1;
+      $student_id = $_SESSION['Student_ID'];
       $sql = "SELECT college.College_ID, college.College_Name FROM student INNER JOIN college ON student.College_ID = college.College_ID WHERE Student_ID=$student_id";
-      $result = $connectionString->query($sql);
+      $result = $connection->query($sql);
       while ($row = $result->fetch_array()) {
         $col_id = $row['College_ID'];
         $res_location = $row['College_Name'];
@@ -72,7 +72,7 @@
     <div class="card-group">
       <?php
       $sql2 = "SELECT restaurant.Restaurant_ID, restaurant.Restaurant_Name, restaurant.Restaurant_Type, restaurant.Restaurant_hours FROM restaurant WHERE College_ID=$col_id ORDER BY restaurant.Restaurant_Name";
-      $result2 = $connectionString->query($sql2);
+      $result2 = $connection->query($sql2);
       while ($res = $result2->fetch_array()) {
         $res_id = $res['Restaurant_ID'];
         $res_name = $res['Restaurant_Name'];
@@ -94,7 +94,7 @@
                         </div>
                     </div>';
       }
-      // $connectionString->close();
+      // $connection->close();
       ?>
     </div>
     <!-- card-group end -->

@@ -44,7 +44,7 @@ if ($_POST["action"] == 'register') {
     // Load Composer's autoloader
     require 'library/vendor/autoload.php';
     try {
-        $sql = "INSERT INTO student (Full_Name, Matric_Number, Email, Password_, Activation_Hash, Verified, College, Faculty)
+        $sql = "INSERT INTO student (Full_Name, Matric_Number, Email, Password_, Activation_Hash, Verified, College_ID, Faculty)
         VALUES (:fullName, :matricNumber, :email, :password, :Activation_Hash, :verifiyStatus, :college, :faculty)";
         $stmt = $connection->prepare($sql);
 
@@ -105,7 +105,7 @@ if ($_POST["action"] == 'register') {
                 below to verify your email address.
             </p>
 
-            <form method="POST" action="http://localhost/carsgit/index.php">
+            <form method="POST" action="http://localhost/index.php">
                 <input type="hidden" name="action" value="verifying" >
                 <input type="hidden" name="email" value="' . sanitizingData($email) . '" >
                 <input type="hidden" name="Activation_Hash" value="' . $Activation_Hash . '" >

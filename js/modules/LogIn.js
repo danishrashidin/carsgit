@@ -87,7 +87,7 @@ export default class LogIn {
       })
       .then((logInError) => {
         if (logInError.status == "success" && logInError.verified == 1) {
-          window.location.href = "index.php?action=login-success&email=" + this.emailInputBox.value;
+          window.location.href = "dashboard.php?action=login-success&email=" + this.emailInputBox.value;
         } else if (logInError.status == "failed") {
           this.logInButton.innerHTML = `Log In`;
           if (logInError.emailError) {

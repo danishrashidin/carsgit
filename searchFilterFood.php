@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             $found_res = [];
 
             $sql8 = "SELECT restaurant.Restaurant_ID,restaurant.Restaurant_Name,food.Food_Name FROM food INNER JOIN restaurant ON restaurant.Restaurant_ID = food.Restaurant_ID ORDER BY food.Food_Name";
-            $result8 = $connectionString->query($sql8);
+            $result8 = $connection->query($sql8);
             while ($row = $result8->fetch_array()) {
                 $res_id = $row['Restaurant_ID'];
                 $res_name = $row['Restaurant_Name'];
@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
 
             // $sql9 = "SELECT * FROM restaurant";
-            // $result9 = $connectionString->query($sql9);
+            // $result9 = $connection->query($sql9);
             // while ($res = $result9->fetch_array()) {
             //     $res_id = $res['Restaurant_ID'];
             //     $res_name = $res['Restaurant_Name'];
@@ -81,5 +81,5 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     }
 }
 
-$connectionString->close();
+$connection->close();
 ?>

@@ -64,18 +64,18 @@
     </div>
     <?php
     include_once "config.php";
-    $student_id = 1; //assume 1st;
+    $student_id = $_SESSION['Student_ID'];
     date_default_timezone_set("Asia/Kuala_Lumpur");
     $today = date("Y/m/d");
 
     $sql = "SELECT Count(Food_ID), Order_No FROM foodorder WHERE Student_ID = $student_id and Order_Date='$today' and Order_Status='Order' GROUP BY Order_No ORDER BY Order_No DESC";
-    $result = $connectionString->query($sql);
+    $result = $connection->query($sql);
     while ($row = $result->fetch_array()) {
       $n = $row['Count(Food_ID)'];
       $order_no = $row['Order_No'];
 
       $sql2 = "SELECT restaurant.Restaurant_Name FROM (foodorder INNER JOIN food ON food.Food_ID = foodorder.Food_ID) INNER JOIN restaurant ON restaurant.Restaurant_ID = food.restaurant_ID WHERE Order_No = '$order_no' ORDER BY Order_ID";
-      $result2 = $connectionString->query($sql2);
+      $result2 = $connection->query($sql2);
       while ($res = $result2->fetch_array()) {
         $res_name = $res['Restaurant_Name'];
       }
@@ -91,7 +91,7 @@
 
           <?php
           $sql3 = "SELECT food.Food_Name,foodorder.Quantity,foodorder.Total_Price FROM foodorder INNER JOIN food ON food.Food_ID = foodorder.Food_ID WHERE Order_No = '$order_no' ORDER BY Order_ID";
-          $result3 = $connectionString->query($sql3);
+          $result3 = $connection->query($sql3);
           $total_price = 0;
           while ($order = $result3->fetch_array()) {
             $food_name = $order['Food_Name'];
@@ -115,7 +115,7 @@
 
     <?php
     }
-    // $connectionString->close();
+    // $connection->close();
     ?>
 
     <p style="text-align: center; color: rgb(119, 119, 119);">You've seen all your orders.</p>
