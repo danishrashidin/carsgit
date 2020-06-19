@@ -415,12 +415,14 @@ export default class SignUp {
     targetedList.parentNode.parentNode.querySelector(".dropdown-label").classList.add("activated");
     targetedList.parentNode.parentNode.querySelector("span").innerText = targetedList.innerText;
     targetedList.parentNode.parentNode.querySelector("span").style.display = "inline";
-    targetedList.parentNode.parentNode.querySelector("input").setAttribute("value", targetedList.innerText);
-    if (!targetedList.parentNode.parentNode.querySelector(".fas")) {
+    if (targetedList.parentNode.classList.contains("college")) {
+      targetedList.parentNode.parentNode.querySelector("input").setAttribute("value", targetedList.getAttribute("id"));
+    } else {
+      targetedList.parentNode.parentNode.querySelector("input").setAttribute("value", targetedList.innerText);
+    }
+    if (!targetedList.parentNode.parentNode.querySelector(".fa-check-circle")) {
       setTimeout(function () {
-        targetedList.parentNode.parentNode
-          .querySelector(".dropdown-label")
-          .insertAdjacentHTML("beforeend", `&nbsp <i class="fas fa-check-circle"></i>`);
+        targetedList.parentNode.parentNode.querySelector(".fas").classList.add("fa-check-circle");
       }, 200);
     }
     targetedList.parentNode.parentNode.style.cssText = "border:1.5px solid green;color:black;font-weight:bold";
@@ -755,23 +757,24 @@ export default class SignUp {
                   </div>
                   <label for="residential-college" class="dropdown-label dropdown1 --reset">
                     Residential College
+                    &nbsp<i class="fas "></i>
                   </label>
                     <input type="text" name="college" required 
                     style="border:none; outline: none; background: red; position: absolute; top:13px; left:10px; opacity: 0; pointer-events: none;"/>
-                    <ul class="dropdown-menu">
-                      <li id="1">ULK</li>
-                      <li id="2">1st Residential College</li>
-                      <li id="3">2nd Residential College</li>
-                      <li id="4">3rd Residential College</li>
-                      <li id="5">4th Residential College</li>
-                      <li id="6">5th Residential College</li>
-                      <li id="7">6th Residential College</li>
-                      <li id="8">7th Residential College</li>
-                      <li id="9">8th Residential College</li>
-                      <li id="10">9th Residential College</li>
-                      <li id="11">10th Residential College</li>
-                      <li id="12">11th Residential College</li>
-                      <li id="13">12th Residential College</li>
+                    <ul class="dropdown-menu college">
+                      <li id="13">ULK</li>
+                      <li id="1">Astar Residential College</li>
+                      <li id="2">Tuanku Bahiyah Residential College</li>
+                      <li id="3">Tuanku Kursiah Residential College</li>
+                      <li id="4">Bestari Residential College</li>
+                      <li id="5">Dayasari Residential College</li>
+                      <li id="6">Ibnu Sina Residential College</li>
+                      <li id="7">Za'ba Residential College</li>
+                      <li id="8">Kinabalu Residential College</li>
+                      <li id="9">Tun Syed Zahiruddin Residential College</li>
+                      <li id="10">Tun Ahmad Zaidi Residential College</li>
+                      <li id="11">Ungku Aziz Residential College</li>
+                      <li id="12">Raja Dr. Nazrin Shah Residential College</li>
                     </ul>
                   </div>
                 </div>
@@ -781,8 +784,9 @@ export default class SignUp {
                       <span style="display: none;"></span>
                     </div>
                     <label for="residential-college" class="dropdown-label dropdown2 --reset">
-                      Faculty</label
-                    >
+                      Faculty
+                      &nbsp<i class="fas "></i>
+                    </label>
                     <input type="text" name="faculty" required                     
                     style="border:none; outline: none; background: red; position: absolute; top:13px; left:10px; opacity: 0; pointer-events: none;"/>
                     <ul class="dropdown-menu">

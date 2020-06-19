@@ -1,60 +1,60 @@
 <?php
-include_once("configReport.php");
+include_once "configReport.php";
 
-if ($_SERVER["REQUEST_METHOD"]==="POST") {
-  if(isset($_POST['update'])){
-    $newCollege=$_POST['collegeName'];
-    $newProb=$_POST['collegeProblem'];
-    $newDes=$_POST['message1'];
-    $newLoc=$_POST['hd_location'];
-    $newFile=$_POST['uploadedfile'];
-    $idid=$_POST['ReportID'];
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if (isset($_POST['update'])) {
+        $newCollege = $_POST['collegeName'];
+        $newProb = $_POST['collegeProblem'];
+        $newDes = $_POST['message1'];
+        $newLoc = $_POST['hd_location'];
+        $newFile = $_POST['uploadedfile'];
+        $idid = $_POST['ReportID'];
 
-    mysqli_query($mysqli, "UPDATE report SET Residential_College='$newCollege', 
-    Problem_Type='$newProb', Problem_Details='$newDes', 
+        mysqli_query($mysqli, "UPDATE report SET Residential_College='$newCollege',
+    Problem_Type='$newProb', Problem_Details='$newDes',
     Problem_Location='$newLoc', File_Upload='$newFile'
-    WHERE ReportID='$idid'"); 
-    
-    header("Location:reportIndex.php");
-    exit();
-  }
+    WHERE ReportID='$idid'");
+
+        header("Location:reportIndex.php");
+        exit();
+    }
 }
 
-if ($_SERVER["REQUEST_METHOD"]==="GET") {
-$editID=$_GET['id'];
-$res = mysqli_query($mysqli, "SELECT * FROM report WHERE ReportID='$editID' "); 
+if ($_SERVER["REQUEST_METHOD"] === "GET") {
+    $editID = $_GET['id'];
+    $res = mysqli_query($mysqli, "SELECT * FROM report WHERE ReportID='$editID' ");
 
-$result = mysqli_fetch_array($res);
+    $result = mysqli_fetch_array($res);
 
-$ReportID = $result['ReportID'];    
-$collegeName=$result['Residential_College'];
-$collegeProblem=$result['Problem_Type'];
-$message1=$result['Problem_Details'];    
-$hd_location=$result['Problem_Location'];
-$uploadedfile=$result['File_Upload'];
+    $ReportID = $result['ReportID'];
+    $collegeName = $result['Residential_College'];
+    $collegeProblem = $result['Problem_Type'];
+    $message1 = $result['Problem_Details'];
+    $hd_location = $result['Problem_Location'];
+    $uploadedfile = $result['File_Upload'];
 
     // checking empty fields
-    // if(empty($collegeName) || empty($collegeProblem) || empty($message1) || empty($hd_location)) {                
+    // if(empty($collegeName) || empty($collegeProblem) || empty($message1) || empty($hd_location)) {
     //     if(empty($collegeName)){
     //         echo "<font color='red'>Residential College is empty.</font><br/>";
     //     }
-        
+
     //     if(empty($collegeProblem)) {
     //         echo "<font color='red'>College Problem field is empty.</font><br/>";
     //     }
-        
+
     //     if(empty($message1)) {
     //         echo "<font color='red'>Problem Details field is empty.</font><br/>";
     //     }
     //     if(empty($hd_location)) {
     //         echo "<font color='red'>Problem Location field is empty.</font><br/>";
     //     }
-    // } else {    
-        // $result = mysqli_query($mysqli, "UPDATE report SET Residential College='$collegeName',Problem Type='$collegeProblem', Problem Details='$message1', Problem Location='$hd_location', File='$fileuploaded' WHERE ReportID=$ReportID");
-        
-        // header("Location: reportIndex.php");
+    // } else {
+    // $result = mysqli_query($mysqli, "UPDATE report SET Residential College='$collegeName',Problem Type='$collegeProblem', Problem Details='$message1', Problem Location='$hd_location', File='$fileuploaded' WHERE ReportID=$ReportID");
+
+    // header("Location: reportIndex.php");
     // }
-?>
+    ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,7 +68,7 @@ $uploadedfile=$result['File_Upload'];
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
   <link rel="stylesheet" href="css/report.css" />
   <link rel="stylesheet" type="text/css" href="css/styles.css" />
-  
+
     <!-- Fonting -->
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@800&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet" />
@@ -99,25 +99,25 @@ $uploadedfile=$result['File_Upload'];
             <div class="dropdown" tabindex="1">
               <label for="residential-college" class="dropdown-label"></label>
               <div class="select">
-                <span style="display: none; position: absolute; top: -5px; left: 10px;"><?php echo $collegeName;?></span>
+                <span style="display: none; position: absolute; top: -5px; left: 10px;"><?php echo $collegeName; ?></span>
               </div>
-              <input type="text" id="CollegeName" value="<?php echo $collegeName;?>" name="collegeName" class="CollegeName" required style="border:none; outline: none; 
-            background: red; position: absolute; 
-            top:13px; left:10px; opacity: 0; 
+              <input type="text" id="CollegeName" value="<?php echo $collegeName; ?>" name="collegeName" class="CollegeName" required style="border:none; outline: none;
+            background: red; position: absolute;
+            top:13px; left:10px; opacity: 0;
             pointer-events: none;" />
-              <ul class="dropdown-menu">
-                <li id="1">1st Residential College</li>
-                <li id="2">2nd Residential College</li>
-                <li id="3">3rd Residential College</li>
-                <li id="4">4th Residential College</li>
-                <li id="5">5th Residential College</li>
-                <li id="6">6th Residential College</li>
-                <li id="7">7th Residential College</li>
-                <li id="8">8th Residential College</li>
-                <li id="9">9th Residential College</li>
-                <li id="10">10th Residential College</li>
-                <li id="11">11th Residential College</li>
-                <li id="12">12th Residential College</li>
+              <ul class="dropdown-menu college">
+                      <li id="1">Astar Residential College</li>
+                      <li id="2">Tuanku Bahiyah Residential College</li>
+                      <li id="3">Tuanku Kursiah Residential College</li>
+                      <li id="4">Bestari Residential College</li>
+                      <li id="5">Dayasari Residential College</li>
+                      <li id="6">Ibnu Sina Residential College</li>
+                      <li id="7">Za'ba Residential College</li>
+                      <li id="8">Kinabalu Residential College</li>
+                      <li id="9">Tun Syed Zahiruddin Residential College</li>
+                      <li id="10">Tun Ahmad Zaidi Residential College</li>
+                      <li id="11">Ungku Aziz Residential College</li>
+                      <li id="12">Raja Dr. Nazrin Shah Residential College</li>
               </ul>
             </div>
           </div>
@@ -130,13 +130,13 @@ $uploadedfile=$result['File_Upload'];
             <div class="dropdown" tabindex="1">
               <label for="residential-college" class="dropdown-label"></label>
               <div class="select">
-                <span style="display: none; position: absolute; top: -5px; left: 10px;"><?php echo $collegeProblem;?></span>
+                <span style="display: none; position: absolute; top: -5px; left: 10px;"><?php echo $collegeProblem; ?></span>
               </div>
-              <input type="text" id="CollegeProblem" 
-              value="<?php echo $collegeProblem;?>" name="collegeProblem" 
-              class="CollegeProblem" required style="border:none; outline: none; 
-              background: red; position: absolute; 
-              top:13px; left:10px; opacity: 0; 
+              <input type="text" id="CollegeProblem"
+              value="<?php echo $collegeProblem; ?>" name="collegeProblem"
+              class="CollegeProblem" required style="border:none; outline: none;
+              background: red; position: absolute;
+              top:13px; left:10px; opacity: 0;
               pointer-events: none;" />
               <ul class="dropdown-menu">
                 <li id="1">ACCOMMODATION FEE</li>
@@ -211,8 +211,8 @@ $uploadedfile=$result['File_Upload'];
             <label for="exampleInputPassword1" class="">Problem Details :</label>
           </div>
           <div class="col-9">
-            <textarea name="message1" value="<?php echo $message1;?>" rows="3" cols="60" class="form-control ProblemDetails" id="message1"
-              placeholder="Please describe your problem" required=""><?php echo $message1;?></textarea>
+            <textarea name="message1" value="<?php echo $message1; ?>" rows="3" cols="60" class="form-control ProblemDetails" id="message1"
+              placeholder="Please describe your problem" required=""><?php echo $message1; ?></textarea>
           </div>
         </div>
         <div class="row">
@@ -220,8 +220,8 @@ $uploadedfile=$result['File_Upload'];
             <label class="">Problem Location :</label>
           </div>
           <div class="col-9">
-            <textarea name="hd_location" value="<?php echo $hd_location;?>" rows="3" cols="60" class="form-control ProblemLocation" id="hd_location"
-              placeholder="Please describe your problem location" required=""><?php echo $hd_location;?></textarea>
+            <textarea name="hd_location" value="<?php echo $hd_location; ?>" rows="3" cols="60" class="form-control ProblemLocation" id="hd_location"
+              placeholder="Please describe your problem location" required=""><?php echo $hd_location; ?></textarea>
           </div>
         </div>
         <div class="row">
@@ -229,13 +229,13 @@ $uploadedfile=$result['File_Upload'];
             <label for="exampleInputFile" class="">Upload File :</label>
           </div>
           <div class="col-9">
-            <input name="uploadedfile" value="<?php echo $uploadedfile;?>" type="file" id="uploadedfile" class="fileUpload" />
+            <input name="uploadedfile" value="<?php echo $uploadedfile; ?>" type="file" id="uploadedfile" class="fileUpload" />
             <p class="help-block">
               Note: only jpg , gif , png ,pdf , doc , docx and max size 5 MB.
             </p>
           </div>
         </div>
-        <input type="hidden" name="ReportID" value=<?php echo $editID;?>>
+        <input type="hidden" name="ReportID" value=<?php echo $editID; ?>>
         <div class="btn-group">
         <button class="btn" id="submitBtn" value="Update" name="update"><i class="fa fa-check" type="submit" value="Update" name="update"></i> Update</button>
         </div>
@@ -257,5 +257,5 @@ $uploadedfile=$result['File_Upload'];
   <script src="js/edit.js"></script>
 </body>
 </html>
-<?php 
+<?php
 }

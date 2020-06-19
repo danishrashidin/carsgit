@@ -91,19 +91,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             background: red; position: absolute;
             top:13px; left:10px; opacity: 0;
             pointer-events: none;" />
-              <ul class="dropdown-menu">
-                <li id="1">1st Residential College</li>
-                <li id="2">2nd Residential College</li>
-                <li id="3">3rd Residential College</li>
-                <li id="4">4th Residential College</li>
-                <li id="5">5th Residential College</li>
-                <li id="6">6th Residential College</li>
-                <li id="7">7th Residential College</li>
-                <li id="8">8th Residential College</li>
-                <li id="9">9th Residential College</li>
-                <li id="10">10th Residential College</li>
-                <li id="11">11th Residential College</li>
-                <li id="12">12th Residential College</li>
+              <ul class="dropdown-menu college">
+                      <li id="1">Astar Residential College</li>
+                      <li id="2">Tuanku Bahiyah Residential College</li>
+                      <li id="3">Tuanku Kursiah Residential College</li>
+                      <li id="4">Bestari Residential College</li>
+                      <li id="5">Dayasari Residential College</li>
+                      <li id="6">Ibnu Sina Residential College</li>
+                      <li id="7">Za'ba Residential College</li>
+                      <li id="8">Kinabalu Residential College</li>
+                      <li id="9">Tun Syed Zahiruddin Residential College</li>
+                      <li id="10">Tun Ahmad Zaidi Residential College</li>
+                      <li id="11">Ungku Aziz Residential College</li>
+                      <li id="12">Raja Dr. Nazrin Shah Residential College</li>
               </ul>
             </div>
           </div>
