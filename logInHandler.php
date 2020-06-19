@@ -2,7 +2,7 @@
 
 include_once 'pdo.php';
 
-$response = array("status" => "", "emailError" => "", "generalError" => "", "verified" => 0);
+$response = array("status" => "", "emailError" => "", "generalError" => "", "verified" => 0, "userId" => 0);
 
 function sanitizingData($data)
 { // Removes all PHP and HTML tags via strip_tags()
@@ -35,6 +35,7 @@ if (!$data) {
     } else {
         $response['status'] = 'success';
         $response['verified'] = $data['Verified'];
+        $response['userId'] = $data['Student_ID'];
         print_r(json_encode($response));
 
     }

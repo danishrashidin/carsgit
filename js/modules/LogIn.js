@@ -23,6 +23,8 @@ export default class LogIn {
       this.notificationTitle = document.querySelector(".notification-title");
       this.notificationMessage = document.querySelector(".notification-message");
       this.modalVerify = document.querySelector(".shadowBox.verify");
+      this.action = document.querySelector(".log-in-success-action");
+      this.userId = document.querySelector(".log-in-success-id");
       this.typed;
       this.emailTippy;
       this.declareTooltips();
@@ -87,7 +89,10 @@ export default class LogIn {
       })
       .then((logInError) => {
         if (logInError.status == "success" && logInError.verified == 1) {
-          window.location.href = "index.php?action=login-success&email=" + this.emailInputBox.value;
+          this.action.value = "success";
+          this.userId.value = logInError.userId;
+          this.logInForm.submit();
+          // window.location.href = "index.php?action=login-success&email=" + this.emailInputBox.value;
         } else if (logInError.status == "failed") {
           this.logInButton.innerHTML = `Log In`;
           if (logInError.emailError) {
@@ -267,7 +272,7 @@ export default class LogIn {
       <div class="shadowBox log-in container-fluid animate__animated ">
         <div class="row no-gutters">
           <div class="col-sm-7 log-in-column-1">
-            <form action="#" class="log-in-form" method="POST">
+            <form action="dashboard.php" class="log-in-form" method="POST">
               <div class="wrapper-up">
                 <h1 id="log-in-title">Welcome Back</h1>
                 <div id="typed-strings">
@@ -314,6 +319,8 @@ export default class LogIn {
                 <a tabindex="-1" class="side-sign-up">Sign Up</a>
                 <a href="#" class="side-forgot-password">Forgot Password</a>
               </div>
+              <input type="hidden" class="log-in-success-action" name="action" value="">
+              <input type="hidden" class="log-in-success-id" name="id" value="">
             </form>
           </div>
           <div class="col-sm-5 log-in-column-2">

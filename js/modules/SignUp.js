@@ -157,6 +157,7 @@ export default class SignUp {
           return response.text();
         })
         .then((dataReceived) => {
+          console.log(dataReceived);
           if (dataReceived == "Successful") {
             this.closeSignUpOverlay("register");
             this.signUpButton.innerHTML = "Submit";

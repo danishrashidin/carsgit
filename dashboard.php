@@ -2,36 +2,36 @@
 
 $pagename = "";
 if (isset($_GET['page'])) {
-  $name = $_GET['page'];
-  switch ($name) {
-    case 'dashboard':
-      $pagename = "Dashboard";
-      break;
-    case 'activities':
-      $pagename = "Activities";
-      break;
-    case 'food':
-      $pagename = "Food";
-      break;
-    case 'acommodation':
-      $pagename = "Acommodation";
-      break;
-    case 'report':
-      $pagename = "Report";
-      break;
-    case 'profile':
-      $pagename = "Your Profile";
-      break;
-    default:
-      $pagename = "Dashboard";
-  }
+    $name = $_GET['page'];
+    switch ($name) {
+        case 'dashboard':
+            $pagename = "Dashboard";
+            break;
+        case 'activities':
+            $pagename = "Activities";
+            break;
+        case 'food':
+            $pagename = "Food";
+            break;
+        case 'acommodation':
+            $pagename = "Acommodation";
+            break;
+        case 'report':
+            $pagename = "Report";
+            break;
+        case 'profile':
+            $pagename = "Your Profile";
+            break;
+        default:
+            $pagename = "Dashboard";
+    }
 }
 
 // Get session variable
 if (isset($_SESSION["email"])) {
-  $identifier = $_SESSION["userEmail"];
+    $identifier = $_SESSION["userEmail"];
 } else {
-  //die("Please login");
+    //die("Please login");
 }
 
 // DB connection
@@ -42,9 +42,11 @@ $dbname = "test";
 
 $connect = new mysqli($servername, $username, $password, $dbname);
 
-if ($connect->connect_error) { die("Failed"); } $student_data = 'SELECT * FROM
-student WHERE Email="wif180040@siswa.um.edu.my"'; $result =
-$connect->query($student_data); ?>
+if ($connect->connect_error) {die("Failed");}
+$student_data = 'SELECT * FROM
+student WHERE Email="wif180040@siswa.um.edu.my"';
+$result =
+$connect->query($student_data);?>
 
 <!DOCTYPE html>
 <html>
@@ -111,13 +113,13 @@ $connect->query($student_data); ?>
     ></script>
     <script type="text/javascript">
       <?php
-      echo 'window.addEventListener("DOMContentLoaded", function() {
+echo 'window.addEventListener("DOMContentLoaded", function() {
         (function($) {
           document.getElementById("' . $name . '-button").classList.add("active");
           feather.replace();
         })(jQuery)
       })';
-      ?>
+?>
   </script>
   </head>
 
@@ -228,24 +230,24 @@ $connect->query($student_data); ?>
             </div>
             <div class="fragment">
             <?php
-            if (isset($_GET['page'])) {
-              $display = $name . '.php';
-              if ($name == "dashboard") {
-              } else if (file_exists($display)) {
-                include_once($display);
-              } else {
-                echo $display . " does not exist";
-              }
-            } else {
-              echo "No page binded";
-            }
-            ?>
+if (isset($_GET['page'])) {
+    $display = $name . '.php';
+    if ($name == "dashboard") {
+    } else if (file_exists($display)) {
+        include_once $display;
+    } else {
+        echo $display . " does not exist";
+    }
+} else {
+    echo "No page binded";
+}
+?>
             </div>
           </div>
         </div>
       </div>
     </main>
-  
-    
+
+
   </body>
 </html>
