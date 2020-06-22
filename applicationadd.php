@@ -2,6 +2,7 @@
 $Student_ID = '1';
 $flag = false;
 
+include_once "config.php";
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (isset($_POST['add'])) {
 
@@ -30,16 +31,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
           $sql = "INSERT INTO accomodation(Initial_Date,Final_Date,Duration,Total_Cost,Reason) VALUES('$Initial_Date','$Final_Date','$Duration','$Total_Cost','$Reason')";
 
-            $result = $mysqli->query($sql);
+            $result = $connection->query($sql);
             $flag = true;
 
         }
     }
 }
 
-include_once "applicationconfig.php";
 $sql = "SELECT * FROM student WHERE Student_ID = '$Student_ID'";
-$result = $mysqli->query($sql);
+$result = $connection->query($sql);
 $name =  $result->fetch_array();
 
 ?>

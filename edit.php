@@ -1,5 +1,5 @@
 <?php
-include_once "configReport.php";
+include_once "config.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (isset($_POST['update'])) {
@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $newFile = $_POST['uploadedfile'];
         $idid = $_POST['ReportID'];
 
-        mysqli_query($mysqli, "UPDATE report SET Residential_College='$newCollege',
+        mysqli_query($connection, "UPDATE report SET Residential_College='$newCollege',
     Problem_Type='$newProb', Problem_Details='$newDes',
     Problem_Location='$newLoc', File_Upload='$newFile'
     WHERE ReportID='$idid'");
@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
     $editID = $_GET['id'];
-    $res = mysqli_query($mysqli, "SELECT * FROM report WHERE ReportID='$editID' ");
+    $res = mysqli_query($connection, "SELECT * FROM report WHERE ReportID='$editID' ");
 
     $result = mysqli_fetch_array($res);
 
@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
     //         echo "<font color='red'>Problem Location field is empty.</font><br/>";
     //     }
     // } else {
-    // $result = mysqli_query($mysqli, "UPDATE report SET Residential College='$collegeName',Problem Type='$collegeProblem', Problem Details='$message1', Problem Location='$hd_location', File='$fileuploaded' WHERE ReportID=$ReportID");
+    // $result = mysqli_query($connection, "UPDATE report SET Residential College='$collegeName',Problem Type='$collegeProblem', Problem Details='$message1', Problem Location='$hd_location', File='$fileuploaded' WHERE ReportID=$ReportID");
 
     // header("Location: reportIndex.php");
     // }

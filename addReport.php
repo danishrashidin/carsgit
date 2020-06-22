@@ -4,7 +4,7 @@ $flag = false;
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (isset($_POST['add'])) {
-        include_once "configReport.php";
+        include_once "config.php";
         $collegeName = $_POST['collegeName'];
         $collegeProblem = $_POST['collegeProblem'];
         $message1 = $_POST['message1'];
@@ -32,8 +32,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $sql = "INSERT INTO report(Residential_College, Problem_Type, Problem_Details, Problem_Location, File_Upload )
         VALUES('$collegeName','$collegeProblem','$message1','$hd_location','$uploadedfile')";
 
-            $mysqli->query($sql);
-            $result = $mysqli->query("INSERT INTO report(Residential College, Problem Type, Problem Details, Problem Location, File ) VALUES('$collegeName','$collegeProblem','$message1','$hd_location','$uploadedfile')");
+            $connection->query($sql);
+            $result = $connection->query("INSERT INTO report(Residential College, Problem Type, Problem Details, Problem Location, File ) VALUES('$collegeName','$collegeProblem','$message1','$hd_location','$uploadedfile')");
             $flag = true;
         }
     }

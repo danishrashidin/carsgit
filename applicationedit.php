@@ -1,14 +1,14 @@
 <?php
 
-include_once("applicationconfig.php");
+include_once("config.php");
 
 if(isset($_POST['update']))
 {	
 	
-	$id = mysqli_real_escape_string($mysqli, $_POST['id']);	
-	$name = mysqli_real_escape_string($mysqli, $_POST['name']);
-	$age = mysqli_real_escape_string($mysqli, $_POST['age']);
-	$email = mysqli_real_escape_string($mysqli, $_POST['email']);	
+	$id = mysqli_real_escape_string($connection, $_POST['id']);	
+	$name = mysqli_real_escape_string($connection, $_POST['name']);
+	$age = mysqli_real_escape_string($connection, $_POST['age']);
+	$email = mysqli_real_escape_string($connection, $_POST['email']);	
 	
 
 	if(empty($name) || empty($age) || empty($email)) {	
@@ -27,7 +27,7 @@ if(isset($_POST['update']))
 	} else {	
 		//Step 3. Execute the SQL query.
 		//updating the table
-		$result = mysqli_query($mysqli, "UPDATE users SET name='$name',age='$age',email='$email' WHERE id=$id");
+		$result = mysqli_query($connection, "UPDATE users SET name='$name',age='$age',email='$email' WHERE id=$id");
 		
 		//redirectig to the display page. In our case, it is index.php
 		header("Location: index.php");
@@ -41,7 +41,7 @@ if(isset($_POST['update']))
 $id = $_GET['id'];
 
 //selecting data associated with this particular id
-$result = mysqli_query($mysqli, "SELECT * FROM users WHERE id=$id");
+$result = mysqli_query($connection, "SELECT * FROM users WHERE id=$id");
 
 while($res = mysqli_fetch_array($result))
 {

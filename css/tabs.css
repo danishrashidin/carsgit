@@ -35,9 +35,11 @@ body {font-family: Arial;}
   color : #f6f6f6;
 }
 
-.container-md{
+.container-fluid{
     height: 1000px;
     box-shadow: 5px 5px 8px #888888;
+    background-color:white;
+    border-radius:1rem
 }
 
 table {
