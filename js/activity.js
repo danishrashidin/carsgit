@@ -19,34 +19,6 @@ let cancelSuccessMessage = document.querySelector(".fs-content.--cancelRegister"
 let currentRegisterButton;
 let currentCancelRegistrationButton;
 
-// registerPopUp.addEventListener("click", () => {
-//   console.log(currentRegisterButton);
-//   if (currentRegisterButton) {
-//     console.log("register: " + currentRegisterButton.parentNode.parentNode.parentNode);
-//   }
-// });
-
-// cancelRegisterPopUp.addEventListener("click", () => {
-//   console.log(currentCancelRegistrationButton);
-//   if (currentCancelRegistrationButton) {
-//     console.log("cancel: " + currentCancelRegistrationButton.parentNode.parentNode.parentNode);
-//   }
-// });
-
-window.addEventListener("click", (e) => {
-  console.log(currentRegisterButton);
-  console.log(currentCancelRegistrationButton);
-  if (currentRegisterButton) {
-    console.log("register: ");
-    console.log(currentRegisterButton.parentNode.parentNode.parentNode);
-  }
-
-  if (currentCancelRegistrationButton) {
-    console.log("cancel: ");
-    console.log(currentCancelRegistrationButton.parentNode.parentNode.parentNode);
-  }
-});
-
 buttonRegister.forEach((eachButton) => {
   eachButton.addEventListener("click", () => {
     registerPopUp.style.display = "block";
@@ -180,7 +152,10 @@ buttonCancelRegistration.addEventListener("click", () => {
               currentRegisterButton = button;
             });
           })(registerButton);
-          currentCancelRegistrationButton.parentNode.parentNode.parentNode.querySelector(".status").innerHTML = "";
+          currentCancelRegistrationButton.parentNode.parentNode.parentNode.querySelector(".status").innerHTML =
+            "Available";
+          currentCancelRegistrationButton.parentNode.parentNode.parentNode.querySelector(".status").style.background =
+            "#00df89";
           currentCancelRegistrationButton.remove();
           currentCancelRegistrationButton = null;
           buttonCancelRegistration.innerHTML = "Next";

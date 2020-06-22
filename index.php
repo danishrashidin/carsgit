@@ -20,6 +20,12 @@ if (isset($_GET['page'])) {
 } else {
     $phpfile = 'home.php';
 }
+
+if (isset($_GET['logout'])){
+    if($_GET['logout']=='success'){
+        session_destroy();
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -65,9 +71,18 @@ if (isset($_GET['page'])) {
                 <li class="nav-item">
                     <a href="index.php?page=activity" class="nav-link">ACTIVITIES</a>
                 </li>
-                <button id="button-log-in" type="button" class="btn btn-outline-light px-4 py-2">
-                    LOGIN
-                </button>
+
+                <?php
+                if(!isset($_SESSION["Student_ID"]) || isset($_GET['logout'])){
+                    echo '<button id="button-log-in" type="button" class="btn btn-outline-light px-4 py-2">';
+                    echo 'LOGIN';
+                    echo '</button>';
+                } else {
+                    echo '<button id="button-dashboard" type="button" class="btn btn-outline-light px-4 py-2" onclick="document.location=\'dashboard.php\'">';
+                    echo 'DASHBOARD';
+                    echo '</button>';
+                }
+                ?>
             </ul>
         </div>
     </nav>

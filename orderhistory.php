@@ -56,7 +56,7 @@
 
     <?php
     include_once "config.php";
-    $student_id = 1; //assume 1st;
+    $student_id = $_SESSION['Student_ID'];
     date_default_timezone_set("Asia/Kuala_Lumpur");
     $today = date("Y/m/d");
     $intToday = intval(str_replace("/", "", $today));
@@ -65,7 +65,7 @@
     UNION
     SELECT Order_Date FROM foodorder WHERE Order_Date>0 AND Order_Date<$intToday
     ORDER BY Date DESC";
-    $result5 = $connectionString->query($sql5);
+    $result5 = $connection->query($sql5);
     while ($date = $result5->fetch_array()) {
       $union_date = str_replace('-', '/', $date['Date']);
       $intDate = intval(str_replace("/", "", $union_date));
@@ -84,7 +84,7 @@
 
       <?php
       $sql = "SELECT Count(Food_ID), Order_No FROM foodorder WHERE Student_ID = $student_id and (Pickup_Date = '$union_date' OR Order_Date = '$union_date') GROUP BY Order_No ORDER BY Order_No";
-      $result = $connectionString->query($sql);
+      $result = $connection->query($sql);
       while ($row = $result->fetch_array()) {
         $n = $row['Count(Food_ID)'];
         $order_no = $row['Order_No'];
@@ -92,7 +92,7 @@
       ?>
 
         <?php $sql2 = "SELECT restaurant.Restaurant_Name,foodorder.Pickup_Date FROM (foodorder INNER JOIN food ON food.Food_ID = foodorder.Food_ID) INNER JOIN restaurant ON restaurant.Restaurant_ID = food.restaurant_ID WHERE Order_No = '$order_no' ORDER BY Order_No";
-        $result2 = $connectionString->query($sql2);
+        $result2 = $connection->query($sql2);
         while ($res = $result2->fetch_array()) {
           $res_name = $res['Restaurant_Name'];
           // $pickup_date = str_replace('-', '/', $res['Pickup_Date']);
@@ -109,7 +109,7 @@
 
             <?php
             $sql3 = "SELECT food.Food_Name,foodorder.Quantity,foodorder.Total_Price FROM foodorder INNER JOIN food ON food.Food_ID = foodorder.Food_ID WHERE Order_No = '$order_no' ORDER BY Order_ID";
-            $result3 = $connectionString->query($sql3);
+            $result3 = $connection->query($sql3);
             $total_price = 0;
             while ($order = $result3->fetch_array()) {
               $food_name = $order['Food_Name'];
