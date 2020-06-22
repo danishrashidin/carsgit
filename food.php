@@ -90,7 +90,7 @@
                             </ul>
                         </div>
                         <div class="overlay">
-                            <a id="menu" href="menu.php?Restaurant_ID=' . $res_id . '"><button class="view_menu" title="Click to view menu">View Menu</button></a>
+                            <a id="menu" href="dashboard.php?page=menu&Restaurant_ID=' . $res_id . '"><button class="view_menu" title="Click to view menu">View Menu</button></a>
                         </div>
                     </div>';
       }
