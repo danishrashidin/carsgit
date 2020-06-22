@@ -1,10 +1,11 @@
-#food-head, #food-body {
+#food-head,
+#food-body {
   font-family: "Manrope", sans-serif;
 }
 
 .main-container {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  background: url(https://images.pexels.com/photos/1565982/pexels-photo-1565982.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940); 
+  background: url(https://images.pexels.com/photos/1565982/pexels-photo-1565982.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
   background-color: #321575;
   /* Used if the image is unavailable */
   opacity: 0.85;
@@ -25,7 +26,7 @@
 /* Style the search box */
 
 .search-container {
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .3), 0 4px 8px 3px rgba(0, 0, 0, .15);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 4px 8px 3px rgba(0, 0, 0, 0.15);
   text-decoration: none;
   background: white;
   padding: 10px 15px;
@@ -42,7 +43,6 @@
   border: none;
   width: 80%;
   outline: none;
-  
 }
 
 /* so that do not float when window is minimized @ use inline block*/

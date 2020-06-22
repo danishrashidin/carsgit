@@ -41,7 +41,6 @@ main {
 }
 
 .row {
-  
   margin: 20px auto 0;
   display: grid;
   grid-template-columns: auto auto;
@@ -52,8 +51,6 @@ main {
   padding-left: 20px;
   padding-right: 20px;
   gap: 2px;
-  
-  
 }
 
 .fancycard {
@@ -92,7 +89,6 @@ main {
   clear: both;
 }
 
-
 .fancycard .menu-content span {
   position: absolute;
   left: 50%;
@@ -109,7 +105,6 @@ main {
   overflow: hidden;
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.2);
   margin: 20px;
-  
 }
 
 .fancycard .menu-content {
@@ -179,45 +174,62 @@ main {
   transform: translateY(-60px);
 }
 
-.card-1 {
-  width: 450px;
-}
-
 .card-1 .wrapper {
   background: url(https://images.pexels.com/photos/34514/spot-runs-start-la.jpg?cs=srgb&dl=athletes-running-on-track-and-field-oval-in-grayscale-34514.jpg&fm=jpg)
     center / cover no-repeat;
   /* max-height: 500px; */
 }
 
-.card-1 .wrapper:hover .menu-content span {
+.card-2 .wrapper {
+  background: url(https://images.pexels.com/photos/2143493/pexels-photo-2143493.jpeg?cs=srgb&dl=people-performing-dragon-dance-2143493.jpg&fm=jpg)
+    center / cover no-repeat;
+  max-height: 500px;
+}
+
+.card-3 .wrapper {
+  background: url(https://images.pexels.com/photos/265940/pexels-photo-265940.jpeg?cs=srgb&dl=catering-celebration-cover-covered-265940.jpg&fm=jpg)
+    center / cover no-repeat;
+  max-height: 500px;
+}
+
+.card-4 .wrapper {
+  background: url(https://images.pexels.com/photos/1714361/pexels-photo-1714361.jpeg?cs=srgb&dl=silhouette-photography-of-people-on-theater-1714361.jpg&fm=jpg)
+    center / cover no-repeat;
+  max-height: 500px;
+}
+
+.cards {
+  width: 450px;
+}
+
+.cards .wrapper:hover .menu-content span {
   transform: translate(-50%, -10px);
   opacity: 1;
 }
 
-.card-1 .header {
+.cards .header {
   color: #fff;
   padding: 1em;
-  
 }
 
-.card-1 .header::before,
-.card-1 .header::after {
+.cards .header::before,
+.cards .header::after {
   content: "";
   display: table;
 }
 
-.card-1 .header::after {
+.cards .header::after {
   clear: both;
 }
 
-.card-1 .header .countdown {
+.cards .header .countdown {
   float: left;
   font-size: 12px;
   top: 0;
   left: 0;
 }
 
-.card-1 .menu-content {
+.cards .menu-content {
   position: absolute;
   top: 0px;
   right: 0px;
@@ -228,12 +240,12 @@ main {
   padding: 0.8em;
 }
 
-.card-1 .menu-content span {
+.cards .menu-content span {
   display: inline-block;
-  text-align: center
+  text-align: center;
 }
 
-.card-1 .menu-content .college{
+.cards .menu-content .college {
   font-weight: 700;
   font-size: 14px;
   text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.18);
@@ -242,7 +254,7 @@ main {
   right: -20px;
 }
 
-.card-1 .menu-status {
+.cards .menu-status {
   position: absolute;
   top: 18px;
   right: 60px;
@@ -252,129 +264,32 @@ main {
   color: #fff;
   padding: 0.8em;
   border-radius: 5px;
-
 }
 
-.card-1 .menu-status span {
+.cards .menu-status span {
   display: block;
-  text-align: center  
+  text-align: center;
 }
 
-.card-1 .menu-status .status {
+.cards .menu-status .status {
   font-weight: 700;
   font-size: 14px;
   text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.18);
   letter-spacing: 0.5px;
   top: 10px;
   right: -20px;
-  
 }
 
-.card-1 .data {
+.cards .data {
   color: #fff;
   transform: translateY(calc(70px + 4em));
 }
 
-.card-1 .title a {
-  color: #fff;
-  
-}
-
-.card-1 .button {
-  display: block;
-  width: 100px;
-  margin: 2em auto 1em;
-  text-align: center;
-  font-size: 12px;
-  color: #fff;
-  line-height: 1;
-  position: relative;
-  font-weight: 700;
-
-}
-
-.card-1 .button::after {
-  content: "\2192";
-  opacity: 0;
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translate(0, -50%);
-  transition: all 0.3s;
-}
-.card-1 .button:hover::after {
-  transform: translate(5px, -50%);
-  opacity: 1;
-}
-
-.card-2 {
-  width: 450px;
-}
-
-.card-2 .wrapper {
-  background: url(https://images.pexels.com/photos/2143493/pexels-photo-2143493.jpeg?cs=srgb&dl=people-performing-dragon-dance-2143493.jpg&fm=jpg)
-    center / cover no-repeat;
-  max-height: 500px;
-}
-.card-2 .wrapper:hover .menu-content span {
-  transform: translate(-50%, -10px);
-  opacity: 1;
-}
-.card-2 .header {
-  color: #fff;
-  padding: 1em;
-  top: 0;
-  left: 0;
-  float: left;
-}
-.card-2 .header::before,
-.card-2 .header::after {
-  content: "";
-  display: table;
-}
-.card-2 .header::after {
-  clear: both;
-}
-.card-2 .header .countdown {
-  float: left;
-  font-size: 12px;
-  top: 0;
-  left: 0;
-}
-.card-2 .menu-content {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  background-color: #77d7b9;
-  width: 50px;
-  height: 100px;
-  color: #fff;
-  padding: 0.8em;
-}
-
-
-.card-2 .menu-content span {
-  display: block;
-  text-align: center
-}
-
-.card-2 .menu-content .college{
-  font-weight: 700;
-  font-size: 14px;
-  text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.18);
-  letter-spacing: 0.5px;
-  top: 15px;
-  right: -20px;
-}
-
-.card-2 .data {
-  color: #fff;
-  transform: translateY(calc(70px + 4em));
-}
-.card-2 .title a {
+.cards .title a {
   color: #fff;
 }
-.card-2 .button {
+
+.cards .button {
   display: block;
   width: 100px;
   margin: 2em auto 1em;
@@ -385,7 +300,8 @@ main {
   position: relative;
   font-weight: 700;
 }
-.card-2 .button::after {
+
+.cards .button::after {
   content: "\2192";
   opacity: 0;
   position: absolute;
@@ -394,189 +310,7 @@ main {
   transform: translate(0, -50%);
   transition: all 0.3s;
 }
-.card-2 .button:hover::after {
-  transform: translate(5px, -50%);
-  opacity: 1;
-}
-
-.card-3 {
-  width: 450px;
-}
-
-.card-3 .wrapper {
-  background: url(https://images.pexels.com/photos/265940/pexels-photo-265940.jpeg?cs=srgb&dl=catering-celebration-cover-covered-265940.jpg&fm=jpg) center /
-    cover no-repeat;
-  max-height: 500px;
-}
-.card-3 .wrapper:hover .menu-content span {
-  transform: translate(-50%, -10px);
-  opacity: 1;
-}
-.card-3 .header {
-  color: #fff;
-  padding: 1em;
-  top: 0;
-  left: 0;
-  float: left;
-}
-.card-3 .header::before,
-.card-3 .header::after {
-  content: "";
-  display: table;
-}
-.card-3 .header::after {
-  clear: both;
-}
-.card-3 .header .countdown {
-  float: left;
-  font-size: 12px;
-  top: 0;
-  left: 0;
-}
-
-.card-3 .menu-content {
-   position: absolute;
-   top: 0px;
-   right: 0px;
-   background-color: #77d7b9;
-   width: 50px;
-   height: 100px;
-   color: #fff;
-   padding: 0.8em;
-}
-
-.card-3 .menu-content span {
-  display: block;
-  text-align: center
-}
-
-.card-3 .menu-content .college{
-  font-weight: 700;
-   font-size: 14px;
-   text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.18);
-   letter-spacing: 0.5px;
-   top: 15px;
-   right: -20px;
-}
-
-.card-3 .data {
-  color: #fff;
-  transform: translateY(calc(70px + 4em));
-}
-.card-3 .title a {
-  color: #fff;
-}
-.card-3 .button {
-  display: block;
-  width: 100px;
-  margin: 2em auto 1em;
-  text-align: center;
-  font-size: 12px;
-  color: #fff;
-  line-height: 1;
-  position: relative;
-  font-weight: 700;
-}
-.card-3 .button::after {
-  content: "\2192";
-  opacity: 0;
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translate(0, -50%);
-  transition: all 0.3s;
-}
-.card-3 .button:hover::after {
-  transform: translate(5px, -50%);
-  opacity: 1;
-}
-
-.card-4 {
-  width: 450px;
-}
-
-.card-4 .wrapper {
-  background: url(https://images.pexels.com/photos/1714361/pexels-photo-1714361.jpeg?cs=srgb&dl=silhouette-photography-of-people-on-theater-1714361.jpg&fm=jpg)
-    center / cover no-repeat;
-  max-height: 500px;
-}
-.card-4 .wrapper:hover .menu-content span {
-  transform: translate(-50%, -10px);
-  opacity: 1;
-}
-.card-4 .header {
-  color: #fff;
-  padding: 1em;
-  top: 0;
-  left: 0;
-  float: left;
-}
-.card-4 .header::before,
-.card-4 .header::after {
-  content: "";
-  display: table;
-}
-.card-4 .header::after {
-  clear: both;
-}
-.card-4 .header .countdown {
-  float: left;
-  font-size: 12px;
-  top: 0;
-  left: 0;
-}
-.card-4 .menu-content {
-   position: absolute;
-   top: 0px;
-   right: 0px;
-   background-color: #77d7b9;
-   width: 50px;
-   height: 100px;
-   color: #fff;
-   padding: 0.8em;
-}
-
-.card-4 .menu-content span {
-  display: block;
-  text-align: center
-}
-
-.card-4 .menu-content .college{
-  font-weight: 700;
-   font-size: 14px;
-   text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.18);
-   letter-spacing: 0.5px;
-   top: 15px;
-   right: -20px;
-}
-.card-4 .data {
-  color: #fff;
-  transform: translateY(calc(70px + 4em));
-}
-.card-4 .title a {
-  color: #fff;
-}
-.card-4 .button {
-  display: block;
-  width: 100px;
-  margin: 2em auto 1em;
-  text-align: center;
-  font-size: 12px;
-  color: #fff;
-  line-height: 1;
-  position: relative;
-  font-weight: 700;
-}
-.card-4 .button::after {
-  content: "\2192";
-  opacity: 0;
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translate(0, -50%);
-  transition: all 0.3s;
-}
-.card-4 .button:hover::after {
+.cards .button:hover::after {
   transform: translate(5px, -50%);
   opacity: 1;
 }
@@ -591,7 +325,6 @@ main {
   margin: 0 auto;
   padding: 0;
   text-align: center;
-  
 }
 
 li {
@@ -606,19 +339,20 @@ li {
 li span {
   display: block;
   font-size: 12px;
- 
 }
 
-.overlay {
+.activityModal {
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.8);
   transition: opacity 500ms;
-  visibility: hidden;
-  opacity: 0;
+  /* visibility: hidden; */
+  display: none;
+  opacity: 1;
+  z-index: 1000;
   width: 100%;
   height: 100%;
 }
@@ -637,16 +371,13 @@ li span {
   height: 70%;
   position: relative;
   float: center;
-  
-
 }
 
-.popup h2{
+.popup h2 {
   margin-top: 0;
   color: #333;
   font-family: Tahoma, Arial, sans-serif;
 }
-
 
 .popup .close {
   position: absolute;
@@ -655,19 +386,18 @@ li span {
   transition: all 200ms;
   text-decoration: none;
   color: white;
-
 }
 
 .popup .close:hover {
   color: white;
 }
 
-
 #msform {
   width: 400px;
   margin: 50px auto;
   text-align: center;
   position: relative;
+  top: 15%;
 }
 
 #msform fieldset {
@@ -685,7 +415,7 @@ li span {
 }
 
 /*Hide all except first fieldset*/
-#msform fieldset:not(:first-of-type){
+#msform fieldset:not(:first-of-type) {
   display: none;
 }
 
@@ -699,13 +429,13 @@ li span {
   box-sizing: border-box;
   font-family: "Roboto";
   letter-spacing: 1px;
-  color: #2C3E50;
+  color: #2c3e50;
   font-size: 14px;
 }
 /*buttons*/
 #msform .action-button {
   width: 100px;
-  background: #27AE60;
+  background: #27ae60;
   font-weight: bold;
   color: white;
   border: 0 none;
@@ -714,8 +444,9 @@ li span {
   padding: 10px 5px;
   margin: 10px 5px;
 }
-#msform .action-button:hover, #msform .action-button:focus {
-  box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+#msform .action-button:hover,
+#msform .action-button:focus {
+  box-shadow: 0 0 0 2px white, 0 0 0 3px #27ae60;
 }
 
 #msform .highcom-button {
@@ -730,8 +461,9 @@ li span {
   margin: 10px 5px;
 }
 
-#msform .highcom-button:hover, #msform .highcom-button:focus {
-  box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+#msform .highcom-button:hover,
+#msform .highcom-button:focus {
+  box-shadow: 0 0 0 2px white, 0 0 0 3px #27ae60;
 }
 
 #msform .member-button {
@@ -746,15 +478,16 @@ li span {
   margin: 10px 5px;
 }
 
-#msform .member-button:hover, #msform .member-button:focus {
-  box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+#msform .member-button:hover,
+#msform .member-button:focus {
+  box-shadow: 0 0 0 2px white, 0 0 0 3px #27ae60;
 }
 
 /*headings*/
 .fs-title {
   font-size: 15px;
   text-transform: uppercase;
-  color: #2C3E50;
+  color: #2c3e50;
   margin-bottom: 10px;
 }
 .fs-subtitle {
@@ -807,7 +540,7 @@ li span {
 }
 /*progressbar connectors*/
 #progressbar li:after {
-  content: '';
+  content: "";
   width: 100%;
   height: 2px;
   background: white;
@@ -818,12 +551,13 @@ li span {
 }
 #progressbar li:first-child:after {
   /*connector not needed before the first step*/
-  content: none; 
+  content: none;
 }
 /*marking active/completed steps green*/
 /*The number of the step and the connector before it = green*/
-#progressbar li.active:before,  #progressbar li.active:after{
-  background: #27AE60;
+#progressbar li.active:before,
+#progressbar li.active:after {
+  background: #27ae60;
   color: white;
 }
 
@@ -855,7 +589,7 @@ label span {
   align-items: center;
   padding: 0.375em 0.75em 0.375em 0.375em;
   border-radius: 99em;
-  transition: 0.25s ease; 
+  transition: 0.25s ease;
 }
 
 label span:hover {
@@ -875,14 +609,64 @@ label span:before {
   box-shadow: inset 0 0 0 0.125em #00005c;
 }
 
+.lds-ellipsis {
+  display: inline-block;
+  position: relative;
+  left: -6px;
+  width: 64.125px;
+  height: 25px;
+}
+.lds-ellipsis div {
+  position: absolute;
+  top: 10px;
+  /* left: -5px; */
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: white;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds-ellipsis div:nth-child(1) {
+  left: 8px;
+  animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+  left: 8px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+  left: 32px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+  left: 56px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+}
 
-
-
-
-
-
-
-
-
-
-
+/* .button.--cancelRegister {
+  display: none;
+} */
