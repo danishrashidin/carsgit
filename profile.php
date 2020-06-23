@@ -5,14 +5,15 @@ $sql = 'SELECT College_Name FROM college WHERE College_ID = '.$array['College_ID
 $college = $connection->query($sql);
 
 if(isset($_POST["ic"])){
-    $updatesql = 'UPDATE student SET IC = '.$_POST["ic"];
+    $updatesql = 'UPDATE student SET IC = '.$_POST["ic"].' WHERE Student_ID = '.$_SESSION['Student_ID'];
     $connection->query($updatesql);
 }
 
 if(isset($_POST["phone"])){
-    $updatesql = 'UPDATE student SET Phone_Number = '.$_POST["phone"];
+    $updatesql = 'UPDATE student SET Phone_Number = '.$_POST["phone"].' WHERE Student_ID = '.$_SESSION['Student_ID'];
     $connection->query($updatesql);
 }
+
 ?>
 
 <div class="content-container">
@@ -20,7 +21,7 @@ if(isset($_POST["phone"])){
         <div class="form-row">
             <div class="col form-group">
                 <div class="vertical-container">
-                    <img class="profile-image mb-4" src="assets/profile-img.jpg" />
+                    <img class="profile-image mb-4" src="<?php echo $array['Image']?>" />
                     <a href="#">Update Photo</a>
                 </div>
                 <div></div>

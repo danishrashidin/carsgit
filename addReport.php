@@ -4,6 +4,8 @@
 if (isset($_SESSION['Student_ID'])) {
     $student_id = $_SESSION['Student_ID'];
 }
+include_once 'config.php';
+$flag = false;
 
 $flag = false;
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -44,6 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 }
+
 ?>
 
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -58,15 +61,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@800&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet" />
 
-
-
+<div>
+<div>
     <div class="container bg-dark text-white"
       style="margin:auto; text-align:center;background-size: 150px;padding-top: 32px;padding-bottom: 30px;">
       <h4>REPORT COLLEGE ISSUE </h4>
       <p class="text-muted small">
-      <div class="cssanimation fadeIn infinite">Are there any damages?
-        Help us by filling up this form and we will fix it right away!
-      </div>
+        <div class="cssanimation fadeIn infinite">Are there any damages?
+          Help us by filling up this form and we will fix it right away!
+        </div>
       </p>
     </div>
     <form id="report-form" name="reportForm" method="post" action="dashboard.php?page=addReport" >
@@ -89,18 +92,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             top:13px; left:10px; opacity: 0;
             pointer-events: none;" />
               <ul class="dropdown-menu college">
-                      <li id="1">Astar Residential College</li>
-                      <li id="2">Tuanku Bahiyah Residential College</li>
-                      <li id="3">Tuanku Kursiah Residential College</li>
-                      <li id="4">Bestari Residential College</li>
-                      <li id="5">Dayasari Residential College</li>
-                      <li id="6">Ibnu Sina Residential College</li>
-                      <li id="7">Za'ba Residential College</li>
-                      <li id="8">Kinabalu Residential College</li>
-                      <li id="9">Tun Syed Zahiruddin Residential College</li>
-                      <li id="10">Tun Ahmad Zaidi Residential College</li>
-                      <li id="11">Ungku Aziz Residential College</li>
-                      <li id="12">Raja Dr. Nazrin Shah Residential College</li>
+                <li id="1">Astar Residential College</li>
+                <li id="2">Tuanku Bahiyah Residential College</li>
+                <li id="3">Tuanku Kursiah Residential College</li>
+                <li id="4">Bestari Residential College</li>
+                <li id="5">Dayasari Residential College</li>
+                <li id="6">Ibnu Sina Residential College</li>
+                <li id="7">Za'ba Residential College</li>
+                <li id="8">Kinabalu Residential College</li>
+                <li id="9">Tun Syed Zahiruddin Residential College</li>
+                <li id="10">Tun Ahmad Zaidi Residential College</li>
+                <li id="11">Ungku Aziz Residential College</li>
+                <li id="12">Raja Dr. Nazrin Shah Residential College</li>
               </ul>
             </div>
           </div>
@@ -192,8 +195,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <label for="exampleInputPassword1" class="">Problem Details :</label>
           </div>
           <div class="col-9">
-            <textarea name="message1" rows="3" cols="60" class="form-control ProblemDetails" id="message1"
-              placeholder="Please describe your problem" required=""></textarea>
+            <textarea name="message1" rows="3" cols="60" class="form-control ProblemDetails" id="message1" placeholder="Please describe your problem" required=""></textarea>
           </div>
         </div>
         <div class="row">
@@ -201,8 +203,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <label class="">Problem Location :</label>
           </div>
           <div class="col-9">
-            <textarea name="hd_location" rows="3" cols="60" class="form-control ProblemLocation" id="hd_location"
-              placeholder="Please describe your problem location" required=""></textarea>
+            <textarea name="hd_location" rows="3" cols="60" class="form-control ProblemLocation" id="hd_location" placeholder="Please describe your problem location" required=""></textarea>
           </div>
         </div>
         <div class="row">
@@ -216,9 +217,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </p>
           </div>
         </div>
-          <div class="btn-group">
-            <button class="btn" id="submitBtn"><i class="fa fa-check" type="submit" value="Add" name="Submit"></i> Submit</button>
-            <?php
+        <div class="btn-group">
+          <button class="btn" id="submitBtn"><i class="fa fa-check" type="submit" value="Add" name="Submit"></i> Submit</button>
+          <?php
 if ($flag == true) {?>
             <div id="myModal" class="modal  animate__animated animate__rotateIn">
               <div class="w3-modal-content" style="max-width:600px">
@@ -228,33 +229,18 @@ if ($flag == true) {?>
                   Your report was submitted successfully.</p>
               </div>
             </div>
-            <?php
+          <?php
 }
 ?>
-          </div>
-          <div class="btn-group">
-            <button type="button" class="btn" id="cancel" onClick="window.location.reload();"><i
-                class="fa fa-close"></i>
-              Cancel</button>
-          </div>
+        </div>
+        <div class="btn-group">
+          <button type="button" class="btn" id="cancel" onClick="window.location.reload();"><i class="fa fa-close"></i>
+            Cancel</button>
+        </div>
       </div>
     </form>
-
-
-
-  <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-    crossorigin="anonymous"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script type="text/javascript"
-    src=" https://cdn.jsdelivr.net/gh/yesiamrocks/cssanimation.io@1.0.3/letteranimation.min.js"></script>
-  <script src="https://kit.fontawesome.com/e881600de5.js" crossorigin="anonymous"></script> -->
+  </div>
+  <script type="text/javascript" src=" https://cdn.jsdelivr.net/gh/yesiamrocks/cssanimation.io@1.0.3/letteranimation.min.js"></script>
+  <script src="https://kit.fontawesome.com/e881600de5.js" crossorigin="anonymous"></script>
   <script src="js/report.js"></script>
-
-
+</div>

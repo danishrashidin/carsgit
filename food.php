@@ -11,8 +11,9 @@
       <h2> lazy to queue up for food everyday? <br> </h2>
       <h3> now you can order food online!</h3>
       <!-- use form to go to another page -->
-      <form method="GET" action="food.php">
+      <form method="GET" action="dashboard.php">
         <div class="search-container">
+          <input type="hidden" name="page" value="food">
           <input type="text" placeholder="Search food..." name="search">
           <button type="submit"><i class="fa fa-search"></i></button>
         </div>
@@ -98,7 +99,8 @@
       ?>
     </div>
     <!-- card-group end -->
-
+    <script type="text/javascript" src="js/menu.js"></script>
+    
     <?php
     include_once("searchFilterFood.php");
     ?>
