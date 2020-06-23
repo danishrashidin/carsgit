@@ -10,7 +10,7 @@ let closeCancel = document.querySelectorAll(".close.--cancel");
 let registerPopUp = document.querySelector(".activityModal.--registration");
 let cancelRegisterPopUp = document.querySelector(".activityModal.--cancelRegistration");
 let buttonSubmitRegistration = document.querySelector(".next.--register");
-let buttonCancelRegistration = document.querySelector(".next.--cancelregister");
+let buttonCancelRegistration = document.querySelector(".next.--cancelRegister");
 let registerForm = document.querySelector(".msform.--registration");
 let cancelRegistrationForm = document.querySelector(".msform.--cancelRegistration");
 let checkYesButton = document.querySelector(".yesCheck");
@@ -76,6 +76,7 @@ buttonSubmitRegistration.addEventListener("click", () => {
       return response.json();
     })
     .then((registration) => {
+      console.log(registration);
       if (registration.status == "success") {
         currentRegisterButton.parentNode.insertAdjacentHTML(
           "beforeend",
@@ -112,10 +113,12 @@ buttonSubmitRegistration.addEventListener("click", () => {
     });
 });
 
-buttonCancelRegistration.addEventListener("click", () => {
-  if (checkYesButton.checked == true) {
-    const formData = new FormData(cancelRegistrationForm);
-    buttonCancelRegistration.innerHTML = `
+if (true) {
+  console.log(buttonCancelRegistration);
+  buttonCancelRegistration.addEventListener("click", () => {
+    if (checkYesButton.checked == true) {
+      const formData = new FormData(cancelRegistrationForm);
+      buttonCancelRegistration.innerHTML = `
     <div class="lds-ellipsis" style="width: 57.0px; height: 22px left: -4px;">
         <div></div>
         <div></div>
@@ -124,52 +127,53 @@ buttonCancelRegistration.addEventListener("click", () => {
       </div>
     `;
 
-    fetch("activityHandler.php", {
-      method: "post",
-      body: formData,
-    })
-      .then((response) => {
-        return response.json();
+      fetch("activityHandler.php", {
+        method: "post",
+        body: formData,
       })
-      .then((cancelation) => {
-        if (cancelation.status == "success") {
-          currentCancelRegistrationButton.parentNode.insertAdjacentHTML(
-            "beforeend",
-            `<a class="button --register">Register Now!</a>`
-          );
+        .then((response) => {
+          return response.json();
+        })
+        .then((cancelation) => {
+          if (cancelation.status == "success") {
+            currentCancelRegistrationButton.parentNode.insertAdjacentHTML(
+              "beforeend",
+              `<a class="button --register">Register Now!</a>`
+            );
 
-          registerButton = currentCancelRegistrationButton.parentNode.querySelector(".button.--register");
+            registerButton = currentCancelRegistrationButton.parentNode.querySelector(".button.--register");
 
-          (function (button) {
-            button.addEventListener("click", () => {
-              registerPopUp.style.display = "block";
-              registerPopUp.querySelector(".collegeId").value = button.parentNode.parentNode.parentNode.querySelector(
-                ".college.--noDisplay"
-              ).innerHTML;
-              registerPopUp.querySelector(".activityName").value = button.parentNode.querySelector(
-                ".activity_name"
-              ).value;
-              currentRegisterButton = button;
-            });
-          })(registerButton);
-          currentCancelRegistrationButton.parentNode.parentNode.parentNode.querySelector(".status").innerHTML =
-            "Available";
-          currentCancelRegistrationButton.parentNode.parentNode.parentNode.querySelector(".status").style.background =
-            "#00df89";
-          currentCancelRegistrationButton.remove();
-          currentCancelRegistrationButton = null;
-          buttonCancelRegistration.innerHTML = "Next";
-          cancelSuccessMessage.innerHTML = `You have cancelled your registration for ` + cancelation.activityName;
-          transition(buttonCancelRegistration);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  } else {
-    cancelRegisterPopUp.style.display = "none";
-  }
-});
+            (function (button) {
+              button.addEventListener("click", () => {
+                registerPopUp.style.display = "block";
+                registerPopUp.querySelector(".collegeId").value = button.parentNode.parentNode.parentNode.querySelector(
+                  ".college.--noDisplay"
+                ).innerHTML;
+                registerPopUp.querySelector(".activityName").value = button.parentNode.querySelector(
+                  ".activity_name"
+                ).value;
+                currentRegisterButton = button;
+              });
+            })(registerButton);
+            currentCancelRegistrationButton.parentNode.parentNode.parentNode.querySelector(".status").innerHTML =
+              "Available";
+            currentCancelRegistrationButton.parentNode.parentNode.parentNode.querySelector(".status").style.background =
+              "#00df89";
+            currentCancelRegistrationButton.remove();
+            currentCancelRegistrationButton = null;
+            buttonCancelRegistration.innerHTML = "Next";
+            cancelSuccessMessage.innerHTML = `You have cancelled your registration for ` + cancelation.activityName;
+            transition(buttonCancelRegistration);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      cancelRegisterPopUp.style.display = "none";
+    }
+  });
+}
 
 function transition(button) {
   if (animating) return false;

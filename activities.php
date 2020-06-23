@@ -1,11 +1,9 @@
 <?php
 include_once "config.php";
 
-if(isset($_SESSION['Student_ID'])){
-  $student_id = $_SESSION['Student_ID'];
+if (isset($_SESSION['Student_ID'])) {
+    $student_id = $_SESSION['Student_ID'];
 }
-$student_id = 1;
-
 ?>
 
 
@@ -18,26 +16,26 @@ $student_id = 1;
 <div class="card-container">
   <div id="wrapper">
     <?php
-    $sql = "SELECT * FROM Activity";
-    $result = $connection->query($sql);
-    echo '<div class="card-row">';
-    while ($a = $result->fetch_array()) {
-      $activity_id = $a['Activity_ID'];
-      $activity_no = substr($activity_id, 0, 1);
-      $activity_name = $a['Activity_Name'];
-      $college = $a['College_ID'];
-      $reg_date = $a['Reg_Dead'];
+$sql = "SELECT * FROM Activity";
+$result = $connection->query($sql);
+echo '<div class="card-row">';
+while ($a = $result->fetch_array()) {
+    $activity_id = $a['Activity_ID'];
+    $activity_no = substr($activity_id, 0, 1);
+    $activity_name = $a['Activity_Name'];
+    $college = $a['College_ID'];
+    $reg_date = $a['Reg_Dead'];
 
-      $rem = strtotime($reg_date . ' 00:00:00') - time();
-      $day = floor($rem / 86400);
-      $hr = floor(($rem % 86400) / 3600);
-      $min = floor(($rem % 3600) / 60);
-      $sec = ($rem % 60);
+    $rem = strtotime($reg_date . ' 00:00:00') - time();
+    $day = floor($rem / 86400);
+    $hr = floor(($rem % 86400) / 3600);
+    $min = floor(($rem % 3600) / 60);
+    $sec = ($rem % 60);
 
-      $registrationQuery = "SELECT * FROM Registration WHERE Student_ID= '$student_id' AND Activity_ID = '$activity_id'";
+    $registrationQuery = "SELECT * FROM registration WHERE Student_ID= '$student_id' AND Activity_ID = '$activity_id'";
 
-      $registrationResult = $connection->query($registrationQuery);
-      $registration = $registrationResult->fetch_array();
+    $registrationResult = $connection->query($registrationQuery);
+    $registration = $registrationResult->fetch_array();
 
     ?>
       <div class="card-<?php echo $activity_no; ?> cards fancycard" style="margin: auto;">
@@ -57,12 +55,12 @@ $student_id = 1;
             <div class="menu-status">
               <span class="status">
                 <?php
-                if (isset($registration)) {
-                  echo $registration['Status'];
-                } else {
-                  echo "Available";
-                }
-                ?></span>
+if (isset($registration)) {
+        echo $registration['Status'];
+    } else {
+        echo "Available";
+    }
+    ?></span>
             </div>
           </div>
 
@@ -72,19 +70,19 @@ $student_id = 1;
                 <a href="#"><?php echo $activity_name; ?></a><input type="hidden" name="activity_name" class="activity_name" value="<?php echo $activity_name; ?>"></input>
               </h1>
               <?php
-              if (isset($registration)) {
-                echo '<a  class="button --cancelRegister">Cancel Registration</a>';
-              } else {
-                echo '<a  class="button --register">Register Now!</a>';
-              }
-              ?>
+if (isset($registration)) {
+        echo '<a  class="button --cancelRegister">Cancel Registration</a>';
+    } else {
+        echo '<a  class="button --register">Register Now!</a>';
+    }
+    ?>
             </div>
           </div>
         </div>
       </div>
     <?php
-    }
-    ?>
+}
+?>
   </div>
   </div>
 
@@ -158,3 +156,4 @@ $student_id = 1;
 
 </div>
 <script src="js/activity.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js " defer></script>

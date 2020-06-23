@@ -3,54 +3,54 @@
 session_start();
 $pagename = "";
 if (isset($_GET['page'])) {
-  $name = $_GET['page'];
-  switch ($name) {
-    case 'dashboard':
-      $pagename = "Dashboard";
-      break;
-    case 'activities':
-      $pagename = "Activities";
-      break;
-    case 'food':
-      $pagename = "Food";
-      break;
-    case 'acommodation':
-      $pagename = "Acommodation";
-      break;
-    case 'report':
-      $pagename = "Report";
-      break;
-    case 'profile':
-      $pagename = "Your Profile";
-      break;
-    default:
-      $pagename = "Dashboard";
-  }
+    $name = $_GET['page'];
+    switch ($name) {
+        case 'dashboard':
+            $pagename = "Dashboard";
+            break;
+        case 'activities':
+            $pagename = "Activities";
+            break;
+        case 'food':
+            $pagename = "Food";
+            break;
+        case 'acommodation':
+            $pagename = "Acommodation";
+            break;
+        case 'report':
+            $pagename = "Report";
+            break;
+        case 'profile':
+            $pagename = "Your Profile";
+            break;
+        default:
+            $pagename = "Dashboard";
+    }
 } else {
-  $pagename = "Dashboard";
-  $name = "dashboard";
+    $pagename = "Dashboard";
+    $name = "dashboard";
 }
 
 // DB connection
-include_once('config.php');
+include_once 'config.php';
 
 if (isset($_POST['action'])) {
-  if ($_POST['action'] == 'success') {
-    if (isset($_POST['id'])) {
-      $_SESSION['Student_ID'] = $_POST['id'];
+    if ($_POST['action'] == 'success') {
+        if (isset($_POST['id'])) {
+            $_SESSION['Student_ID'] = $_POST['id'];
+        }
+    } else {
+        die("Please login");
     }
-  } else {
-    die("Please login");
-  }
 }
 
 if (isset($_SESSION['Student_ID'])) {
-  // retrieve student data
-  $sql = 'SELECT * FROM student WHERE Student_ID = ' . $_SESSION["Student_ID"];
-  $query = $connection->query($sql);
-  $array = $query->fetch_assoc();
+    // retrieve student data
+    $sql = 'SELECT * FROM student WHERE Student_ID = ' . $_SESSION["Student_ID"];
+    $query = $connection->query($sql);
+    $array = $query->fetch_assoc();
 } else {
-  die('Please login');
+    die('Please login');
 }
 
 ?>
@@ -81,10 +81,10 @@ if (isset($_SESSION['Student_ID'])) {
   <link rel="stylesheet" type="text/css" href="css/dashboard.css" />
 
   <script type="text/javascript" src="js/dashboard.js" defer></script>
-  
+
   <script type="text/javascript">
     <?php
-    echo 'window.addEventListener("DOMContentLoaded", function() {
+echo 'window.addEventListener("DOMContentLoaded", function() {
         (function($) {
           feather.replace();
           try {
@@ -95,8 +95,9 @@ if (isset($_SESSION['Student_ID'])) {
 
         })(jQuery)
       })';
-    ?>
+?>
   </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js " defer></script>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous" defer></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous" defer></script>
@@ -162,18 +163,18 @@ if (isset($_SESSION['Student_ID'])) {
           </div>
           <div class="fragment">
             <?php
-            if (isset($_GET['page'])) {
-              $display = $name . '.php';
-              if ($name == "dashboard") {
-              } else if (file_exists($display)) {
-                include_once $display;
-              } else {
-                echo $display . " does not exist";
-              }
-            } else {
-              echo "No page binded";
-            }
-            ?>
+if (isset($_GET['page'])) {
+    $display = $name . '.php';
+    if ($name == "dashboard") {
+    } else if (file_exists($display)) {
+        include_once $display;
+    } else {
+        echo $display . " does not exist";
+    }
+} else {
+    echo "No page binded";
+}
+?>
           </div>
         </div>
       </div>
