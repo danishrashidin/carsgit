@@ -157,8 +157,6 @@ if (true) {
             })(registerButton);
             currentCancelRegistrationButton.parentNode.parentNode.parentNode.querySelector(".status").innerHTML =
               "Available";
-            currentCancelRegistrationButton.parentNode.parentNode.parentNode.querySelector(".status").style.background =
-              "#00df89";
             currentCancelRegistrationButton.remove();
             currentCancelRegistrationButton = null;
             buttonCancelRegistration.innerHTML = "Next";
