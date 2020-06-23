@@ -21,12 +21,12 @@ FROM report ORDER BY Report_ID DESC");
             <table>
                 <thead>
                     <tr>
-                        <td>Report ID</td>
-                        <td>Residential College</td>
-                        <td>Problem Type</td>
-                        <td>Date Submitted</td>
-                        <td>Status</td>
-                        <td>Update</td>
+                        <th>Report ID</th>
+                        <th>Residential College</th>
+                        <th>Problem Type</th>
+                        <th>Date Submitted</th>
+                        <th>Status</th>
+                        <th>Update</th>
                     </tr>
 
                     <?php
@@ -42,8 +42,8 @@ FROM report ORDER BY Report_ID DESC");
                         mysqli_query($connection, "UPDATE report SET Status_='$status' WHERE Report_ID='$id' ");
                         if ($status == 'Pending') {
                     ?>
-                            <td><a href="<?php echo "edit.php?id=" . $res['Report_ID'] ?>"><i class="fa fa-edit"></i></a> |
-                                <a href="<?php echo "delete.php?id=" . $res['Report_ID'] ?>"><i class="fa fa-trash"></i></a></td>
+                            <td><a href="<?php echo "editreport.php?id=" . $res['Report_ID'] ?>"><i class="fa fa-edit"></i></a> |
+                                <a href="<?php echo "deletereport.php?id=" . $res['Report_ID'] ?>"><i class="fa fa-trash"></i></a></td>
                             </tr>
                     <?php
                         } else {
@@ -61,12 +61,12 @@ FROM report ORDER BY Report_ID DESC");
             <table>
                 <thead>
                     <tr>
-                        <td>Report ID</td>
-                        <td>Residential College</td>
-                        <td>Problem Type</td>
-                        <td>Date_ Submitted</td>
-                        <td>Status</td>
-                        <td>Update</td>
+                        <th>Report ID</th>
+                        <th>Residential College</th>
+                        <th>Problem Type</th>
+                        <th>Date Submitted</th>
+                        <th>Status</th>
+                        <th>Update</th>
                     </tr>
                     <?php
                     $result = mysqli_query($connection, "SELECT * FROM report WHERE Status_='Pending' ");
@@ -94,12 +94,12 @@ FROM report ORDER BY Report_ID DESC");
             <table>
                 <thead>
                     <tr>
-                        <td>Report ID</td>
-                        <td>Residential College</td>
-                        <td>Problem Type</td>
-                        <td>Date_ Submitted</td>
-                        <td>Status</td>
-                        <td>Update</td>
+                        <th>Report ID</th>
+                        <th>Residential College</th>
+                        <th>Problem Type</th>
+                        <th>Date Submitted</th>
+                        <th>Status</th>
+                        <th>Update</th>
                     </tr>
                     <?php
                     $result = mysqli_query($connection, "SELECT * FROM report WHERE Status_='Completed' ");
@@ -123,12 +123,12 @@ FROM report ORDER BY Report_ID DESC");
             <table>
                 <thead>
                     <tr>
-                        <td>Report ID</td>
-                        <td>Residential College</td>
-                        <td>Problem Type</td>
-                        <td>Date_ Submitted</td>
-                        <td>Status</td>
-                        <td>Update</td>
+                        <th>Report ID</th>
+                        <th>Residential College</th>
+                        <th>Problem Type</th>
+                        <th>Date Submitted</th>
+                        <th>Status</th>
+                        <th>Update</th>
                     </tr>
                     <?php
                     $result = mysqli_query($connection, "SELECT * FROM report WHERE Status_='In Progress' ");

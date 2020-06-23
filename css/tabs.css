@@ -3,6 +3,7 @@ body {font-family: Arial;}
 .tab {
   overflow: hidden;
   border: none;
+  padding: 0 15px;
 }
 
 .tab button {
@@ -29,7 +30,6 @@ body {font-family: Arial;}
 
 .tabcontent {
   display: none;
-  padding: 6px 12px;
   border: none;
   border-top: none;
   color : #f6f6f6;
@@ -39,18 +39,28 @@ body {font-family: Arial;}
     height: 1000px;
     box-shadow: 5px 5px 8px #888888;
     background-color:white;
-    border-radius:1rem
+    border-radius:1rem;
+    padding:0 !important;
 }
 
 table {
   border-collapse: collapse;
   width: 100%;
-  margin-top: 40px;
   margin-bottom: 20px;
 }
 
+th {
+  text-transform: uppercase;
+  font-family: Manrope, sans-serif;
+  font-size: small;
+}
+
+td {
+  font-family: Roboto, sans-serif;
+}
+
 th, td {
-  padding: 8px;
+  padding: 1rem 1.5rem;
   text-align: left;
   border-bottom: 1px solid #ddd;
   color: rgb(121, 117, 117);

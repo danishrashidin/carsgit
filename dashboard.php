@@ -160,6 +160,9 @@ echo 'window.addEventListener("DOMContentLoaded", function() {
         <div class="fragment-container">
           <div class="fragment-title-container">
             <h2 class="fragment-title"><?php echo $pagename ?></h2>
+            <?php
+
+            ?>
           </div>
           <div class="fragment">
             <?php

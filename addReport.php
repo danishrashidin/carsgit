@@ -1,78 +1,64 @@
 <?php
 //including the database connection file
+include_once('config.php');
 $flag = false;
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    if (isset($_POST['add'])) {
-        include_once "config.php";
-        $collegeName = $_POST['collegeName'];
-        $collegeProblem = $_POST['collegeProblem'];
-        $message1 = $_POST['message1'];
-        $hd_location = $_POST['hd_location'];
-        $uploadedfile = $_POST['uploadedfile'];
-        $status = "";
+  if (isset($_POST['add'])) {
+    include_once "config.php";
+    $collegeName = $_POST['collegeName'];
+    $collegeProblem = $_POST['collegeProblem'];
+    $message1 = $_POST['message1'];
+    $hd_location = $_POST['hd_location'];
+    $uploadedfile = $_POST['uploadedfile'];
+    $status = "";
 
-        // checking empty fields
-        if (empty($collegeName) || empty($collegeProblem) || empty($message1) || empty($hd_location)) {
-            if (empty($collegeName)) {
-                echo "<font color='red'>Residential College is empty.</font><br/>";
-            }
+    // checking empty fields
+    if (empty($collegeName) || empty($collegeProblem) || empty($message1) || empty($hd_location)) {
+      if (empty($collegeName)) {
+        echo "<font color='red'>Residential College is empty.</font><br/>";
+      }
 
-            if (empty($collegeProblem)) {
-                echo "<font color='red'>College Problem field is empty.</font><br/>";
-            }
+      if (empty($collegeProblem)) {
+        echo "<font color='red'>College Problem field is empty.</font><br/>";
+      }
 
-            if (empty($message1)) {
-                echo "<font color='red'>Problem Details field is empty.</font><br/>";
-            }
-            if (empty($hd_location)) {
-                echo "<font color='red'>Problem Location field is empty.</font><br/>";
-            }
-        } else {
-            $sql = "INSERT INTO report(Residential_College, Problem_Type, Problem_Details, Problem_Location, File_Upload )
+      if (empty($message1)) {
+        echo "<font color='red'>Problem Details field is empty.</font><br/>";
+      }
+      if (empty($hd_location)) {
+        echo "<font color='red'>Problem Location field is empty.</font><br/>";
+      }
+    } else {
+      $sql = "INSERT INTO report(Residential_College, Problem_Type, Problem_Details, Problem_Location, File_Upload )
         VALUES('$collegeName','$collegeProblem','$message1','$hd_location','$uploadedfile')";
 
-            $connection->query($sql);
-            $result = $connection->query("INSERT INTO report(Residential College, Problem Type, Problem Details, Problem Location, File ) VALUES('$collegeName','$collegeProblem','$message1','$hd_location','$uploadedfile')");
-            $flag = true;
-        }
+      $connection->query($sql);
+      $result = $connection->query("INSERT INTO report(Residential College, Problem Type, Problem Details, Problem Location, File ) VALUES('$collegeName','$collegeProblem','$message1','$hd_location','$uploadedfile')");
+      $flag = true;
     }
+  }
 }
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Report issue</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link href="https://cdn.jsdelivr.net/gh/yesiamrocks/cssanimation.io@1.0.3/cssanimation.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
-  <link rel="stylesheet" href="css/report.css" />
-  <link rel="stylesheet" type="text/css" href="css/styles.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://cdn.jsdelivr.net/gh/yesiamrocks/cssanimation.io@1.0.3/cssanimation.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
+<link rel="stylesheet" href="css/report.css" />
 
-    <!-- Fonting -->
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@800&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet" />
-</head>
-
-<body>
-  <main>
-    <div class="container bg-dark text-white"
-      style="margin:auto; text-align:center;background-size: 150px;padding-top: 32px;padding-bottom: 30px;">
+<div>
+  <div>
+    <div class="container bg-dark text-white" style="margin:auto; text-align:center;background-size: 150px;padding-top: 32px;padding-bottom: 30px;">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
       <!-- <div class="jumbotron" id="jumbotron" style="margin-bottom:0; width:800; text-align:center;background-size: 150px;padding-top: 32px;padding-bottom: 30px;"> -->
       <h4>REPORT COLLEGE ISSUE </h4>
       <p class="text-muted small">
-      <div class="cssanimation fadeIn infinite">Are there any damages?
-        Help us by filling up this form and we will fix it right away!
-      </div>
+        <div class="cssanimation fadeIn infinite">Are there any damages?
+          Help us by filling up this form and we will fix it right away!
+        </div>
       </p>
     </div>
-    <form id="report-form" name="reportForm" method="post" action="addReport.php" >
+    <form id="report-form" name="reportForm" method="post" action="addReport.php">
       <input type="hidden" name="add" value="Add">
       <div class="container p-3" style="background-color: white; padding-top: 40px;">
         <div class="row">
@@ -92,18 +78,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             top:13px; left:10px; opacity: 0;
             pointer-events: none;" />
               <ul class="dropdown-menu college">
-                      <li id="1">Astar Residential College</li>
-                      <li id="2">Tuanku Bahiyah Residential College</li>
-                      <li id="3">Tuanku Kursiah Residential College</li>
-                      <li id="4">Bestari Residential College</li>
-                      <li id="5">Dayasari Residential College</li>
-                      <li id="6">Ibnu Sina Residential College</li>
-                      <li id="7">Za'ba Residential College</li>
-                      <li id="8">Kinabalu Residential College</li>
-                      <li id="9">Tun Syed Zahiruddin Residential College</li>
-                      <li id="10">Tun Ahmad Zaidi Residential College</li>
-                      <li id="11">Ungku Aziz Residential College</li>
-                      <li id="12">Raja Dr. Nazrin Shah Residential College</li>
+                <li id="1">Astar Residential College</li>
+                <li id="2">Tuanku Bahiyah Residential College</li>
+                <li id="3">Tuanku Kursiah Residential College</li>
+                <li id="4">Bestari Residential College</li>
+                <li id="5">Dayasari Residential College</li>
+                <li id="6">Ibnu Sina Residential College</li>
+                <li id="7">Za'ba Residential College</li>
+                <li id="8">Kinabalu Residential College</li>
+                <li id="9">Tun Syed Zahiruddin Residential College</li>
+                <li id="10">Tun Ahmad Zaidi Residential College</li>
+                <li id="11">Ungku Aziz Residential College</li>
+                <li id="12">Raja Dr. Nazrin Shah Residential College</li>
               </ul>
             </div>
           </div>
@@ -195,8 +181,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <label for="exampleInputPassword1" class="">Problem Details :</label>
           </div>
           <div class="col-9">
-            <textarea name="message1" rows="3" cols="60" class="form-control ProblemDetails" id="message1"
-              placeholder="Please describe your problem" required=""></textarea>
+            <textarea name="message1" rows="3" cols="60" class="form-control ProblemDetails" id="message1" placeholder="Please describe your problem" required=""></textarea>
           </div>
         </div>
         <div class="row">
@@ -204,8 +189,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <label class="">Problem Location :</label>
           </div>
           <div class="col-9">
-            <textarea name="hd_location" rows="3" cols="60" class="form-control ProblemLocation" id="hd_location"
-              placeholder="Please describe your problem location" required=""></textarea>
+            <textarea name="hd_location" rows="3" cols="60" class="form-control ProblemLocation" id="hd_location" placeholder="Please describe your problem location" required=""></textarea>
           </div>
         </div>
         <div class="row">
@@ -219,10 +203,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </p>
           </div>
         </div>
-          <div class="btn-group">
-            <button class="btn" id="submitBtn"><i class="fa fa-check" type="submit" value="Add" name="Submit"></i> Submit</button>
-            <?php
-if ($flag == true) {?>
+        <div class="btn-group">
+          <button class="btn" id="submitBtn"><i class="fa fa-check" type="submit" value="Add" name="Submit"></i> Submit</button>
+          <?php
+          if ($flag == true) { ?>
             <div id="myModal" class="modal  animate__animated animate__rotateIn">
               <div class="w3-modal-content" style="max-width:600px">
                 <span class="close">&times;</span>
@@ -231,44 +215,18 @@ if ($flag == true) {?>
                   Your report was submitted successfully.</p>
               </div>
             </div>
-            <?php
-}
-?>
-          </div>
-          <div class="btn-group">
-            <button type="button" class="btn" id="cancel" onClick="window.location.reload();"><i
-                class="fa fa-close"></i>
-              Cancel</button>
-          </div>
+          <?php
+          }
+          ?>
+        </div>
+        <div class="btn-group">
+          <button type="button" class="btn" id="cancel" onClick="window.location.reload();"><i class="fa fa-close"></i>
+            Cancel</button>
+        </div>
       </div>
     </form>
-  </main>
-
-  <footer>
-    <div class="copyright">
-      <p>&copy 2020 - Cuba Teka</p>
-    </div>
-    <div class="social">
-      <a href="#" class="support">Contact Us</a>
-      <a href="#" class="face">f</a>
-      <a href="#" class="tweet">t</a>
-      <a href="#" class="linked">ig</a>
-    </div>
-  </footer>
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-    crossorigin="anonymous"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script type="text/javascript"
-    src=" https://cdn.jsdelivr.net/gh/yesiamrocks/cssanimation.io@1.0.3/letteranimation.min.js"></script>
+  </div>
+  <script type="text/javascript" src=" https://cdn.jsdelivr.net/gh/yesiamrocks/cssanimation.io@1.0.3/letteranimation.min.js"></script>
   <script src="https://kit.fontawesome.com/e881600de5.js" crossorigin="anonymous"></script>
   <script src="js/report.js"></script>
-</body>
-
-</html>
+</div>

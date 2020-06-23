@@ -32,12 +32,17 @@
           <?php echo $res_hours; ?>
         </h4>
         <!-- use form to go to search food -->
-        <form method="GET" action="menu.php">
+        <form method="GET" action="dashboard.php">
           <div class="search-container">
             <input
               type="hidden"
               name="Restaurant_ID"
               value="<?php echo $res_id; ?>"
+            />
+            <input
+              type="hidden"
+              name="page"
+              value="menu"
             />
             <input type="text" placeholder="Search food..." name="search" />
             <button type="submit"><i class="fa fa-search"></i></button>
