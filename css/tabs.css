@@ -9,19 +9,25 @@ body {
 }
 
 .tab button {
-  background-color: inherit;
   float: left;
-  border: none;
   outline: none;
   cursor: pointer;
-  padding: 14px 16px;
+  padding: 0.1rem 0.5rem;
   transition: 0.3s;
-  font-size: 17px;
-  border-radius: 5px 5px 0px 0px;
+  border-radius: 0.4rem;
+  font-size: 0.9rem !important;
+  font-family: Manrope, sans-serif;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+  margin: 1rem 0.5rem 1rem 0;
+  border: none;
 }
 
 .tab button:hover {
-  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
 }
 
 .tab button.active {
@@ -55,10 +61,15 @@ th {
   text-transform: uppercase;
   font-family: Manrope, sans-serif;
   font-size: small;
+  color: black;
 }
 
 td {
-  font-family: Roboto, sans-serif;
+  font-family: Manrope, sans-serif;
+  color: rgb(121, 117, 117);
+  font-size: small;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 th,
@@ -66,11 +77,30 @@ td {
   padding: 1rem 1.5rem;
   text-align: left;
   border-bottom: 1px solid #ddd;
-  color: rgb(121, 117, 117);
 }
 
 tr:hover {
   background-color: #f5f5f5;
+}
+
+.completed {
+  color: #388e3c;
+  background-color: #81c784;
+}
+
+.pending {
+  color:#f57c00;
+  background-color: #ffb74d;
+}
+
+.inprogress {
+  color:#1976d2;
+  background-color: #64b5f6;
+}
+
+.rejected {
+  color: #e33371;
+  background-color:#9a0036;
 }
 
 .reportButton {

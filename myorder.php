@@ -10,8 +10,9 @@
 
       <h1> My Order </h1>
       <!-- use form to go to search food -->
-      <form method="GET" action="myorder.php">
+      <form method="GET" action="dashboard.php">
         <div class="search-container">
+          <input type="hidden" name="page" value="myorder">
           <input type="text" placeholder="Search food..." name="search">
           <button type="submit"><i class="fa fa-search"></i></button>
         </div>

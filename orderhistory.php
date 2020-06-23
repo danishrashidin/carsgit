@@ -11,8 +11,9 @@
 
       <h1> Order History </h1>
       <!-- use form to go to search food -->
-      <form method="GET" action="orderhistory.php">
+      <form method="GET" action="dashboard.php">
         <div class="search-container">
+          <input type="hidden" name="page" value="orderhistory">
           <input type="text" placeholder="Search food..." name="search">
           <button type="submit"><i class="fa fa-search"></i></button>
         </div>

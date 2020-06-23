@@ -2,13 +2,10 @@
   box-sizing: border-box;
 }
 
-body {
-  background-color: whitesmoke;
-  font-family: "Manrope", sans-serif;
-  line-height: 1.5;
+.report {
+  font-family: Manrope, sans-serif;
 }
-
-.container {
+.report .container {
   margin: auto;
   text-align: center;
   background-size: 150px;
@@ -17,60 +14,53 @@ body {
   border-radius: 10px 10px 0 0;
 }
 
-nav {
-  background-image: linear-gradient(-225deg, #ff057c 0, #8d0b93 50%, #321575 100%) !important;
-  -webkit-box-shadow: 0px 5px 50px -10px rgba(0, 0, 0, 0.4);
-  -moz-box-shadow: 0px 5px 50px -10px rgba(0, 0, 0, 0.4);
-  box-shadow: 0px 5px 50px -10px rgba(0, 0, 0, 0.4);
-}
-
-#report-form .container {
+.report #report-form .container {
   border-radius: 0 0 10px 10px;
 }
 
-p.submission {
+.report p.submission {
   color: #f6f6f6;
   font-family: roboto 300, 400;
   /* font-weight: bold; */
   font-size: 20px;
 }
 
-p.small {
+.report p.small {
   line-height: 1;
 }
 
-label {
+.report label {
   line-height: 5;
 }
 
-.form-group {
+.report .form-group {
   vertical-align: middle;
 }
 
-.col-9 {
+.report .col-9 {
   max-width: 75%;
   padding-top: 25px;
   text-align: left;
 }
 
-.row {
+.report .row {
   padding: 10px 40px 10px 20px;
 }
-.container-ex1 {
+.report .container-ex1 {
   width: 800px;
   margin: auto;
 }
 
-.container-ex2 {
+.report .container-ex2 {
   width: 800px;
   margin: auto;
 }
 
-.container-ex3 {
+.report .container-ex3 {
   width: 800px;
 }
 
-element.style {
+.report element.style {
   margin-bottom: 0;
   text-align: center;
   background-size: 150px;
@@ -78,23 +68,23 @@ element.style {
   padding-bottom: 30px;
 }
 
-h3 {
+.report h3 {
   padding-top: 50px;
   padding-left: 2em;
 }
 
-.jumbotron {
+.report .jumbotron {
   padding: 0.5em 0.6em;
 }
 
-main {
+/* main {
   background-color: #f5f5f5;
   display: block;
   line-height: 50px;
   padding: 30px;
-}
+} */
 
-.fade-background {
+.report .fade-background {
   position: absolute;
   display: none;
   width: 100%;
@@ -104,7 +94,7 @@ main {
   align-items: center;
 }
 
-.shadowBox {
+.report .shadowBox {
   background: white;
   position: absolute;
   width: 80%;
@@ -115,22 +105,26 @@ main {
   box-shadow: 10px 10px 10px -6px rgba(0, 0, 0, 0.8);
 }
 
-.container-fluid {
+.report .container-fluid {
   padding: 0px;
 }
 
-.row {
+#report-form .container-fluid {
+  border-radius: 0 0 1rem 1rem;
+}
+
+.report .row {
   height: 100%;
   width: 100%;
 }
 
-.dropdown .activated {
+.report .dropdown .activated {
   font-size: 10px !important;
   top: 8px !important;
   color: rgb(117, 116, 116) !important;
 }
 
-.dropdown-label {
+.report .dropdown-label {
   position: absolute;
   font-size: 1em;
   font-weight: bold;
@@ -140,7 +134,7 @@ main {
   pointer-events: none;
 }
 
-.dropdown {
+.report .dropdown {
   width: 100%;
   height: 40px;
   display: inline-block;
@@ -160,7 +154,7 @@ main {
   cursor: pointer;
 }
 
-.dropdown .select {
+.report .dropdown .select {
   padding: 20px 15px 12px 16px;
   white-space: nowrap;
   overflow: hidden;
@@ -169,20 +163,20 @@ main {
   top: 0;
 }
 
-.dropdown.active:hover,
-.dropdown.active {
+.report .dropdown.active:hover,
+.report .dropdown.active {
   outline: none;
   color: rgb(100, 98, 98);
 }
 
-.dropdown-menu.slideToggle {
+.report .dropdown-menu.slideToggle {
   max-height: 180px;
   margin-top: 10px;
   box-shadow: 0 1px 2px rgb(0, 0, 0);
   transition: margin-top 0.7s, max-height 0.7s 0.2s;
 }
 
-.dropdown-menu {
+.report .dropdown-menu {
   display: block;
   position: absolute;
   background-color: #222;
@@ -204,7 +198,7 @@ main {
   transition: margin-top 1s 0.4s, max-height 0.7s;
 }
 
-.leFadeIn span {
+.report .leFadeIn span {
   animation-name: leFadeIn;
 }
 @keyframes leFadeIn {
@@ -222,7 +216,7 @@ main {
   }
 }
 
-.btn-group {
+.report .btn-group {
   background-color: DodgerBlue;
   border: none; /* Remove borders */
   color: white; /* White text */
@@ -233,11 +227,11 @@ main {
   margin: 10px;
 }
 
-.btn:hover {
+.report .btn:hover {
   background-color: RoyalBlue;
 }
 
-h4 {
+.report h4 {
   color: #f6f6f6;
   font-family: "Helvetica Neue", sans-serif;
   font-size: 30px;
@@ -247,28 +241,28 @@ h4 {
   text-align: center;
 }
 
-.dropdown .dropdown-menu::-webkit-scrollbar {
+.report .dropdown .dropdown-menu::-webkit-scrollbar {
   width: 0px; /* Remove scrollbar space */
 }
 
-.dropdown .dropdown-menu li {
+.report .dropdown .dropdown-menu li {
   padding: 10px;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
   border-bottom: 1px solid rgba(90, 88, 88, 0.158);
 }
-.dropdown .dropdown-menu {
+.report .dropdown .dropdown-menu {
   padding: 0;
   list-style: none;
 }
-.dropdown .dropdown-menu li:hover {
+.report .dropdown .dropdown-menu li:hover {
   background-image: linear-gradient(-225deg, #827e8a 0%, #827e8a 70%);
 }
-.dropdown .dropdown-menu li:active {
+.report .dropdown .dropdown-menu li:active {
   background-color: #e2e2e2;
 }
 
-.modal {
+.report .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
@@ -283,7 +277,7 @@ h4 {
 }
 
 /* Modal Content/Box */
-.w3-modal-content {
+.report .w3-modal-content {
   background-color: #333435;
   margin: 15% auto; /* 15% from the top and centered */
   padding: 50px;
@@ -292,7 +286,7 @@ h4 {
 }
 
 /* The Close Button */
-.close {
+.report .close {
   color: rgb(134, 131, 131);
   padding: 2px;
   float: right;
@@ -300,21 +294,21 @@ h4 {
   font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
+.report .close:hover,
+.report .close:focus {
   color: red;
   text-decoration: none;
   cursor: pointer;
 }
 
-h5 {
+.report h5 {
   float: left;
   font-family: manrope;
   font-weight: bold;
   color: #f6f6f6;
 }
 
-.clase {
+.report .clase {
   color: rgb(134, 131, 131);
   padding: 2px;
   float: right;
@@ -322,14 +316,14 @@ h5 {
   font-weight: bold;
 }
 
-.clase:hover,
-.clase:focus {
+.report .clase:hover,
+.report .clase:focus {
   color: red;
   text-decoration: none;
   cursor: pointer;
 }
 
-table {
+.report table {
   background-color: #f6f6f6;
   border: 1px solid;
   border-radius: 4px 4px 4px 4px;
@@ -342,7 +336,7 @@ th {
   font-weight: bold;
 }
 
-.w2-modal-content {
+.report .w2-modal-content {
   background-color: #333435;
   margin: 15% auto; /* 15% from the top and centered */
   padding: 50px;
@@ -350,7 +344,7 @@ th {
   width: 50%; /* Could be more or less, depending on screen size */
 }
 
-caption {
+.report caption {
   font-family: manrope;
   font-weight: bolder;
   font-size: 10px;

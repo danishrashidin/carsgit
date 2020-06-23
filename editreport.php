@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $newFile = $_POST['uploadedfile'];
         $idid = $_POST['ReportID'];
 
-        mysqli_query($connection, "UPDATE report SET Residential_College='$newCollege',
+        mysqli_query($connection, "UPDATE report SET College_ID='$newCollege',
     Problem_Type='$newProb', Problem_Details='$newDes',
     Problem_Location='$newLoc', File_Upload='$newFile'
     WHERE ReportID='$idid'");
@@ -22,12 +22,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
     $editID = $_GET['id'];
-    $res = mysqli_query($connection, "SELECT * FROM report WHERE ReportID='$editID' ");
+    $res = mysqli_query($connection, "SELECT * FROM report WHERE Report_ID='$editID' ");
 
     $result = mysqli_fetch_array($res);
 
-    $ReportID = $result['ReportID'];
-    $collegeName = $result['Residential_College'];
+    $ReportID = $result['Report_ID'];
+    $collegeName = $result['College_ID'];
     $collegeProblem = $result['Problem_Type'];
     $message1 = $result['Problem_Details'];
     $hd_location = $result['Problem_Location'];
@@ -55,28 +55,11 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
     // header("Location: reportIndex.php");
     // }
     ?>
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Report issue</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link href="https://cdn.jsdelivr.net/gh/yesiamrocks/cssanimation.io@1.0.3/cssanimation.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
   <link rel="stylesheet" href="css/report.css" />
-  <link rel="stylesheet" type="text/css" href="css/styles.css" />
 
-    <!-- Fonting -->
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@800&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet" />
-
-</head>
-<body>
-  <div class="container bg-dark text-white"
-      style="margin:auto; text-align:center;background-size: 150px;padding-top: 32px;padding-bottom: 30px;">
+<div class='report'>
+  <div class="container-fluid bg-dark text-white"
+      style="margin:auto; text-align:center;background-size: 150px;padding-top: 32px;padding-bottom: 30px; border-radius: 1rem 1rem 0 0;">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
       <!-- <div class="jumbotron" id="jumbotron" style="margin-bottom:0; width:800; text-align:center;background-size: 150px;padding-top: 32px;padding-bottom: 30px;"> -->
       <h4>REPORT COLLEGE ISSUE </h4>
@@ -86,9 +69,8 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
       </div>
       </p>
     </div>
-    </div>
-    <form id="report-form" name="reportForm" method="post" action="edit.php">
-      <div class="container p-3" style="background-color: white; padding-top: 40px;">
+    <form id="report-form" name="reportForm" method="post" action="dashboard.php?page=editreport">
+      <div class="container-fluid p-3" style="background-color: white; padding-top: 40px;">
         <div class="row">
           <div class="col-3 text-right">
             <label for="College" class="">
@@ -241,21 +223,10 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         </div>
     </form>
     </div>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-    crossorigin="anonymous"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script type="text/javascript"
     src=" https://cdn.jsdelivr.net/gh/yesiamrocks/cssanimation.io@1.0.3/letteranimation.min.js"></script>
   <script src="https://kit.fontawesome.com/e881600de5.js" crossorigin="anonymous"></script>
   <script src="js/edit.js"></script>
-</body>
-</html>
+</div>
 <?php
 }

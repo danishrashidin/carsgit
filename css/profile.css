@@ -18,6 +18,10 @@
   color: grey
 }
 
+.file {
+  text-align: center;
+}
+
 .profile-input-box {
     width: 80%;
     margin: 10px;

@@ -2,7 +2,7 @@
 
 //including the database connection file
 if (isset($_SESSION['Student_ID'])) {
-    $student_id = $_SESSION['Student_ID'];
+  $student_id = $_SESSION['Student_ID'];
 }
 include_once 'config.php';
 $flag = false;
@@ -10,61 +10,56 @@ $flag = false;
 $flag = false;
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    if (isset($_POST['add'])) {
-        include_once "config.php";
-        $collegeID = $_POST['collegeName'];
-        $collegeProblem = $_POST['collegeProblem'];
-        $message1 = $_POST['message1'];
-        $hd_location = $_POST['hd_location'];
-        $uploadedfile = $_POST['uploadedfile'];
-        $status = "";
+  if (isset($_POST['add'])) {
+    include_once "config.php";
+    $collegeID = $_POST['collegeName'];
+    $collegeProblem = $_POST['collegeProblem'];
+    $message1 = $_POST['message1'];
+    $hd_location = $_POST['hd_location'];
+    $uploadedfile = $_POST['uploadedfile'];
+    $status = "";
 
-        // checking empty fields
+    // checking empty fields
 
-        if (empty($collegeID) || empty($collegeProblem) || empty($message1) || empty($hd_location)) {
-            if (empty($collegeID)) {
-                echo "<font color='red'>Residential College is empty.</font><br/>";
-            }
+    if (empty($collegeID) || empty($collegeProblem) || empty($message1) || empty($hd_location)) {
+      if (empty($collegeID)) {
+        echo "<font color='red'>Residential College is empty.</font><br/>";
+      }
 
-            if (empty($collegeProblem)) {
-                echo "<font color='red'>College Problem field is empty.</font><br/>";
-            }
+      if (empty($collegeProblem)) {
+        echo "<font color='red'>College Problem field is empty.</font><br/>";
+      }
 
-            if (empty($message1)) {
-                echo "<font color='red'>Problem Details field is empty.</font><br/>";
-            }
-            if (empty($hd_location)) {
-                echo "<font color='red'>Problem Location field is empty.</font><br/>";
-            }
-        } else {
-            $sql = "INSERT INTO report(Student_ID, College_ID, Problem_Type, Problem_Details, Problem_Location, File_Upload )
+      if (empty($message1)) {
+        echo "<font color='red'>Problem Details field is empty.</font><br/>";
+      }
+      if (empty($hd_location)) {
+        echo "<font color='red'>Problem Location field is empty.</font><br/>";
+      }
+    } else {
+      $sql = "INSERT INTO report(Student_ID, College_ID, Problem_Type, Problem_Details, Problem_Location, File_Upload )
             VALUES($student_id, $collegeID,'$collegeProblem','$message1','$hd_location','$uploadedfile')";
 
-            $connection->query($sql);
-            // $result = $connection->query("INSERT INTO report(College_ID, Problem_Type, Problem_Details, Problem_Location, File_Upload ) VALUES('$collegeID','$collegeProblem','$message1','$hd_location','$uploadedfile')");
-            $flag = true;
-        }
+      $connection->query($sql);
+      // $result = $connection->query("INSERT INTO report(College_ID, Problem_Type, Problem_Details, Problem_Location, File_Upload ) VALUES('$collegeID','$collegeProblem','$message1','$hd_location','$uploadedfile')");
+      $flag = true;
     }
+  }
 }
 
 ?>
 
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://cdn.jsdelivr.net/gh/yesiamrocks/cssanimation.io@1.0.3/cssanimation.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" /> -->
-  <link rel="stylesheet" href="css/report.css" />
-  <!-- <link rel="stylesheet" type="text/css" href="css/styles.css" /> -->
+<link rel="stylesheet" href="css/report.css" />
+<!-- <link rel="stylesheet" type="text/css" href="css/styles.css" /> -->
 
-    <!-- Fonting -->
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@800&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet" />
-
-<div>
-<div>
-    <div class="container bg-dark text-white"
-      style="margin:auto; text-align:center;background-size: 150px;padding-top: 32px;padding-bottom: 30px;">
+<div class="report">
+  <div>
+    <div class="container-fluid bg-dark text-white" style="margin:auto; text-align:center;background-size: 150px;padding-top: 32px;padding-bottom: 30px; border-radius: 1rem 1rem 0 0;">
       <h4>REPORT COLLEGE ISSUE </h4>
       <p class="text-muted small">
         <div class="cssanimation fadeIn infinite">Are there any damages?
@@ -72,9 +67,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
       </p>
     </div>
-    <form id="report-form" name="reportForm" method="post" action="dashboard.php?page=addReport" >
+    <form id="report-form" name="reportForm" method="post" action="dashboard.php?page=addReport">
       <input type="hidden" name="add" value="Add">
-      <div class="container p-3" style="background-color: white; padding-top: 40px;">
+      <div class="container-fluid p-3" style="background-color: white; padding-top: 40px;">
         <div class="row">
           <div class="col-3 text-right">
             <label for="College" class="">
@@ -220,7 +215,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <div class="btn-group">
           <button class="btn" id="submitBtn"><i class="fa fa-check" type="submit" value="Add" name="Submit"></i> Submit</button>
           <?php
-if ($flag == true) {?>
+          if ($flag == true) { ?>
             <div id="myModal" class="modal  animate__animated animate__rotateIn">
               <div class="w3-modal-content" style="max-width:600px">
                 <span class="close">&times;</span>
@@ -230,8 +225,8 @@ if ($flag == true) {?>
               </div>
             </div>
           <?php
-}
-?>
+          }
+          ?>
         </div>
         <div class="btn-group">
           <button type="button" class="btn" id="cancel" onClick="window.location.reload();"><i class="fa fa-close"></i>
