@@ -11,25 +11,28 @@
 }
 
 .card-container {
-    margin-top: 2rem;
+  margin-top: 2rem;
 }
 
 .card {
   width: 21rem;
-  margin: 2rem 0.5rem;
+  margin: 2rem 0.8rem;
   border-radius: 1.5rem !important;
-  border:none !important;
+  border: none !important;
   background-color: #68518f;
+  -webkit-box-shadow: 1px 1px 15px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 1px 1px 15px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 15px 0px rgba(0, 0, 0, 0.2);
 }
 
 .card-body {
-    padding-top: 0;
+  padding-top: 0;
 }
 
 .card a {
-    color: #fff;
-    font-family: Manrope, sans-serif;
-    letter-spacing: 0.3px;
+  color: #fff;
+  font-family: Manrope, sans-serif;
+  letter-spacing: 0.3px;
 }
 
 .card-img-top {
