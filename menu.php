@@ -68,7 +68,7 @@
   <div class="main-nav">
     <ul>
       <li>
-        <a href="dashboard.php?page=myorder" class="active">my order</a>
+        <a href="dashboard.php?page=myorder" >my order</a>
       </li>
       <li>
         <a href="dashboard.php?page=mypreorder">my pre-order</a>
