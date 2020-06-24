@@ -194,7 +194,9 @@
 
     <?php
     // include_once("config.php");
-    $student_id = $_SESSION["student_id"];
+    if (isset($_SESSION['Student_ID'])) {
+        $student_id = $_SESSION['Student_ID'];
+    }
 
     $is_ordernow = false;
     $is_preorder = false;

@@ -174,7 +174,7 @@ var cumulativeCartItems = [];
               for (var j = 0; j < cumulativeCartItems.length; j++) {
                 if (temp == cumulativeCartItems[j].food_name) {
                   // cumulativeCartItems.splice(j, j+1);
-                  cumulativeCartItems[j]="";
+                  cumulativeCartItems[j] = "";
                 }
               }
               // console.log(cumulativeCartItems);
@@ -281,7 +281,36 @@ function preorder_function() {
     // alert("Heading to proceed PRE-ORDER.");
     var date = new Date;
     var int_today = Number(formatDate(date));
-    var limit_date = int_today + 14;
+    var limit_date = int_today;
+    if (Number(formatDate(new Date).substring(6, 8)) < 18) {
+      limit_date += 14;
+    } else {
+
+      if (Number(formatDate(new Date).substring(4, 6)) == 1 || Number(formatDate(new Date).substring(4, 6)) == 3 || Number(formatDate(new Date).substring(4, 6)) == 5 || Number(formatDate(new Date).substring(4, 6)) == 7 || Number(formatDate(new Date).substring(4, 6)) == 8 || Number(formatDate(new Date).substring(4, 6)) == 10 || Number(formatDate(new Date).substring(4, 6)) == 12) {
+        var mod_value = 31;
+      }
+      else {
+        var mod_value = 30;
+      }
+
+      if (Number(formatDate(new Date).substring(4, 6)) !== 12) {
+        var increment_month = 1;
+      } else {
+        var increment_month = -11;
+      }
+
+      var temp_day = (Number(formatDate(new Date).substring(6, 8)) + 14) % mod_value;
+      var temp_added_year = formatDate(date).substring(0, 4);
+      var temp_month = Number(formatDate(new Date).substring(4, 6)) + increment_month;
+      if (temp_month.toString.length < 2) {
+        var temp_added_month = '0' + temp_month;
+      }
+      if (temp_day.toString.length < 2) {
+        var temp_added_day = '0' + temp_day;
+      }
+      limit_date = temp_added_year + temp_added_month + temp_added_day;
+    }
+
     const create_hidden_input = document.createElement("div");
     create_hidden_input.classList.add("order-output");
     create_hidden_input.innerHTML =
@@ -394,6 +423,7 @@ function formatDate(date) {
 
   return [year, month, day].join('');
 }
+
 
 function checkDate(field) {
   var minYear = (new Date()).getFullYear();

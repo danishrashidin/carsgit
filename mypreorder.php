@@ -58,7 +58,9 @@
 
     <?php
     include_once "config.php";
-    $student_id = $_SESSION['Student_ID'];
+    if (isset($_SESSION['Student_ID'])) {
+      $student_id = $_SESSION['Student_ID'];
+    }
     date_default_timezone_set("Asia/Kuala_Lumpur");
     $today = date("Y/m/d");
     $intToday = intval(str_replace("/", "", $today));
@@ -142,7 +144,7 @@
       ?>
         <script>
           alert("Order with Order_No <?php echo $delete_ID ?> have been successfully deleted .");
-          location.assign("mypreorder.php");
+          location.assign("dashboard.php?page=mypreorder");
         </script>
 
     <?php
@@ -165,7 +167,7 @@
   document.querySelectorAll('#delete').forEach(function(del) {
     del.addEventListener("click", function() {
       if (confirm('Are you sure you want to delete your Pre-order with ID <?php echo $order_no ?>?')) {
-        location.assign("mypreorder.php?delete=<?php echo $order_no ?>");
+        location.assign("dashboard.php?page=mypreorder&delete=<?php echo $order_no ?>");
       }
     });
   });
