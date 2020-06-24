@@ -41,6 +41,8 @@ if ($_POST["action"] == 'checkEmail') {
 
 if ($_POST["action"] == 'register') {
 
+    // print_r($_POST);
+
     // Load Composer's autoloader
     require 'library/vendor/autoload.php';
     try {
