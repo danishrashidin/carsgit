@@ -58,7 +58,9 @@
     <div class="horizontal-bar-row">
       <?php
       include_once('config.php');
-      $student_id = $_SESSION['Student_ID'];
+      if (isset($_SESSION['Student_ID'])) {
+        $student_id = $_SESSION['Student_ID'];
+      }
       $sql = "SELECT college.College_ID, college.College_Name FROM student INNER JOIN college ON student.College_ID = college.College_ID WHERE Student_ID=$student_id";
       $result = $connection->query($sql);
       while ($row = $result->fetch_array()) {

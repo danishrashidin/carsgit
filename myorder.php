@@ -65,7 +65,9 @@
     </div>
     <?php
     include_once "config.php";
-    $student_id = $_SESSION['Student_ID'];
+    if (isset($_SESSION['Student_ID'])) {
+      $student_id = $_SESSION['Student_ID'];
+    }
     date_default_timezone_set("Asia/Kuala_Lumpur");
     $today = date("Y/m/d");
 
