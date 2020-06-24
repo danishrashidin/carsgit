@@ -2,74 +2,117 @@
 include_once "config.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    if (isset($_POST['update'])) {
-        $newCollege = $_POST['collegeName'];
-        $newProb = $_POST['collegeProblem'];
-        $newDes = $_POST['message1'];
-        $newLoc = $_POST['hd_location'];
-        $newFile = $_POST['uploadedfile'];
-        $idid = $_POST['ReportID'];
+  if (isset($_POST['update'])) {
+    $newCollege = $_POST['collegeName'];
+    $newProb = $_POST['collegeProblem'];
+    $newDes = $_POST['message1'];
+    $newLoc = $_POST['hd_location'];
+    $idid = $_POST['ReportID'];
 
-        mysqli_query($connection, "UPDATE report SET College_ID='$newCollege',
+    $result = $connection->query("UPDATE report SET College_ID=$newCollege,
     Problem_Type='$newProb', Problem_Details='$newDes',
     Problem_Location='$newLoc', File_Upload='$newFile'
-    WHERE ReportID='$idid'");
+    WHERE Report_ID=$idid");
 
-        echo '<script type="text/javascript">window.location.href="dashboard.php?page=report"</script>';
-        exit();
+    // Check if image file is a actual image or fake image
+    if ($_FILES["uploadedfile"]['name'] == 0) {
+      $target_dir = "reportuploads/";
+      $target_file = $target_dir . basename($_FILES["uploadedfile"]["name"]);
+      $uploadOk = 1;
+      $fileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+      
+      // Check if file already exists
+      if (file_exists($target_file)) {
+        echo "Sorry, file already exists.";
+        $uploadOk = 0;
+      }
+
+      // Check file size
+      // if ($_FILES["uploadedfile"]["size"] > 500000) {
+      //     echo "Sorry, your file is too large.";
+      //     $uploadOk = 0;
+      // }
+
+      // Check if $uploadOk is set to 0 by an error
+      if ($uploadOk == 0) {
+        echo "Sorry, your file was not uploaded.";
+        // if everything is ok, try to upload file
+      } else {
+        $updatesql = "UPDATE report SET College_ID=$newCollege,
+        Problem_Type='$newProb', Problem_Details='$newDes',
+        Problem_Location='$newLoc', File_Upload='$target_file'
+        WHERE Report_ID=$idid";
+        if ($connection->query($updatesql) === true) {
+          //echo "The file " . basename($_FILES["uploadedfile"]["name"]) . " has been uploaded.";
+          move_uploaded_file($_FILES["uploadedfile"]["tmp_name"], $target_file);
+        } else {
+          echo "Sorry, there was an error uploading your file.";
+        }
+      }
+    } else {
+      $sql = "UPDATE report SET College_ID=$newCollege,
+      Problem_Type='$newProb', Problem_Details='$newDes',
+      Problem_Location='$newLoc', File_Upload=''
+      WHERE Report_ID=$idid";
+
+      $connection->query($sql);
+      $flag = true;
     }
+
+    echo '<script type="text/javascript">window.location.href="dashboard.php?page=report"</script>';
+    exit();
+  }
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
-    $editID = $_GET['id'];
-    $res = mysqli_query($connection, "SELECT * FROM report WHERE Report_ID='$editID' ");
+  $editID = $_GET['id'];
+  $res = mysqli_query($connection, "SELECT * FROM report WHERE Report_ID='$editID' ");
 
-    $result = mysqli_fetch_array($res);
+  $result = mysqli_fetch_array($res);
 
-    $ReportID = $result['Report_ID'];
-    $collegeName = $result['College_ID'];
-    $collegeProblem = $result['Problem_Type'];
-    $message1 = $result['Problem_Details'];
-    $hd_location = $result['Problem_Location'];
-    $uploadedfile = $result['File_Upload'];
+  $ReportID = $result['Report_ID'];
+  $collegeName = $result['College_ID'];
+  $collegeProblem = $result['Problem_Type'];
+  $message1 = $result['Problem_Details'];
+  $hd_location = $result['Problem_Location'];
+  $uploadedfile = $result['File_Upload'];
 
-    // checking empty fields
-    // if(empty($collegeName) || empty($collegeProblem) || empty($message1) || empty($hd_location)) {
-    //     if(empty($collegeName)){
-    //         echo "<font color='red'>Residential College is empty.</font><br/>";
-    //     }
+  // checking empty fields
+  // if(empty($collegeName) || empty($collegeProblem) || empty($message1) || empty($hd_location)) {
+  //     if(empty($collegeName)){
+  //         echo "<font color='red'>Residential College is empty.</font><br/>";
+  //     }
 
-    //     if(empty($collegeProblem)) {
-    //         echo "<font color='red'>College Problem field is empty.</font><br/>";
-    //     }
+  //     if(empty($collegeProblem)) {
+  //         echo "<font color='red'>College Problem field is empty.</font><br/>";
+  //     }
 
-    //     if(empty($message1)) {
-    //         echo "<font color='red'>Problem Details field is empty.</font><br/>";
-    //     }
-    //     if(empty($hd_location)) {
-    //         echo "<font color='red'>Problem Location field is empty.</font><br/>";
-    //     }
-    // } else {
-    // $result = mysqli_query($connection, "UPDATE report SET Residential College='$collegeName',Problem Type='$collegeProblem', Problem Details='$message1', Problem Location='$hd_location', File='$fileuploaded' WHERE ReportID=$ReportID");
+  //     if(empty($message1)) {
+  //         echo "<font color='red'>Problem Details field is empty.</font><br/>";
+  //     }
+  //     if(empty($hd_location)) {
+  //         echo "<font color='red'>Problem Location field is empty.</font><br/>";
+  //     }
+  // } else {
+  // $result = mysqli_query($connection, "UPDATE report SET Residential College='$collegeName',Problem Type='$collegeProblem', Problem Details='$message1', Problem Location='$hd_location', File='$fileuploaded' WHERE ReportID=$ReportID");
 
-    // header("Location: reportIndex.php");
-    // }
-    ?>
+  // header("Location: reportIndex.php");
+  // }
+?>
   <link rel="stylesheet" href="css/report.css" />
 
-<div class='report'>
-  <div class="container-fluid bg-dark text-white"
-      style="margin:auto; text-align:center;background-size: 150px;padding-top: 32px;padding-bottom: 30px; border-radius: 1rem 1rem 0 0;">
+  <div class='report'>
+    <div class="container-fluid bg-dark text-white" style="margin:auto; text-align:center;background-size: 150px;padding-top: 32px;padding-bottom: 30px; border-radius: 1rem 1rem 0 0;">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
       <!-- <div class="jumbotron" id="jumbotron" style="margin-bottom:0; width:800; text-align:center;background-size: 150px;padding-top: 32px;padding-bottom: 30px;"> -->
       <h4>REPORT COLLEGE ISSUE </h4>
       <p class="text-muted small">
-      <div class="cssanimation fadeIn infinite">Are there any damages?
-        Help us by filling up this form and we will fix it right away!
-      </div>
+        <div class="cssanimation fadeIn infinite">Are there any damages?
+          Help us by filling up this form and we will fix it right away!
+        </div>
       </p>
     </div>
-    <form id="report-form" name="reportForm" method="post" action="dashboard.php?page=editreport">
+    <form id="report-form" name="reportForm" method="post" action="dashboard.php?page=editreport" enctype="multipart/form-data">
       <div class="container-fluid p-3" style="background-color: white; padding-top: 40px;">
         <div class="row">
           <div class="col-3 text-right">
@@ -88,18 +131,18 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
             top:13px; left:10px; opacity: 0;
             pointer-events: none;" />
               <ul class="dropdown-menu college">
-                      <li id="1">Astar Residential College</li>
-                      <li id="2">Tuanku Bahiyah Residential College</li>
-                      <li id="3">Tuanku Kursiah Residential College</li>
-                      <li id="4">Bestari Residential College</li>
-                      <li id="5">Dayasari Residential College</li>
-                      <li id="6">Ibnu Sina Residential College</li>
-                      <li id="7">Za'ba Residential College</li>
-                      <li id="8">Kinabalu Residential College</li>
-                      <li id="9">Tun Syed Zahiruddin Residential College</li>
-                      <li id="10">Tun Ahmad Zaidi Residential College</li>
-                      <li id="11">Ungku Aziz Residential College</li>
-                      <li id="12">Raja Dr. Nazrin Shah Residential College</li>
+                <li id="1">Astar Residential College</li>
+                <li id="2">Tuanku Bahiyah Residential College</li>
+                <li id="3">Tuanku Kursiah Residential College</li>
+                <li id="4">Bestari Residential College</li>
+                <li id="5">Dayasari Residential College</li>
+                <li id="6">Ibnu Sina Residential College</li>
+                <li id="7">Za'ba Residential College</li>
+                <li id="8">Kinabalu Residential College</li>
+                <li id="9">Tun Syed Zahiruddin Residential College</li>
+                <li id="10">Tun Ahmad Zaidi Residential College</li>
+                <li id="11">Ungku Aziz Residential College</li>
+                <li id="12">Raja Dr. Nazrin Shah Residential College</li>
               </ul>
             </div>
           </div>
@@ -114,9 +157,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
               <div class="select">
                 <span style="display: inline; position: absolute; top: 0.2rem; left: 10px;"><?php echo $collegeProblem; ?></span>
               </div>
-              <input type="text" id="CollegeProblem"
-              value="<?php echo $collegeProblem; ?>" name="collegeProblem"
-              class="CollegeProblem" required style="border:none; outline: none;
+              <input type="text" id="CollegeProblem" value="<?php echo $collegeProblem; ?>" name="collegeProblem" class="CollegeProblem" required style="border:none; outline: none;
               background: red; position: absolute;
               top:13px; left:10px; opacity: 0;
               pointer-events: none;" />
@@ -193,8 +234,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
             <label for="exampleInputPassword1" class="">Problem Details :</label>
           </div>
           <div class="col-9">
-            <textarea name="message1" value="<?php echo $message1; ?>" rows="3" cols="60" class="form-control ProblemDetails" id="message1"
-              placeholder="Please describe your problem" required=""><?php echo $message1; ?></textarea>
+            <textarea name="message1" value="<?php echo $message1; ?>" rows="3" cols="60" class="form-control ProblemDetails" id="message1" placeholder="Please describe your problem" required=""><?php echo $message1; ?></textarea>
           </div>
         </div>
         <div class="row">
@@ -202,8 +242,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
             <label class="">Problem Location :</label>
           </div>
           <div class="col-9">
-            <textarea name="hd_location" value="<?php echo $hd_location; ?>" rows="3" cols="60" class="form-control ProblemLocation" id="hd_location"
-              placeholder="Please describe your problem location" required=""><?php echo $hd_location; ?></textarea>
+            <textarea name="hd_location" value="<?php echo $hd_location; ?>" rows="3" cols="60" class="form-control ProblemLocation" id="hd_location" placeholder="Please describe your problem location" required=""><?php echo $hd_location; ?></textarea>
           </div>
         </div>
         <div class="row">
@@ -218,15 +257,17 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
           </div>
         </div>
         <input type="hidden" name="ReportID" value=<?php echo $editID; ?>>
+        <input type="hidden" name="update" value='update'>
+        <div class="row" style="align-items: center; justify-content:center;">
         <div class="btn-group">
-        <button class="btn" id="submitBtn" value="Update" name="update"><i class="fa fa-check" type="submit" value="Update" name="update"></i> Update</button>
+          <button class="btn" id="submitBtn" value="Update" name="update"><i class="fa fa-check" type="submit" value="Update" name="update"></i> Update</button>
         </div>
+      </div>
     </form>
-    </div>
-  <script type="text/javascript"
-    src=" https://cdn.jsdelivr.net/gh/yesiamrocks/cssanimation.io@1.0.3/letteranimation.min.js"></script>
+  </div>
+  <script type="text/javascript" src=" https://cdn.jsdelivr.net/gh/yesiamrocks/cssanimation.io@1.0.3/letteranimation.min.js"></script>
   <script src="https://kit.fontawesome.com/e881600de5.js" crossorigin="anonymous"></script>
   <script src="js/edit.js"></script>
-</div>
+  </div>
 <?php
 }

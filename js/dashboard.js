@@ -11,7 +11,7 @@ dashboard.onload = init();
 
 function deleteConfirmation(id){
   var warning = 'Are you sure you want to delete account? There is no turning back!';
-  var form = document.querySelector('delete-account');
+  var form = document.querySelector('.delete-account');
   if(confirm(warning)){
     form.submit();
   } else {

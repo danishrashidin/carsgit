@@ -16,7 +16,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $collegeProblem = $_POST['collegeProblem'];
     $message1 = $_POST['message1'];
     $hd_location = $_POST['hd_location'];
-    $uploadedfile = $_POST['uploadedfile'];
     $status = "";
 
     // checking empty fields
@@ -37,12 +36,48 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         echo "<font color='red'>Problem Location field is empty.</font><br/>";
       }
     } else {
-      $sql = "INSERT INTO report(Student_ID, College_ID, Problem_Type, Problem_Details, Problem_Location, File_Upload )
-            VALUES($student_id, $collegeID,'$collegeProblem','$message1','$hd_location','$uploadedfile')";
-
-      $connection->query($sql);
       // $result = $connection->query("INSERT INTO report(College_ID, Problem_Type, Problem_Details, Problem_Location, File_Upload ) VALUES('$collegeID','$collegeProblem','$message1','$hd_location','$uploadedfile')");
-      $flag = true;
+
+      // Check if image file is a actual image or fake image
+      if ($_FILES["uploadedfile"]['name'] == 0) {
+        $target_dir = "reportuploads/";
+        $target_file = $target_dir . basename($_FILES["uploadedfile"]["name"]);
+        $uploadOk = 1;
+        $fileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+        
+        // Check if file already exists
+        if (file_exists($target_file)) {
+          echo "Sorry, file already exists.";
+          $uploadOk = 0;
+        }
+
+        // Check file size
+        // if ($_FILES["uploadedfile"]["size"] > 500000) {
+        //     echo "Sorry, your file is too large.";
+        //     $uploadOk = 0;
+        // }
+
+        // Check if $uploadOk is set to 0 by an error
+        if ($uploadOk == 0) {
+          echo "Sorry, your file was not uploaded.";
+          // if everything is ok, try to upload file
+        } else {
+          $updatesql = "INSERT INTO report(Student_ID, College_ID, Problem_Type, Problem_Details, Problem_Location, File_Upload )
+          VALUES($student_id, $collegeID,'$collegeProblem','$message1','$hd_location','$target_file')";
+          if ($connection->query($updatesql) === true) {
+            //echo "The file " . basename($_FILES["uploadedfile"]["name"]) . " has been uploaded.";
+            move_uploaded_file($_FILES["uploadedfile"]["tmp_name"], $target_file);
+          } else {
+            echo "Sorry, there was an error uploading your file.";
+          }
+        }
+      } else {
+        $sql = "INSERT INTO report(Student_ID, College_ID, Problem_Type, Problem_Details, Problem_Location, File_Upload )
+      VALUES($student_id, $collegeID,'$collegeProblem','$message1','$hd_location','')";
+
+        $connection->query($sql);
+        $flag = true;
+      }
     }
   }
 }
@@ -67,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
       </p>
     </div>
-    <form id="report-form" name="reportForm" method="post" action="dashboard.php?page=addReport">
+    <form id="report-form" name="reportForm" method="post" action="dashboard.php?page=addReport" enctype="multipart/form-data">
       <input type="hidden" name="add" value="Add">
       <div class="container-fluid p-3" style="background-color: white; padding-top: 40px;">
         <div class="row">
@@ -212,25 +247,27 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </p>
           </div>
         </div>
-        <div class="btn-group">
-          <button class="btn" id="submitBtn"><i class="fa fa-check" type="submit" value="Add" name="Submit"></i> Submit</button>
-          <?php
-          if ($flag == true) { ?>
-            <div id="myModal" class="modal  animate__animated animate__rotateIn">
-              <div class="w3-modal-content" style="max-width:600px">
-                <span class="close">&times;</span>
-                <i class="fa fa-check-circle" style="font-size:48px;color:#15da6d"></i>
-                <p class="submission">Thank You <br>
-                  Your report was submitted successfully.</p>
+        <div class="row" style="align-items: center; justify-content:center;">
+          <div class="btn-group">
+            <button class="btn" id="submitBtn"><i class="fa fa-check" type="submit" value="Add" name="Submit"></i> Submit</button>
+            <?php
+            if ($flag == true) { ?>
+              <div id="myModal" class="modal  animate__animated animate__rotateIn">
+                <div class="w3-modal-content" style="max-width:600px">
+                  <span class="close">&times;</span>
+                  <i class="fa fa-check-circle" style="font-size:48px;color:#15da6d"></i>
+                  <p class="submission">Thank You <br>
+                    Your report was submitted successfully.</p>
+                </div>
               </div>
-            </div>
-          <?php
-          }
-          ?>
-        </div>
-        <div class="btn-group">
-          <button type="button" class="btn" id="cancel" onClick="window.location.reload();"><i class="fa fa-close"></i>
-            Cancel</button>
+            <?php
+            }
+            ?>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn" id="cancel" onClick="window.location.reload();"><i class="fa fa-close"></i>
+              Cancel</button>
+          </div>
         </div>
       </div>
     </form>

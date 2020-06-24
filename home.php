@@ -37,9 +37,9 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="d-block w-100" src="assets/image-1.jpg" alt="First slide" />
+                    <img class="d-block w-100" src="assets/activitydetail.jpg" alt="First slide" />
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>Activity 1</h5>
+                        <h5>Join Activities</h5>
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                             labore et
@@ -48,9 +48,9 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="assets/image-2.jpg" alt="Second slide" />
+                    <img class="d-block w-100" src="assets/food.jpg" alt="Second slide" />
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>Activity 2</h5>
+                        <h5>Buy Food</h5>
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                             labore et
@@ -59,9 +59,9 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="assets/image-3.jpg" alt="Third slide" />
+                    <img class="d-block w-100" src="assets/room.jpg" alt="Third slide" />
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>Activity 3</h5>
+                        <h5>Apply for college rooms</h5>
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                             labore et

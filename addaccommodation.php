@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $result = $connection->query($sql);
             $flag = true;
             if($result){
-              echo '<script type="text/javascript">window.location.href="dashboard.php?page=report"</script>';
+              echo '<script type="text/javascript">window.location.href="dashboard.php?page=accommodation"</script>';
             }
         }
     }
