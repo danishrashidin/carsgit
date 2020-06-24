@@ -126,18 +126,18 @@ $array = $query->fetch_assoc();
             <div class="col-1"></div>
             <div class="col form-group">
                 <label for="phone">Phone Number</label>
-                <input type="tel" class="form-control" id="phone" name="phone" value="<?php echo '0' . $array['Phone_Number'] ?>" />
+                <input type="tel" class="form-control" id="phone" name="phone" value="<?php echo $array['Phone_Number'] ?>" />
             </div>
         </div>
         <div class="form-row mt-5">
             <div class="col form-group horizontal-container">
                 <input type="submit" name="submit" class="btn form-button px-5 py-3" style="background-color: #00df89; border-color: #00df89;" value="SAVE" />
-                <button onclick=<?php echo 'deleteConfirmation(' . $_SESSION["Student_ID"] . ')'; ?> class="btn form-button px-5 py-3" style="background-color: #cc4a49; border-color: #cc2a49;">DELETE ACCOUNT</button>
+                <button type="button" onclick=<?php echo 'deleteConfirmation(' . $_SESSION["Student_ID"] . ')'; ?> class="btn form-button px-5 py-3" style="background-color: #cc4a49; border-color: #cc2a49;">DELETE ACCOUNT</button>
             </div>
         </div>
 
 </div>
 </form>
-<form class='delete-account' method='post' action='dashboard.php?'>
+<form class='delete-account' method='post' action='dashboard.php'>
     <input type="hidden" name="delete" value="DELETE ACCOUNT" />
 </form>
