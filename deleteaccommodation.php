@@ -8,4 +8,4 @@ $connection->query($sql);
 
 // header("Location:dashboard.php?page=accommodation");
 
-include 'accommodation.php';
+echo '<script type="text/javascript">window.location.href="dashboard.php?page=accommodation"</script>';

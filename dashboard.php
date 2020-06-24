@@ -69,7 +69,6 @@ if (isset($_SESSION['Student_ID'])) {
     // Handle delete account
     if (isset($_POST['delete'])) {
         if ($_POST['delete'] == 'DELETE ACCOUNT') {
-            // TODO: solve deletion
             $updatesql = 'DELETE FROM student WHERE student.Student_ID = ' . $_SESSION["Student_ID"];
             if ($connection->query($updatesql)) {
                 session_destroy();

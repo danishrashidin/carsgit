@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     Problem_Location='$newLoc', File_Upload='$newFile'
     WHERE ReportID='$idid'");
 
-        header("Location:reportIndex.php");
+        echo '<script type="text/javascript">window.location.href="dashboard.php?page=report"</script>';
         exit();
     }
 }
@@ -81,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
             <div class="dropdown" tabindex="1">
               <label for="residential-college" class="dropdown-label"></label>
               <div class="select">
-                <span style="display: none; position: absolute; top: -5px; left: 10px;"><?php echo $collegeName; ?></span>
+                <span style="display: inline; position: absolute; top: 0.2rem; left: 10px;"><?php echo $collegeName; ?></span>
               </div>
               <input type="text" id="CollegeName" value="<?php echo $collegeName; ?>" name="collegeName" class="CollegeName" required style="border:none; outline: none;
             background: red; position: absolute;
@@ -112,7 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
             <div class="dropdown" tabindex="1">
               <label for="residential-college" class="dropdown-label"></label>
               <div class="select">
-                <span style="display: none; position: absolute; top: -5px; left: 10px;"><?php echo $collegeProblem; ?></span>
+                <span style="display: inline; position: absolute; top: 0.2rem; left: 10px;"><?php echo $collegeProblem; ?></span>
               </div>
               <input type="text" id="CollegeProblem"
               value="<?php echo $collegeProblem; ?>" name="collegeProblem"

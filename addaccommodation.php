@@ -27,6 +27,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $sql = "INSERT INTO accomodation(Student_ID, Initial_Date, Final_Date, Duration, Total_Cost, Reason) VALUES('$student_id','$Initial_Date','$Final_Date','$Duration','$Total_Cost','$Reason')";
             $result = $connection->query($sql);
             $flag = true;
+            if($result){
+              echo '<script type="text/javascript">window.location.href="dashboard.php?page=report"</script>';
+            }
         }
     }
 }

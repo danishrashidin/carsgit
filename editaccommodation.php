@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         Reason='$newReason' WHERE Application_ID='$newid'";
         $connection->query($sql);
 
-        include "accommodation.php";
+        echo '<script type="text/javascript">window.location.href="dashboard.php?page=accommodation"</script>';
         exit();
     }
 }

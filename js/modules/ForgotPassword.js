@@ -360,7 +360,7 @@ export default class ForgotPassword {
                   Password?
                 </p>
                 <p class="col-12 forgot-description">
-                  Idiot, don't worry! Just fill in your SiswaMail and we'll send you a link to reset your password.
+                  Don't worry! Just fill in your SiswaMail and we'll send you a link to reset your password.
                 </p>
                 <div id="forgotPassword-email-check-template" >
                     <p class="email-error" style ="max-width: 241px">

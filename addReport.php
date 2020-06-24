@@ -80,7 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <div class="dropdown" tabindex="1">
               <label for="residential-college" class="dropdown-label"></label>
               <div class="select">
-                <span style="display: none; position: absolute; top: -5px; left: 10px;"></span>
+                <span style="display: none; position: absolute; top: 0.2rem; left: 10px;"></span>
               </div>
               <input type="text" id="CollegeName" name="collegeName" class="CollegeName" required style="border:none; outline: none;
             background: red; position: absolute;
@@ -111,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <div class="dropdown" tabindex="1">
               <label for="residential-college" class="dropdown-label"></label>
               <div class="select">
-                <span style="display: none; position: absolute; top: -5px; left: 10px;"></span>
+                <span style="display: none; position: absolute; top: 0.2rem; left: 10px;"></span>
               </div>
               <input type="text" id="CollegeProblem" name="collegeProblem" class="CollegeProblem" required style="border:none; outline: none;
             background: red; position: absolute;

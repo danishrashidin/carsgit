@@ -15,7 +15,7 @@ if (isset($_POST["phone"])) {
 }
 
 // Check if image file is a actual image or fake image
-if (isset($_POST["submit"]) && isset($_FILES["photo"])) {
+if (isset($_POST["submit"]) && $_FILES["photo"]['name'] == 0) {
     $target_dir = "uploads/";
     $target_file = $target_dir . basename($_FILES["photo"]["name"]);
     $uploadOk = 1;
@@ -131,8 +131,12 @@ $array = $query->fetch_assoc();
         <div class="form-row mt-5">
             <div class="col form-group horizontal-container">
                 <input type="submit" name="submit" class="btn form-button px-5 py-3" style="background-color: #00df89; border-color: #00df89;" value="SAVE" />
-                <input type="submit" name="delete" class="btn form-button px-5 py-3" style="background-color: #cc4a49; border-color: #cc2a49;" value="DELETE ACCOUNT" />
+                <button onclick=<?php echo 'deleteConfirmation(' . $_SESSION["Student_ID"] . ')'; ?> class="btn form-button px-5 py-3" style="background-color: #cc4a49; border-color: #cc2a49;">DELETE ACCOUNT</button>
             </div>
         </div>
+
 </div>
+</form>
+<form class='delete-account' method='post' action='dashboard.php?page=profile'>
+    <input type="hidden" name="delete" value="DELETE ACCOUNT" />
 </form>
