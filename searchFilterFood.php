@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             // }
             ?>
             <!-- <script>
-            document.querySelector("#foundMessage").innerHTML += "<?php echo "</td><td id='res_link'> <a title='Bring me to $res_name' href=menu.php?Restaurant_ID=" . $res_id . ">" . $res_name . "</a></td></tr>" ?>";
+            document.querySelector("#foundMessage").innerHTML += "<?php echo "</td><td id='res_link'> <a title='Bring me to $res_name' href=dashboard.php?page=menu&Restaurant_ID=" . $res_id . ">" . $res_name . "</a></td></tr>" ?>";
             onFoundMessage();
         </script> -->
 

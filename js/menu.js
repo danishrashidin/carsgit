@@ -15,7 +15,7 @@ document.querySelector(".store-cart-icon").addEventListener("click", function ()
     document.querySelector(".cart").style.visibility = "visible";
     document.querySelector(".store-cart-icon").style.visibility = "hidden";
     document.querySelectorAll(".food-card").forEach(function (c) {
-      var w = window.screen.width - 500;
+      var w = window.screen.width - 800;
       // console.log(w);
       c.style.maxWidth = w + "px";
       // console.log(c.style.maxWidth);
