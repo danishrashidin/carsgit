@@ -80,15 +80,15 @@
     <!--  NAVIGATION  -->
     <div class="main-nav">
         <ul>
-        <li>
-        <a href="dashboard.php?page=myorder">my order</a>
-      </li>
-      <li>
-        <a href="dashboard.php?page=mypreorder">my pre-order</a>
-      </li>
-      <li>
-        <a href="dashboard.php?page=orderhistory">order history</a>
-      </li>
+            <li>
+                <a href="dashboard.php?page=myorder">my order</a>
+            </li>
+            <li>
+                <a href="dashboard.php?page=mypreorder">my pre-order</a>
+            </li>
+            <li>
+                <a href="dashboard.php?page=orderhistory">order history</a>
+            </li>
         </ul>
     </div>
     <!--  NAVIGATION END  -->
@@ -175,17 +175,17 @@
 
         <!-- onclick="offOrderedMessage()" title="Click anywhere to proceed." -->
         <div class="overlayMessage" id="overlayOrderedMessage">
-            <div id="Message">Order submitted. Please pick up your food from <?php echo $res_name ?> by TODAY. You can view your order at <a title="VIEW ORDER" href="dashboard.php?page=myorder">MY ORDER</a>.<br><br><a href="menu.php?Restaurant_ID=<?php echo $res_id ?>">Create new order</a> </div>
+            <div id="Message">Order submitted. Please pick up your food from <?php echo $res_name ?> by TODAY. You can view your order at <a title="VIEW ORDER" href="dashboard.php?page=myorder">MY ORDER</a>.<br><br><a href="dashboard.php?page=menu&Restaurant_ID=<?php echo $res_id ?>">Create new order</a> </div>
         </div>
         <!-- onclick="offPreOrderedMessage()" title="Click anywhere to proceed." -->
         <div class="overlayMessage" id="overlayPreOrderedMessage">
-            <div id="Message">Order submitted. You can view or cancel your order at <a title="VIEW PRE-ORDER" href="dashboard.php?page=mypreorder">MY PRE-ORDER</a>.<br><br><a href="menu.php?Restaurant_ID=<?php echo $res_id ?>">Create new order</a></div>
+            <div id="Message">Order submitted. You can view or cancel your order at <a title="VIEW PRE-ORDER" href="dashboard.php?page=mypreorder">MY PRE-ORDER</a>.<br><br><a href="dashboard.php?page=menu&Restaurant_ID=<?php echo $res_id ?>">Create new order</a></div>
         </div>
         <div class="overlayMessage" id="overlayCartEmptyMessage">
-            <div id="Message">Failed to submit order. Your cart is empty. <br><br><a href="menu.php?Restaurant_ID=<?php echo $res_id ?>">Back to previous</a></div>
+            <div id="Message">Failed to submit order. Your cart is empty. <br><br><a href="dashboard.php?page=menu&Restaurant_ID=<?php echo $res_id ?>">Back to previous</a></div>
         </div>
         <div class="overlayMessage" id="overlayDateInvalidMessage">
-            <div id="Message">Failed to submit order. Your entered date is invalid. <br><br><a href="menu.php?Restaurant_ID=<?php echo $res_id ?>">Back to previous</a></div>
+            <div id="Message">Failed to submit order. Your entered date is invalid. <br><br><a href="dashboard.php?page=menu&Restaurant_ID=<?php echo $res_id ?>">Back to previous</a></div>
         </div>
 
     </div>
