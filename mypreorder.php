@@ -14,7 +14,7 @@
       <!-- use form to go to search food -->
       <form method="GET" action="dashboard.php">
         <div class="search-container">
-        <input type="hidden" name="page" value="mypreorder">
+          <input type="hidden" name="page" value="mypreorder">
           <input type="text" placeholder="Search food..." name="search">
           <button type="submit"><i class="fa fa-search"></i></button>
         </div>

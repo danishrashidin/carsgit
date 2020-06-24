@@ -100,7 +100,7 @@
     </div>
     <!-- card-group end -->
     <script type="text/javascript" src="js/menu.js"></script>
-    
+
     <?php
     include_once("searchFilterFood.php");
     ?>
