@@ -3,13 +3,9 @@
 include "config.php";
 
 $id = $_GET['id'];
-$sql = "";
-$result = $connection->query($sql);
+$sql = "DELETE FROM accomodation WHERE Application_ID=$id";
+$connection->query($sql);
 
-$result = mysqli_query($connection, "DELETE FROM accomodation WHERE Application_ID=$id");
+// header("Location:dashboard.php?page=accommodation");
 
-include "accommodation.php";
-
-?>
-
-// include "accommodation.php";
+include 'accommodation.php';

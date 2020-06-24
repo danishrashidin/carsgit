@@ -20,36 +20,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 
-// if (isset($_POST['update'])) {
-
-//     $id = mysqli_real_escape_string($connection, $_POST['id']);
-//     $name = mysqli_real_escape_string($connection, $_POST['name']);
-//     $age = mysqli_real_escape_string($connection, $_POST['age']);
-//     $email = mysqli_real_escape_string($connection, $_POST['email']);
-
-//     if (empty($name) || empty($age) || empty($email)) {
-
-//         if (empty($name)) {
-//             echo "<font color='red'>Name field is empty.</font><br/>";
-//         }
-
-//         if (empty($age)) {
-//             echo "<font color='red'>Age field is empty.</font><br/>";
-//         }
-
-//         if (empty($email)) {
-//             echo "<font color='red'>Email field is empty.</font><br/>";
-//         }
-//     } else {
-//         //Step 3. Execute the SQL query.
-//         //updating the table
-//         $sql = "UPDATE users SET name='$name', age='$age', email='$email' WHERE id=$id";
-//         $result = $connection->query($sql);
-
-//         //redirectig to the display page. In our case, it is index.php
-//         header("Location: dashboard.php");
-//     }
-// }
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
 //getting id from url
     $Application_ID = $_GET['id'];
@@ -162,6 +132,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
           <div class="text-center bgimg">
             <input type="hidden" name="Application_ID" value=<?php echo $Application_ID; ?>>
+            <input type="hidden" name="update" value="Update">
             <div class="btn-group">
               <button class="btn btn-primary" id="submitBtn"><i class="fa fa-check" type="submit" value="Update" name="update"></i>Update</button>
             </div>
