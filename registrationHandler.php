@@ -105,11 +105,7 @@ if ($_POST["action"] == 'register') {
                 below to verify your email address.
             </p>
 
-<<<<<<< HEAD
-            <form method="POST" action="http://localhost/Weeb Project/carsgit/index.php">
-=======
-            <form method="POST" action="http://localhost/carsgit-1/index.php">
->>>>>>> f785c214a0de78e20277d4da891e381de273795a
+            <form method="POST" action="http://localhost/ndex.php">
                 <input type="hidden" name="action" value="verifying" >
                 <input type="hidden" name="email" value="' . sanitizingData($email) . '" >
                 <input type="hidden" name="Activation_Hash" value="' . $Activation_Hash . '" >
