@@ -24,7 +24,7 @@
 </header>
 
 <main>
-    <h1 class="title-center">Upcoming Actvities</h1>
+    <h1 class="title-center">What do we offer!</h1>
 
     <!-- Activities wrapper -->
     <div class="carousel-wrapper">
