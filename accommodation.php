@@ -13,7 +13,7 @@ FROM accomodation ORDER BY Application_ID DESC");
     <div class="container-fluid">
         <div class="tab">
             <button class="tablinks AllApplications">All Applications</button>
-            <button class="tablinks Completed completed">Completed</button>
+            <button class="tablinks Accepted Accepted">Accepted</button>
             <button class="tablinks Pending pending">Pending</button>
             <button class="tablinks InProgress inprogress">In Progress</button>
         </div>
@@ -114,7 +114,7 @@ FROM accomodation ORDER BY Application_ID DESC");
                             <!-- <th>Update</th> -->
                         </tr>
                         <?php
-                        $result = mysqli_query($connection, "SELECT * FROM accomodation WHERE Status_='Completed' ");
+                        $result = mysqli_query($connection, "SELECT * FROM accomodation WHERE Status_='Accepted' ");
                         while ($newReport = $result->fetch_array()) {
                             echo "<tr>";
                             echo "<td>" . $newReport['Application_ID'] . "</td>";
@@ -183,7 +183,7 @@ FROM accomodation ORDER BY Application_ID DESC");
         if ($diff > 1 && $diff <= 3) {
             return "In Progress";
         } else {
-            return "Completed";
+            return "Accepted";
         }
     }
     ?>
