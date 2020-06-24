@@ -102,7 +102,7 @@
                     in a single click<br />
                 </p>
                 <a type="button" class="btn desc-btn px-5 py-3"
-                    style="background-color: #00df89; border-color: #00df89;" href="activity.html">
+                    style="background-color: #00df89; border-color: #00df89;" href="index.php?page=activities">
                     FIND OUT MORE
                 </a>
             </div>
