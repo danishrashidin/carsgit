@@ -13,7 +13,7 @@ FROM accomodation ORDER BY Application_ID DESC");
     <div class="container-fluid">
         <div class="tab">
             <button class="tablinks AllApplications">All Applications</button>
-            <button class="tablinks Completed completed">Completed</button>
+            <button class="tablinks Completed completed">Accepted</button>
             <button class="tablinks Pending pending">Pending</button>
             <button class="tablinks InProgress inprogress">In Progress</button>
         </div>
@@ -40,7 +40,7 @@ FROM accomodation ORDER BY Application_ID DESC");
                             echo "<td>" . $res['Application_ID'] . "</td>";
                             echo "<td>" . $res['Initial_Date'] . "</td>";
                             echo "<td>" . $res['Final_Date'] . "</td>";
-                            echo "<td>" . $res['Duration'] . "</td>";
+                            echo "<td>" . $res['Duration'] ." days". "</td>";
                             echo "<td>" . $res['Total_Cost'] . "</td>";
                             echo "<td>" . $res['Date_'] . "</td>";
                             $status = calculate($res['Date_'], date('Y-m-d'));
@@ -83,7 +83,7 @@ FROM accomodation ORDER BY Application_ID DESC");
                             echo "<td>" . $newReport['Application_ID'] . "</td>";
                             echo "<td>" . $newReport['Initial_Date'] . "</td>";
                             echo "<td>" . $newReport['Final_Date'] . "</td>";
-                            echo "<td>" . $newReport['Duration'] . "</td>";
+                            echo "<td>" . $newReport['Duration'] ." days". "</td>";
                             echo "<td>" . $newReport['Total_Cost'] . "</td>";
                             echo "<td>" . $newReport['Date_'] . "</td>";
                             echo "<td>" . $newReport['Status_'] . "</td>";
@@ -111,16 +111,16 @@ FROM accomodation ORDER BY Application_ID DESC");
                             <th>Total Cost</th>
                             <th>Date Submitted</th>
                             <th>Status</th>
-                            <th>Update</th>
+                            <!-- <th>Update</th> -->
                         </tr>
                         <?php
-                        $result = mysqli_query($connection, "SELECT * FROM accomodation WHERE Status_='Completed' ");
+                        $result = mysqli_query($connection, "SELECT * FROM accomodation WHERE Status_='Accepted' ");
                         while ($newReport = $result->fetch_array()) {
                             echo "<tr>";
                             echo "<td>" . $newReport['Application_ID'] . "</td>";
                             echo "<td>" . $newReport['Initial_Date'] . "</td>";
                             echo "<td>" . $newReport['Final_Date'] . "</td>";
-                            echo "<td>" . $newReport['Duration'] . "</td>";
+                            echo "<td>" . $newReport['Duration'] ." days". "</td>";
                             echo "<td>" . $newReport['Total_Cost'] . "</td>";
                             echo "<td>" . $newReport['Date_'] . "</td>";
                             echo "<td>" . $newReport['Status_'] . "</td>";
@@ -144,7 +144,7 @@ FROM accomodation ORDER BY Application_ID DESC");
                             <th>Total Cost</th>
                             <th>Date Submitted</th>
                             <th>Status</th>
-                            <th>Update</th>
+                            <!-- <th>Update</th> -->
                         </tr>
                         <?php
                         $result = mysqli_query($connection, "SELECT * FROM accomodation WHERE Status_='In Progress' ");
@@ -153,7 +153,7 @@ FROM accomodation ORDER BY Application_ID DESC");
                             echo "<td>" . $newReport['Application_ID'] . "</td>";
                             echo "<td>" . $newReport['Initial_Date'] . "</td>";
                             echo "<td>" . $newReport['Final_Date'] . "</td>";
-                            echo "<td>" . $newReport['Duration'] . "</td>";
+                            echo "<td>" . $newReport['Duration'] ." days"."</td>";
                             echo "<td>" . $newReport['Total_Cost'] . "</td>";
                             echo "<td>" . $newReport['Date_'] . "</td>";
                             echo "<td>" . $newReport['Status_'] . "</td>";
@@ -183,7 +183,7 @@ FROM accomodation ORDER BY Application_ID DESC");
         if ($diff > 1 && $diff <= 3) {
             return "In Progress";
         } else {
-            return "Completed";
+            return "Accepted";
         }
     }
     ?>

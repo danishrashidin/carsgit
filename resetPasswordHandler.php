@@ -76,7 +76,11 @@ if (($_POST['action']) == "send reset password") {
             If you didn\'t request a new password, you can safely delete this email. <br>
             </p>
 
+<<<<<<< HEAD
+            <form method="POST" action="http://localhost/Weeb Project/carsgit/index.php">
+=======
             <form method="POST" action="http://localhost/carsgit-1/index.php">
+>>>>>>> f785c214a0de78e20277d4da891e381de273795a
                 <input type="hidden" name="action" value="reset password" >
                 <input type="hidden" name="email" value="' . sanitizingData($email) . '" >
                 <input type="hidden" name="Activation_Hash" value="' . $data['Activation_Hash'] . '" >
