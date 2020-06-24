@@ -138,6 +138,6 @@ $array = $query->fetch_assoc();
 
 </div>
 </form>
-<form class='delete-account' method='post' action='dashboard.php?page=profile'>
+<form class='delete-account' method='post' action='dashboard.php?'>
     <input type="hidden" name="delete" value="DELETE ACCOUNT" />
 </form>
