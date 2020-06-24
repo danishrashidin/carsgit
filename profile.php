@@ -51,8 +51,8 @@ if (isset($_POST["submit"]) && isset($_FILES["photo"])) {
         echo "Sorry, your file was not uploaded.";
         // if everything is ok, try to upload file
     } else {
-        $updatesql = 'UPDATE student SET Photo = \''.$target_file.'\' WHERE Student_ID = '.$_SESSION['Student_ID'];
-        if ($connection->query($updatesql) === TRUE) {
+        $updatesql = 'UPDATE student SET Photo = \'' . $target_file . '\' WHERE Student_ID = ' . $_SESSION['Student_ID'];
+        if ($connection->query($updatesql) === true) {
             //echo "The file " . basename($_FILES["photo"]["name"]) . " has been uploaded.";
             move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file);
         } else {
@@ -136,4 +136,3 @@ $array = $query->fetch_assoc();
         </div>
 </div>
 </form>
-</div>

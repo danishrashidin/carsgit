@@ -41,6 +41,8 @@ if ($_POST["action"] == 'checkEmail') {
 
 if ($_POST["action"] == 'register') {
 
+    // print_r($_POST);
+
     // Load Composer's autoloader
     require 'library/vendor/autoload.php';
     try {
@@ -104,8 +106,7 @@ if ($_POST["action"] == 'register') {
                 You are almost ready to start using College Activity Registration System. Simply click the big greenish button
                 below to verify your email address.
             </p>
-
-            <form method="POST" action="http://localhost/ndex.php">
+                <form method="POST" action="http://localhost/index.php">
                 <input type="hidden" name="action" value="verifying" >
                 <input type="hidden" name="email" value="' . sanitizingData($email) . '" >
                 <input type="hidden" name="Activation_Hash" value="' . $Activation_Hash . '" >

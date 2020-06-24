@@ -6,85 +6,84 @@ $pagename = "";
 include_once 'config.php';
 
 if (isset($_GET['page'])) {
-  $name = $_GET['page'];
-  switch ($name) {
-    case 'dashboard':
-      $pagename = "Dashboard";
-      break;
-    case 'activities':
-      $pagename = "Activities";
-      break;
-    case 'food':
-      $pagename = "Food";
-      break;
-    case 'menu':
-      $pagename = "Food";
-      break;
-    case 'myorder':
-      $pagename = "Food";
-      break;
-    case 'mypreorder':
-      $pagename = "Food";
-      break;
-    case 'orderhistory':
-      $pagename = "Food";
-      break;
-    case 'accommodation':
-      $pagename = "Accommodation";
-      break;
-    case 'addaccommodation':
-      $pagename = "Apply for Accommodation";
-      break;
-    case 'report':
-      $pagename = "Report";
-      break;
-    case 'addreport':
-      $pagename = "File a new report";
-      break;
-    case 'editreport':
-      $pagename = "Edit Report";
-      break;
-    case 'profile':
-      $pagename = "Your Profile";
-      break;
-    default:
-      $pagename = "Dashboard";
-  }
+    $name = $_GET['page'];
+    switch ($name) {
+        case 'dashboard':
+            $pagename = "Dashboard";
+            break;
+        case 'activities':
+            $pagename = "Activities";
+            break;
+        case 'food':
+            $pagename = "Food";
+            break;
+        case 'menu':
+            $pagename = "Food";
+            break;
+        case 'myorder':
+            $pagename = "Food";
+            break;
+        case 'mypreorder':
+            $pagename = "Food";
+            break;
+        case 'orderhistory':
+            $pagename = "Food";
+            break;
+        case 'accommodation':
+            $pagename = "Accommodation";
+            break;
+        case 'addaccommodation':
+            $pagename = "Apply for Accommodation";
+            break;
+        case 'report':
+            $pagename = "Report";
+            break;
+        case 'addreport':
+            $pagename = "File a new report";
+            break;
+        case 'editreport':
+            $pagename = "Edit Report";
+            break;
+        case 'profile':
+            $pagename = "Your Profile";
+            break;
+        default:
+            $pagename = "Dashboard";
+    }
 } else {
-  $pagename = "Dashboard";
-  $name = "dashboard";
+    $pagename = "Dashboard";
+    $name = "dashboard";
 }
 
-
 if (isset($_POST['action'])) {
-  if ($_POST['action'] == 'success') {
-    if (isset($_POST['id'])) {
-      $_SESSION['Student_ID'] = $_POST['id'];
+    if ($_POST['action'] == 'success') {
+        if (isset($_POST['id'])) {
+            $_SESSION['Student_ID'] = $_POST['id'];
+        }
+    } else {
+        die("Please login");
     }
-  } else {
-    die("Please login");
-  }
 }
 
 if (isset($_SESSION['Student_ID'])) {
-  // Handle delete account
-  if (isset($_POST['delete'])) {
-    if ($_POST['delete'] == 'DELETE ACCOUNT') {
-      // TODO: solve deletion
-      $updatesql = 'DELETE FROM student WHERE student.Student_ID = ' . $_SESSION["Student_ID"];
-      if ($connection->query($updatesql)) {
-        session_destroy();
-        header("Location: index.php");
-        exit();
-      }
+    // Handle delete account
+    if (isset($_POST['delete'])) {
+        if ($_POST['delete'] == 'DELETE ACCOUNT') {
+            // TODO: solve deletion
+            $updatesql = 'DELETE FROM student WHERE student.Student_ID = ' . $_SESSION["Student_ID"];
+            if ($connection->query($updatesql)) {
+                session_destroy();
+                header("Location: index.php");
+                exit();
+            }
+        }
     }
-  }
-  // retrieve student data
-  $sql = 'SELECT * FROM student WHERE student.Student_ID = ' . $_SESSION["Student_ID"];
-  $query = $connection->query($sql);
-  $array = $query->fetch_assoc();
+    // retrieve student data
+    $sql = 'SELECT * FROM student WHERE student.Student_ID = ' . $_SESSION["Student_ID"];
+    $query = $connection->query($sql);
+    $array = $query->fetch_assoc();
 } else {
-  header("Location: index.php");
+    header("Location: index.php");
 }
 
 ?>
@@ -118,7 +117,7 @@ if (isset($_SESSION['Student_ID'])) {
 
   <script type="text/javascript">
     <?php
-    echo 'window.addEventListener("DOMContentLoaded", function() {
+echo 'window.addEventListener("DOMContentLoaded", function() {
         (function($) {
           feather.replace();
           try {
@@ -129,7 +128,7 @@ if (isset($_SESSION['Student_ID'])) {
 
         })(jQuery)
       })';
-    ?>
+?>
   </script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js " defer></script>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous" defer></script>
@@ -195,27 +194,27 @@ if (isset($_SESSION['Student_ID'])) {
           <div class="fragment-title-container">
             <h2 class="fragment-title"><?php echo $pagename ?></h2>
             <?php
-            if ($name == "report") {
-              echo '<a type="button" class="btn fragment-action" href="dashboard.php?page=addreport">File a new report</a>';
-            } else if ($name == "accommodation") {
-              echo '<a type="button" class="btn fragment-action" href="dashboard.php?page=addaccommodation">Apply Now!</a>';
-            }
-            ?>
+if ($name == "report") {
+    echo '<a type="button" class="btn fragment-action" href="dashboard.php?page=addreport">File a new report</a>';
+} else if ($name == "accommodation") {
+    echo '<a type="button" class="btn fragment-action" href="dashboard.php?page=addaccommodation">Apply Now!</a>';
+}
+?>
           </div>
           <div class="fragment">
             <?php
-            if (isset($_GET['page'])) {
-              $display = $name . '.php';
-              if ($name == "dashboard") {
-              } else if (file_exists($display)) {
-                include_once $display;
-              } else {
-                echo $display . " does not exist";
-              }
-            } else {
-              echo "No page binded";
-            }
-            ?>
+if (isset($_GET['page'])) {
+    $display = $name . '.php';
+    if ($name == "dashboard") {
+    } else if (file_exists($display)) {
+        include_once $display;
+    } else {
+        echo $display . " does not exist";
+    }
+} else {
+    echo "No page binded";
+}
+?>
           </div>
         </div>
       </div>

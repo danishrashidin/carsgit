@@ -2,33 +2,33 @@
 $flag = false;
 $student_id = $array['Student_ID'];
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-  if (isset($_POST['add'])) {
-    include_once "config.php";
-    $Initial_Date = $_POST['Initial_Date'];
-    $Final_Date = $_POST['Final_Date'];
-    $Duration = $_POST['numdays'];
-    $Total_Cost = $_POST['cost'];
-    $Reason = $_POST['reason'];
-    $status = "";
+    if (isset($_POST['add'])) {
+        include_once "config.php";
+        $Initial_Date = $_POST['Initial_Date'];
+        $Final_Date = $_POST['Final_Date'];
+        $Duration = $_POST['numdays'];
+        $Total_Cost = $_POST['cost'];
+        $Reason = $_POST['reason'];
+        $status = "";
 
-    //print_r($_POST);
+        //print_r($_POST);
 
-    // checking empty fields
-    if (empty($Initial_Date) || empty($Final_Date) || empty($Duration) || empty($Total_Cost) || empty($Reason)) {
+        // checking empty fields
+        if (empty($Initial_Date) || empty($Final_Date) || empty($Duration) || empty($Total_Cost) || empty($Reason)) {
 
-      if (empty($Duration) || $Duration = 'Invalid date!') {
-        echo "<font color='red'>Date field is empty.</font><br/>";
-      }
+            if (empty($Duration) || $Duration = 'Invalid date!') {
+                echo "<font color='red'>Date field is empty.</font><br/>";
+            }
 
-      if (empty($Reason)) {
-        echo "<font color='red'>Reason field is empty.</font><br/>";
-      }
-    } else {
-      $sql = "INSERT INTO accomodation(Student_ID,Initial_Date,Final_Date,Duration,Total_Cost,Reason) VALUES('$student_id','$Initial_Date','$Final_Date','$Duration','$Total_Cost','$Reason')";
-      $result = $connection->query($sql);
-      $flag = true;
+            if (empty($Reason)) {
+                echo "<font color='red'>Reason field is empty.</font><br/>";
+            }
+        } else {
+            $sql = "INSERT INTO accomodation(Student_ID, Initial_Date, Final_Date, Duration, Total_Cost, Reason) VALUES('$student_id','$Initial_Date','$Final_Date','$Duration','$Total_Cost','$Reason')";
+            $result = $connection->query($sql);
+            $flag = true;
+        }
     }
-  }
 }
 
 ?>
@@ -76,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
               <label for="Phonenumber" class="application-label">Phone Number :</label>
             </div>
             <div class="col-9">
-              <input id="Phonenumber" name="phonenumber" class="form-control" readonly value="<?php echo '0'.$array['Phone_Number']; ?>" />
+              <input id="Phonenumber" name="phonenumber" class="form-control" readonly value="<?php echo '0' . $array['Phone_Number']; ?>" />
             </div>
           </div>
 
