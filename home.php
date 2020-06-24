@@ -41,9 +41,7 @@
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Join Activities</h5>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et
-                            dolore magna aliqua.
+                            Want to get involved into the society? Increase your chances of staying next semester. You can apply it from here!
                         </p>
                     </div>
                 </div>
@@ -52,9 +50,7 @@
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Buy Food</h5>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et
-                            dolore magna aliqua.
+                            Craving for your college's food? We can order it for you!
                         </p>
                     </div>
                 </div>
@@ -63,9 +59,7 @@
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Apply for college rooms</h5>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et
-                            dolore magna aliqua.
+                            Having trouble on applying college rooms? We can try to apply it for you. Just sign up, fill in your details and voila!
                         </p>
                     </div>
                 </div>

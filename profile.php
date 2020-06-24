@@ -15,11 +15,12 @@ if (isset($_POST["phone"])) {
 }
 
 // Check if image file is a actual image or fake image
-if (isset($_POST["submit"]) && $_FILES["photo"]['name'] == 0) {
+if (isset($_POST["submit"]) && $_FILES["photo"]['error'] !== 4) {
     $target_dir = "uploads/";
     $target_file = $target_dir . basename($_FILES["photo"]["name"]);
     $uploadOk = 1;
     $fileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+    $rename = $target_dir . $_SESSION['Student_ID'] . $fileType;
     $check = getimagesize($_FILES["photo"]["tmp_name"]);
     if ($check !== false) {
         //echo "File is an image - " . $check["mime"] . ".";

@@ -5,11 +5,32 @@ $pagename = "";
 // DB connection
 include_once 'config.php';
 
+if (isset($_SESSION['Student_ID'])) {
+  // Handle delete account
+  if (isset($_POST['delete'])) {
+      if ($_POST['delete'] == 'DELETE ACCOUNT') {
+          $updatesql = 'DELETE FROM student WHERE student.Student_ID = ' . $_SESSION["Student_ID"];
+          if ($connection->query($updatesql)) {
+              session_destroy();
+              header("Location: index.php");
+              exit();
+          }
+      }
+  }
+  // retrieve student data
+  $sql = 'SELECT * FROM student WHERE student.Student_ID = ' . $_SESSION["Student_ID"];
+  $query = $connection->query($sql);
+  $array = $query->fetch_assoc();
+  $student_name = $array['Full_Name'];
+} else {
+  header("Location: index.php");
+}
+
 if (isset($_GET['page'])) {
     $name = $_GET['page'];
     switch ($name) {
-        case 'dashboard':
-            $pagename = "Dashboard";
+        case 'dashhome':
+            $pagename = "👋 Welcome back, $student_name!";
             break;
         case 'activities':
             $pagename = "Activities";
@@ -51,7 +72,7 @@ if (isset($_GET['page'])) {
             $pagename = "Dashboard";
     }
 } else {
-    $pagename = "Dashboard";
+    $pagename = "👋 Welcome back, $student_name!";
     $name = "dashboard";
 }
 
@@ -105,9 +126,9 @@ if (isset($_SESSION['Student_ID'])) {
   <!-- <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale.css" /> -->
 
   <!-- Fonting -->
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@800&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/feather-icons"></script>
   <link rel="stylesheet" type="text/css" href="css/styles.css" />
   <link rel="stylesheet" type="text/css" href="css/dashboard.css" />
@@ -167,7 +188,7 @@ echo 'window.addEventListener("DOMContentLoaded", function() {
       <div class="col-2 sidebar pt-4">
         <ul class="nav nav-pills flex-column" role="tablist">
           <li class="nav-item">
-            <a id="dashboard-button" class="nav-link" href="dashboard.php?page=dashboard">
+            <a id="dashhome-button" class="nav-link" href="dashboard.php?page=dashhome">
               <span data-feather="box"></span>Dashboard</a>
           </li>
           <li class="nav-item">
@@ -211,7 +232,7 @@ if (isset($_GET['page'])) {
         echo $display . " does not exist";
     }
 } else {
-    echo "No page binded";
+    include_once 'dashhome.php';
 }
 ?>
           </div>

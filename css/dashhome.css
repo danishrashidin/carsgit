@@ -1,0 +1,42 @@
+.content-container {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 1.5rem 1.5rem;
+}
+
+.home-message {
+  font-family: Manrope, sans-serif;
+  width: 30rem;
+  line-height: 3.5rem;
+}
+
+.card-container {
+    margin-top: 2rem;
+}
+
+.card {
+  width: 21rem;
+  margin: 2rem 0.5rem;
+  border-radius: 1.5rem !important;
+  border:none !important;
+  background-color: #68518f;
+}
+
+.card-body {
+    padding-top: 0;
+}
+
+.card a {
+    color: #fff;
+    font-family: Manrope, sans-serif;
+    letter-spacing: 0.3px;
+}
+
+.card-img-top {
+  /* border-top-left-radius: 2rem;
+      border-top-right-radius: 2rem; */
+  height: 9rem;
+  position: relative;
+  top: -1.5rem;
+  right: -2rem;
+}
