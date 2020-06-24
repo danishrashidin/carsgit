@@ -16,7 +16,7 @@ document.querySelector(".AllApplications").addEventListener("click", function (e
 console.log(e.target);
 openFolder('AllApplications')});
 document.querySelector(".Pending").addEventListener("click", function(e) {openFolder('Pending')});
-document.querySelector(".Accepted").addEventListener("click", function(e) { openFolder('Accepted')});
+document.querySelector(".Completed").addEventListener("click", function(e) { openFolder('Completed')});
 document.querySelector(".InProgress").addEventListener("click", function(e) { openFolder('InProgress')});
 
 openFolder('AllApplications');

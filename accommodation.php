@@ -13,7 +13,7 @@ FROM accomodation ORDER BY Application_ID DESC");
     <div class="container-fluid">
         <div class="tab">
             <button class="tablinks AllApplications">All Applications</button>
-            <button class="tablinks Accepted completed">Accepted</button>
+            <button class="tablinks Completed completed">Accepted</button>
             <button class="tablinks Pending pending">Pending</button>
             <button class="tablinks InProgress inprogress">In Progress</button>
         </div>
