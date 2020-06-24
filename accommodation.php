@@ -111,7 +111,7 @@ FROM accomodation ORDER BY Application_ID DESC");
                             <th>Total Cost</th>
                             <th>Date Submitted</th>
                             <th>Status</th>
-                            <th>Update</th>
+                            <!-- <th>Update</th> -->
                         </tr>
                         <?php
                         $result = mysqli_query($connection, "SELECT * FROM accomodation WHERE Status_='Completed' ");
@@ -144,7 +144,7 @@ FROM accomodation ORDER BY Application_ID DESC");
                             <th>Total Cost</th>
                             <th>Date Submitted</th>
                             <th>Status</th>
-                            <th>Update</th>
+                            <!-- <th>Update</th> -->
                         </tr>
                         <?php
                         $result = mysqli_query($connection, "SELECT * FROM accomodation WHERE Status_='In Progress' ");
