@@ -166,8 +166,9 @@
 <script>
   document.querySelectorAll('#delete').forEach(function(del) {
     del.addEventListener("click", function() {
-      if (confirm('Are you sure you want to delete your Pre-order with ID <?php echo $order_no ?>?')) {
-        location.assign("dashboard.php?page=mypreorder&delete=<?php echo $order_no ?>");
+     var delete_id = del.nextElementSibling.textContent;
+      if (confirm('Are you sure you want to delete your Pre-order with ID ' + delete_id + ' ?')) {
+        location.assign("dashboard.php?page=mypreorder&delete=" + delete_id);
       }
     });
   });
