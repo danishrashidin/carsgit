@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       // $result = $connection->query("INSERT INTO report(College_ID, Problem_Type, Problem_Details, Problem_Location, File_Upload ) VALUES('$collegeID','$collegeProblem','$message1','$hd_location','$uploadedfile')");
 
       // Check if image file is a actual image or fake image
-      if ($_FILES["uploadedfile"]['name'] == 0) {
+      if ($_FILES["uploadedfile"]['error'] != 4) {
         $target_dir = "reportuploads/";
         $target_file = $target_dir . basename($_FILES["uploadedfile"]["name"]);
         $uploadOk = 1;
@@ -67,6 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
           if ($connection->query($updatesql) === true) {
             //echo "The file " . basename($_FILES["uploadedfile"]["name"]) . " has been uploaded.";
             move_uploaded_file($_FILES["uploadedfile"]["tmp_name"], $target_file);
+            $flag=true;
           } else {
             echo "Sorry, there was an error uploading your file.";
           }
