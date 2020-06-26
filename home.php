@@ -103,5 +103,4 @@
         </div>
     </div>
 
-    <div class="features"></div>
 </main>
